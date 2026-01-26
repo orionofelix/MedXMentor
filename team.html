@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Team - MedXMentor</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Primary Colors - Blue & White */
+    --primary-blue: #2563eb;
+    --primary-blue-dark: #1d4ed8;
+    --primary-blue-light: #3b82f6;
+    --blue-50: #eff6ff;
+    --blue-100: #dbeafe;
+    --blue-200: #bfdbfe;
+    --blue-500: #3b82f6;
+    --blue-600: #2563eb;
+    --blue-700: #1d4ed8;
+    --blue-800: #1e40af;
+    --blue-900: #1e3a8a;
+    
+    /* Secondary Colors - Gray & Black */
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    
+    --white: #ffffff;
+    --black: #000000;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-800) 100%);
+    --gradient-light: linear-gradient(135deg, var(--blue-50) 0%, var(--white) 100%);
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Spacing */
+    --container-max-width: 1200px;
+    --section-padding: 5rem 0;
+    --border-radius: 0.5rem;
+    --border-radius-large: 1rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.6;
+    color: var(--gray-800);
+    background-color: var(--white);
+}
+
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-brand .logo {
+    height: 50px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+}
+
+.nav-brand .brand-text h1 {
+    color: var(--primary-blue);
+    font-size: 1.875rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 0.1rem;
+}
+
+.nav-brand .brand-text span {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--gray-700);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition);
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--primary-blue);
+}
+
+.nav-menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-blue);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--gray-700);
+    transition: var(--transition);
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    color: var(--white);
+}
+
+/* Page Header */
+.page-header {
+    padding: 4rem 0 2rem;
+    background: var(--gradient-light);
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.page-header p {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+}
+
+/* Section Styles */
+section {
+    padding: var(--section-padding);
+}
+
+/* Leadership Team */
+.leadership-team {
+    padding: 2rem 0 2rem;
+    background-color: var(--white);
+}
+
+.leadership-team h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 3rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.team-member {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.team-member.featured {
+    grid-column: 1 / -1;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.member-photo {
+    width: 16rem;
+    height: 16rem;
+    border-radius: 24px;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--white);
+}
+
+.member-photo i {
+    font-size: 2rem;
+}
+
+.member-info h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+}
+
+.position {
+    color: var(--primary-blue);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 1rem;
+}
+
+.bio {
+    color: var(--gray-600);
+    line-height: 1.6;
+}
+
+/* Campus Ambassadors */
+.campus-ambassadors {
+    background-color: var(--gray-50);
+}
+
+.campus-ambassadors h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 1.5rem;
+}
+
+.ambassadors-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    line-height: 1.8;
+}
+
+.ambassadors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.ambassador-card {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.ambassador-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.ambassador-photo {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--white);
+}
+
+.ambassador-photo i {
+    font-size: 1.25rem;
+}
+
+.ambassador-card h4 {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+}
+
+.university {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.country {
+    color: var(--primary-blue);
+    font-weight: var(--font-weight-medium);
+    font-size: 0.875rem;
+}
+
+/* Team Mission */
+.team-mission {
+    background: var(--gradient-primary);
+    color: var(--white);
+    text-align: center;
+}
+
+.mission-content h2 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1.5rem;
+}
+
+.mission-content p {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+/* Call to Action */
+.cta {
+    background: var(--gradient-primary);
+    color: var(--white);
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+}
+
+.cta p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta .btn-primary {
+    background-color: var(--white);
+    color: var(--white);
+}
+
+.cta .btn-primary:hover {
+    background-color: var(--gray-100);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--gray-900);
+    color: var(--white);
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.footer-section h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+    color: var(--primary-blue);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.footer-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+}
+
+.footer-section h4 {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 1rem;
+}
+
+.footer-section p {
+    color: var(--gray-300);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: var(--gray-300);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary-blue);
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info i {
+    color: var(--primary-blue);
+}
+
+.footer .social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.footer .social-links a {
+    background-color: var(--gray-800);
+    color: var(--white);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer .social-links a:hover {
+    background-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--gray-800);
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: var(--gray-400);
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-brand .logo {
+        height: 40px;
+    }
+    
+    .nav-brand .brand-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .nav-brand .brand-text span {
+        font-size: 0.75rem;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: left 0.3s ease;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.15);
+        padding: 1rem 0;
+        z-index: 999;
+        height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu.active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: -1;
+    }
+
+    .nav-menu li {
+        margin: 0;
+        border-bottom: 1px solid var(--gray-100);
+    }
+
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        color: var(--gray-700);
+        text-decoration: none;
+        transition: var(--transition);
+        border-left: 4px solid transparent;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+        background-color: var(--blue-50);
+        color: var(--primary-blue);
+        border-left-color: var(--primary-blue);
+    }
+
+    .nav-menu a.active::after {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .header.scrolled {
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ambassadors-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    .page-header {
+        padding: 6rem 0 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .ambassadors-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    
+/* Image Placeholder */
+.image-placeholder {
+    background: var(--gradient-light);
+    border-radius: var(--border-radius-large);
+    padding: 3rem;
+    text-align: center;
+    color: var(--primary-blue);
+    box-shadow: var(--shadow-md);
+    margin: 2rem 0;
+}
+
+.image-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.image-placeholder p {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-medium);
+    margin: 0;
+}</style>
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="logo"></a>
+                    <div class="brand-text">
+                        <h1>MedXMentor</h1>
+                        <span>Mentorship Program</span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="team.html" class="active">The Team</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Team</h1>
+            <p>Meet the dedicated professionals leading MedXMentor's mission</p>
+        </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section class="leadership-team">
+        <div class="container">
+            <h2>MedXMentor Secretariat</h2>
+            <div class="team-grid">
+                <div class="team-member featured">
+                    <div class="member-photo">
+                        <img src="pictures/Dr. Tamale Elvis.jpg" alt="Dr. Tamale Elvis" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Tamale Elvis</h3>
+                        <p class="position">Chairperson MedXMentor</p>
+                        <p class="bio">Leading the vision and strategic direction of MedXMentor's mission to empower future health professionals across Africa.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="pictures/Ampaire Daphine.jpg" alt="Ampaire Daphine" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Ampaire Daphine</h3>
+                        <p class="position">Executive Secretary</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="pictures/Malinga Paddy.jpg" alt="Malinga Paddy" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Malinga Paddy</h3>
+                        <p class="position">Research & Innovation Director</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="pictures/Arnold Ssemwogerere.jpg" alt="Arnold Ssemwogerere" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Arnold Ssemwogerere</h3>
+                        <p class="position">Projects & Finance Director</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="pictures/Odora Stephen.jpg" alt="Odora Stephen" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Odora Stephen</h3>
+                        <p class="position">Chapter Coordination Director</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="pictures/Baja Uthman.jpg" alt="Baja Uthman" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Baja Uthman</h3>
+                        <p class="position">Monitoring & Evaluation (M&E) Director</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="pictures/Oriono Felix.jpg" alt="Oriono Felix" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Oriono Felix</h3>
+                        <p class="position">Communications Director</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Country Coordinators Team -->
+    <section class="country-coordinators">
+        <div class="container">
+            <h2 style="font-size:2.5rem;font-weight:800;margin-bottom:2rem;letter-spacing:-1px;text-align:center;">Country Coordinators</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="pictures/Uwimana Rachel.jpg" alt="Uwimana Rachel" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Uwimana Rachel</h3>
+                        <p class="position">Country Coordinator</p>
+                        <p class="country">Burundi</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="pictures/Kalkidan Dawit.jpg" alt="Kalkidan Dawit" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Kalkidan Dawit</h3>
+                        <p class="position">Country Coordinator</p>
+                        <p class="country">Ethiopia</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="pictures/Fisher.jpg" alt="Irving Fisher" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Irving Fisher</h3>
+                        <p class="position">Country Coordinator</p>
+                        <p class="country">Uganda</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campus Ambassadors -->
+    <section id="campus-ambassadors" class="campus-ambassadors">
+        <div class="container">
+            <h2>Meet the 2025 MedXMentor Campus Ambassadors!</h2>
+            <p class="ambassadors-intro">We are excited to unveil our newly chosen Campus Ambassadors for 2025 — a diverse and vibrant team of student leaders from universities across Uganda, Ethiopia, Rwanda, Kenya, and Burundi. These ambassadors embody the core of the MedXMentor mission: to provide future health professionals with knowledge, skills, confidence, motivation, experiences, and life lessons through a mentoring program.</p>
+            
+            <div class="ambassadors-grid">
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Fisher.jpg" alt="Irving Fisher" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Irving Fisher</h4>
+                    <p class="university">Kabale University</p>
+                    <p class="country">Uganda</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Midhega Awel.jpg" alt="Midhega Awel" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Midhega Awel</h4>
+                    <p class="university">Haramaya University</p>
+                    <p class="country">Ethiopia</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/William Bekele.jpg" alt="William Bekele" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>William Bekele</h4>
+                    <p class="university">St. Paul Hospital College</p>
+                    <p class="country">Ethiopia</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Uwimana Rachel.jpg" alt="Uwimana Rachel" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Uwimana Rachel</h4>
+                    <p class="university">Olivia University</p>
+                    <p class="country">Burundi</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Kariuki.jpg" alt="Brian Kariuki" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Brian Kariuki</h4>
+                    <p class="university">Uzima University</p>
+                    <p class="country">Kenya</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Lydia Assefa.jpg" alt="Lydia Assefa" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Lydia Assefa</h4>
+                    <p class="university">Bahir Dar University</p>
+                    <p class="country">Ethiopia</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Wanjiku.jpg" alt="Stella Wanjiku" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Stella Wanjiku</h4>
+                    <p class="university">JKUAT</p>
+                    <p class="country">Kenya</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Ismail Farah.jpg" alt="Kamil Ismail Farah" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Kamil Ismail Farah</h4>
+                    <p class="university">Jigjiga University</p>
+                    <p class="country">Ethiopia</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Egide Tuyisingize.jpg" alt="Egide Tuyisingize" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Egide Tuyisingize</h4>
+                    <p class="university">University of Rwanda</p>
+                    <p class="country">Rwanda</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Nahim Geneti.jpg" alt="Nahim Geneti" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Nahim Geneti</h4>
+                    <p class="university">Hawassa University</p>
+                    <p class="country">Ethiopia</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Abera.JPG" alt="Abel Abera" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Abel Abera</h4>
+                    <p class="university">Debremarkos University</p>
+                    <p class="country">Ethiopia</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Haragakiza.jpg" alt="Eunice Haragakiza" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Eunice Haragakiza</h4>
+                    <p class="university">Hope Africa University</p>
+                    <p class="country">Burundi</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Bethlehem Abate.jpg" alt="Bethlehem Abate" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Bethlehem Abate</h4>
+                    <p class="university">Debretabor University</p>
+                    <p class="country">Ethiopia</p>
+                </div>
+
+                <div class="ambassador-card">
+                    <div class="ambassador-photo">
+                        <img src="pictures/Dessalegn.jpg" alt="Bezawit Dessalegn" style="width:100px;height:100px;object-fit:cover;border-radius:12px;" />
+                    </div>
+                    <h4>Bezawit Dessalegn</h4>
+                    <p class="university">Debre Birhan University</p>
+                    <p class="country">Ethiopia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Mission -->
+    <section class="team-mission">
+        <div class="container">
+            <div class="mission-content">
+                <h2>Together, We Journey With You</h2>
+                <p>Our team is dedicated to fostering meaningful mentoring relationships that empower the next generation of health professionals. Through collaboration, guidance, and shared experiences, we're building a stronger healthcare future for Africa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Want to Join Our Team?</h2>
+                <p>We're always looking for passionate individuals to help expand our mission across Africa.</p>
+                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="footer-logo"></a>
+                        <h3>MedXMentor</h3>
+                    </div>
+                    <p>A mentorship program for young health professionals. We Journey with You.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/medxmentor/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/MedXMentor" target="_blank" style="font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
+                        <a href="https://www.youtube.com/@medxmentor" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/in/medxmentor/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacts</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +256 788 340086</p>
+                        <p><i class="fas fa-envelope"></i> info@medxmentor.org</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; MedXMentor 2025. All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+// MedXMentor Website JavaScript
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile Navigation Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+
+    // Add scroll effect to header
+    const header = document.querySelector('.header');
+    if (header) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+
+    // Add fade-in animation to cards on scroll
+    const animatedElements = document.querySelectorAll('.team-member, .ambassador-card');
+    
+    if (animatedElements.length > 0) {
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        animatedElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            cardObserver.observe(element);
+        });
+    }
+
+    // Social media links click tracking
+    const socialLinks = document.querySelectorAll('.social-links a');
+    socialLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // You can add analytics tracking here
+            const platform = this.getAttribute('href');
+            console.log('Social media clicked:', platform);
+        });
+    });
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - MedXMentor Assessment Portal</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-dark: #1d4ed8;
+            --primary-blue-light: #3b82f6;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-400: #9ca3af;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --white: #ffffff;
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--gradient-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .signup-card {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .signup-header h1 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .signup-header p {
+            color: var(--gray-600);
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray-700);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .login-link {
+            text-align: center;
+            color: var(--gray-600);
+        }
+
+        .login-link a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .alert-error {
+            background: #fee;
+            color: #c00;
+            border: 1px solid #fcc;
+            display: block;
+        }
+
+        .alert-success {
+            background: #efe;
+            color: #060;
+            border: 1px solid #cfc;
+            display: block;
+        }
+
+        .loading {
+            display: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .signup-card {
+                padding: 2rem;
+            }
+
+            .signup-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="signup-card">
+            <div class="signup-header">
+                <img src="logo.png" alt="MedXMentor" class="logo">
+                <h1>Sign Up</h1>
+                <p>Create Your Assessment Account</p>
+            </div>
+
+            <div id="alertMessage" class="alert"></div>
+
+            <form id="signupForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="At least 6 characters">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select id="country" name="country">
+                            <option value="">Select Country</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Rwanda">Rwanda</option>
+                            <option value="Ethiopia">Ethiopia</option>
+                            <option value="Nigeria">Nigeria</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="university">University</label>
+                        <input type="text" id="university" name="university" placeholder="Your university">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="program">Program of Study</label>
+                    <input type="text" id="program" name="program" placeholder="e.g., Medical School">
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <span class="loading">
+                        <span class="spinner"></span>Creating Account...
+                    </span>
+                    <span class="normal">Sign Up</span>
+                </button>
+            </form>
+
+            <p class="login-link">
+                Already have an account? <a href="login.html">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const apiUrl = 'http://localhost:5000/api'; // Change to your backend URL in production
+
+        const signupForm = document.getElementById('signupForm');
+        const alertMessage = document.getElementById('alertMessage');
+        const loadingSpan = document.querySelector('.loading');
+        const normalSpan = document.querySelector('.normal');
+
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const country = document.getElementById('country').value;
+            const university = document.getElementById('university').value;
+            const program = document.getElementById('program').value;
+
+            // Validate password length
+            if (password.length < 6) {
+                alertMessage.className = 'alert alert-error';
+                alertMessage.textContent = 'Password must be at least 6 characters long.';
+                return;
+            }
+
+            // Show loading state
+            loadingSpan.style.display = 'inline';
+            normalSpan.style.display = 'none';
+            signupForm.querySelector('button').disabled = true;
+
+            try {
+                const response = await fetch(`${apiUrl}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        firstName,
+                        lastName,
+                        email,
+                        password,
+                        country,
+                        university,
+                        program,
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Save token to localStorage
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+
+                    // Show success message
+                    alertMessage.className = 'alert alert-success';
+                    alertMessage.textContent = 'Account created successfully! Redirecting...';
+
+                    // Redirect to assessment portal after 1.5 seconds
+                    setTimeout(() => {
+                        window.location.href = 'assessment-portal.html';
+                    }, 1500);
+                } else {
+                    // Show error message
+                    alertMessage.className = 'alert alert-error';
+                    alertMessage.textContent = data.message || 'Sign up failed. Please try again.';
+
+                    // Reset button state
+                    loadingSpan.style.display = 'none';
+                    normalSpan.style.display = 'inline';
+                    signupForm.querySelector('button').disabled = false;
+                }
+            } catch (error) {
+                alertMessage.className = 'alert alert-error';
+                alertMessage.textContent = 'Network error. Please try again.';
+
+                // Reset button state
+                loadingSpan.style.display = 'none';
+                normalSpan.style.display = 'inline';
+                signupForm.querySelector('button').disabled = false;
+            }
+        });
+
+        // Check if already logged in
+        window.addEventListener('load', () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                window.location.href = 'assessment-portal.html';
+            }
+        });
+    </script>
+</body>
+</html>

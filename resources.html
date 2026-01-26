@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - MedXMentor</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Primary Colors - Blue & White */
+    --primary-blue: #2563eb;
+    --primary-blue-dark: #1d4ed8;
+    --primary-blue-light: #3b82f6;
+    --blue-50: #eff6ff;
+    --blue-100: #dbeafe;
+    --blue-200: #bfdbfe;
+    --blue-500: #3b82f6;
+    --blue-600: #2563eb;
+    --blue-700: #1d4ed8;
+    --blue-800: #1e40af;
+    --blue-900: #1e3a8a;
+    
+    /* Secondary Colors - Gray & Black */
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    
+    --white: #ffffff;
+    --black: #000000;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-800) 100%);
+    --gradient-light: linear-gradient(135deg, var(--blue-50) 0%, var(--white) 100%);
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Spacing */
+    --container-max-width: 1200px;
+    --section-padding: 5rem 0;
+    --border-radius: 0.5rem;
+    --border-radius-large: 1rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.6;
+    color: var(--gray-800);
+    background-color: var(--white);
+}
+
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-brand .logo {
+    height: 50px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+}
+
+.nav-brand .brand-text h1 {
+    color: var(--primary-blue);
+    font-size: 1.875rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 0.1rem;
+}
+
+.nav-brand .brand-text span {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--gray-700);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition);
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--primary-blue);
+}
+
+.nav-menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-blue);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--gray-700);
+    transition: var(--transition);
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    color: var(--white);
+}
+
+/* Page Header */
+.page-header {
+    padding: 4rem 0 2rem;
+    background: var(--gradient-light);
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.page-header p {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+}
+
+/* Section Styles */
+section {
+    padding: var(--section-padding);
+}
+
+/* Newsletter Feature */
+.newsletter-feature {
+    padding: 0rem 0 1rem;    
+    background-color: var(--gray-50);
+}
+
+.newsletter-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-md);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.newsletter-content h2 {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.newsletter-content p {
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.newsletter-icon {
+    background: var(--gradient-primary);
+    color: var(--white);
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.newsletter-icon i {
+    font-size: 2rem;
+}
+
+/* Resources Grid */
+.resources-grid {
+    padding: 2rem 0 2rem;    
+    background-color: var(--white);
+}
+
+.resources-grid h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 3rem;
+}
+
+.resources-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+}
+
+.resource-category h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.resource-category h3 i {
+    color: var(--primary-blue);
+}
+
+.resource-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.resource-item {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary-blue);
+    transition: var(--transition);
+}
+
+.resource-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(5px);
+}
+
+.resource-item h4 {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 0.75rem;
+}
+
+.resource-item p {
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.resource-link {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.resource-link:hover {
+    color: var(--primary-blue-dark);
+}
+
+/* Mentoring Benefits */
+.mentoring-benefits {
+    background-color: var(--gray-50);
+}
+
+.mentoring-benefits h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.benefits-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    font-size: 1.125rem;
+    color: var(--gray-600);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.benefits-grid .benefit-item {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+.benefit-icon {
+    background: var(--gradient-primary);
+    color: var(--white);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.benefit-icon i {
+    font-size: 1.5rem;
+}
+
+.benefit-item h4 {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.benefit-item p {
+    color: var(--gray-600);
+    line-height: 1.6;
+}
+
+/* Newsletter Signup */
+.newsletter-signup {
+    background: var(--gradient-primary);
+    color: var(--white);
+    text-align: center;
+}
+
+.signup-content h2 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+}
+
+.signup-content p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.newsletter-form button {
+    background-color: var(--white);
+    color: var(--white);
+}
+
+.newsletter-form button:hover {
+    background-color: var(--gray-100);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--gray-900);
+    color: var(--white);
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.footer-section h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+    color: var(--primary-blue);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.footer-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+}
+
+.footer-section h4 {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 1rem;
+}
+
+.footer-section p {
+    color: var(--gray-300);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: var(--gray-300);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary-blue);
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info i {
+    color: var(--primary-blue);
+}
+
+.footer .social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.footer .social-links a {
+    background-color: var(--gray-800);
+    color: var(--white);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer .social-links a:hover {
+    background-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--gray-800);
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: var(--gray-400);
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-brand .logo {
+        height: 40px;
+    }
+    
+    .nav-brand .brand-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .nav-brand .brand-text span {
+        font-size: 0.75rem;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: left 0.3s ease;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.15);
+        padding: 1rem 0;
+        z-index: 999;
+        height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu.active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: -1;
+    }
+
+    .nav-menu li {
+        margin: 0;
+        border-bottom: 1px solid var(--gray-100);
+    }
+
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        color: var(--gray-700);
+        text-decoration: none;
+        transition: var(--transition);
+        border-left: 4px solid transparent;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+        background-color: var(--blue-50);
+        color: var(--primary-blue);
+        border-left-color: var(--primary-blue);
+    }
+
+    .nav-menu a.active::after {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .header.scrolled {
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+    }
+    
+    .newsletter-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .resources-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    .page-header {
+        padding: 6rem 0 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    
+/* Image Placeholder */
+.image-placeholder {
+    background: var(--gradient-light);
+    border-radius: var(--border-radius-large);
+    padding: 3rem;
+    text-align: center;
+    color: var(--primary-blue);
+    box-shadow: var(--shadow-md);
+    margin: 2rem 0;
+}
+
+.image-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.image-placeholder p {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-medium);
+    margin: 0;
+}</style>
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="logo"></a>
+                    <div class="brand-text">
+                        <h1>MedXMentor</h1>
+                        <span>Mentorship Program</span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="team.html">The Team</a></li>
+                    <li><a href="resources.html" class="active">Resources</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Resources</h1>
+            <p>Empowering your mentorship journey with valuable tools and insights</p>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-feature">
+        <div class="container">
+            <div class="newsletter-card">
+                <div class="newsletter-content">
+                    <h2>News from MedXMentor</h2>
+                    <p>We are excited to have released the first edition of our newsletter. Stay updated with the latest mentorship insights, success stories, and program announcements.</p>
+                    <a href="https://medmentor.org/Files/MedXmentor Newsletter July 2025 Edition.pdf" class="btn btn-primary">Read Our Newsletter</a>
+                </div>
+                <div class="newsletter-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Grid -->
+    <section class="resources-grid">
+        <div class="container">
+            <h2>Mentorship Resources</h2>
+            <div class="resources-container">
+                <div class="resource-category">
+                    <h3><i class="fas fa-user-tie"></i> For Mentors</h3>
+                    <div class="resource-items">
+                        <div class="resource-item">
+                            <h4>Instructer's Guide</h4>
+                            <p>Comprehensive guide on effective mentoring practices, goal setting, and building meaningful relationships with mentees.</p>
+                            <a href="https://medmentor.org/resources/Files/Instructor's Guide.pdf" class="resource-link">Download PDF <i class="fas fa-download"></i></a>
+                        </div>
+                        <div class="resource-item">
+                            <h4>Mentoring Grid</h4>
+                            <p>Visual representation of mentoring topics and their interconnections to facilitate structured mentorship sessions.</p>
+                            <a href="https://medmentor.org/resources/Files/Mentoring Grid.pdf" class="resource-link">View Grid <i class="fas fa-download"></i></a>
+                        </div>
+
+                        <div class="resource-item">
+                            <h4>Mentoring Prompts</h4>
+                            <p>Utilize these prompts to guide your conversations and ensure productive interactions with your mentees.</p>
+                            <a href="https://medmentor.org/resources/Files/Mentoring Prompts.pdf" class="resource-link">View Guide <i class="fas fa-download"></i></a>
+                        </div>
+
+                        <div class="resource-item">
+                            <h4>Mentoring Slides</h4>
+                            <p>Utilize these slides to guide your conversations and ensure productive interactions with your mentees.</p>
+                            <a href="https://medmentor.org/resources/Files/Mentoring Slides.ppt" class="resource-link">View Slides <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-category">
+                    <h3><i class="fas fa-graduation-cap"></i> For Mentees</h3>
+                    <div class="resource-items">
+                        <div class="resource-item">
+                            <h4>CV Development Toolkit</h4>
+                            <p>Step-by-step guide to creating compelling CVs for healthcare professionals, including templates and examples.</p>
+                            <a href="https://www.resume-now.com/job-resources/cv/how-to-write?utm_source=google&utm_medium=sem&utm_campaign=8699883812&utm_term=&network=g&device=c&adposition=&adgroupid=87750445895&placement=&adid=408227519979&gad_source=1&gad_campaignid=8699883812&gbraid=0AAAAADEP8E4ZJ7mrH7EroeQ5QyrmA0zjh&gclid=CjwKCAjwz5nGBhBBEiwA-W6XRKL86OUNr7rvKdweVzi6fUGE7U89NdGNh7ssG7PA1CJ2ZLYOW36ZJBoCwJYQAvD_BwE" class="resource-link">Visit Guideline <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <div class="resource-item">
+                            <h4>Grant Writing Resources</h4>
+                            <p>Comprehensive materials on research grant applications, including sample proposals and writing tips.</p>
+                            <a href="https://writing.wisc.edu/handbook/grants/" class="resource-link">Explore Resources <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <div class="resource-item">
+                            <h4>Project Management Resources</h4>
+                            <p>Guidelines and tools for effective project management in healthcare settings.</p>
+                            <a href="https://project-management.com/5-rules-to-follow-to-manage-any-project/" class="resource-link">Explore Resources <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-category">
+                    <h3><i class="fas fa-project-diagram"></i> Research & Innovation</h3>
+                    <div class="resource-items">
+                        <div class="resource-item">
+                            <h4>Research Proposal Templates</h4>
+                            <p>Professional templates for structuring compelling research proposals in various healthcare disciplines.</p>
+                            <a href="https://www.yorksj.ac.uk/study/postgraduate/research-degrees/apply/examples-of-research-proposals/" class="resource-link">Get Templates <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <div class="resource-item">
+                            <h4>Leadership Skills Development</h4>
+                            <p>Resources and strategies for enhancing leadership capabilities in healthcare settings.</p>
+                            <a href="https://www.ccl.org/articles/leading-effectively-articles/characteristics-good-leader/" class="resource-link">View Guidelines <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-signup">
+        <div class="container">
+            <div class="signup-content">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>For updates on the latest events, calls, and mentorship articles. Stay informed, inspired, and connected with MedXMentor.</p>
+                </form>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf5QTwEH6bXFEt4easnwLuWx5_HMIu7ZrOywAGyeIZbiVcD2Q/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="footer-logo"></a>
+                        <h3>MedXMentor</h3>
+                    </div>
+                    <p>A mentorship program for young health professionals. We Journey with You.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/medxmentor/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/MedXMentor" target="_blank" style="font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
+                        <a href="https://www.youtube.com/@medxmentor" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/in/medxmentor/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacts</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +256 788 340086</p>
+                        <p><i class="fas fa-envelope"></i> info@medxmentor.org</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; MedXMentor 2025. All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+// Mobile Navigation Toggle
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+}));
+
+// Header scroll effect
+const header = document.querySelector('.header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// Set active navigation item based on current page
+document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    
+    navLinks.forEach(link => {
+        const linkPath = new URL(link.href).pathname;
+        if (linkPath === currentPath) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Newsletter form handling
+const newsletterForm = document.querySelector('.newsletter-form');
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        
+        // Basic email validation
+        if (validateEmail(email)) {
+            alert('Thank you for subscribing to our newsletter!');
+            this.querySelector('input[type="email"]').value = '';
+        } else {
+            alert('Please enter a valid email address.');
+        }
+    });
+}
+
+// Email validation function
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// Smooth scrolling for internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Intersection Observer for fade-in animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe elements for animation
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.resource-item, .benefit-item');
+    
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+});
+    </script>
+</body>
+</html>
+
+
+
+
+

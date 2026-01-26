@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - MedXMentor</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Primary Colors - Blue & White */
+    --primary-blue: #2563eb;
+    --primary-blue-dark: #1d4ed8;
+    --primary-blue-light: #3b82f6;
+    --blue-50: #eff6ff;
+    --blue-100: #dbeafe;
+    --blue-200: #bfdbfe;
+    --blue-500: #3b82f6;
+    --blue-600: #2563eb;
+    --blue-700: #1d4ed8;
+    --blue-800: #1e40af;
+    --blue-900: #1e3a8a;
+    
+    /* Secondary Colors - Gray & Black */
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    
+    --white: #ffffff;
+    --black: #000000;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-800) 100%);
+    --gradient-light: linear-gradient(135deg, var(--blue-50) 0%, var(--white) 100%);
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Spacing */
+    --container-max-width: 1200px;
+    --section-padding: 5rem 0;
+    --border-radius: 0.5rem;
+    --border-radius-large: 1rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.6;
+    color: var(--gray-800);
+    background-color: var(--white);
+}
+
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-brand .logo {
+    height: 50px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+}
+
+.nav-brand .brand-text h1 {
+    color: var(--primary-blue);
+    font-size: 1.875rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 0.1rem;
+}
+
+.nav-brand .brand-text span {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--gray-700);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition);
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--primary-blue);
+}
+
+.nav-menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-blue);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--gray-700);
+    transition: var(--transition);
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    color: var(--white);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+/* Page Header */
+.page-header {
+    padding: 2rem 0 2rem;
+    background: var(--gradient-light);
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.page-header p {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+}
+
+/* Section Styles */
+section {
+    padding: var(--section-padding);
+}
+
+/* Featured Event */
+.featured-event {
+    padding: 7rem 0 2rem;    
+    background-color: var(--white);
+}
+
+.featured-card {
+    background: var(--gradient-primary);
+    border-radius: var(--border-radius-large);
+    padding: 3rem;
+    color: var(--white);
+    text-align: center;
+    box-shadow: var(--shadow-xl);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.featured-card .event-badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.featured-card h2 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+}
+
+.featured-card p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.featured-card .event-details {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.featured-card .event-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.featured-card .event-detail i {
+    font-size: 1.125rem;
+}
+
+.featured-card .btn-primary {
+    background-color: var(--white);
+    color: var(--white);
+}
+
+.featured-card .btn-primary:hover {
+    background-color: var(--gray-100);
+}
+
+/* Events Categories */
+.events-categories {
+    padding: 2rem 0 2rem;
+    background-color: var(--gray-50);
+}
+
+.events-categories h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 3rem;
+}
+
+.events-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--gray-300);
+    background-color: var(--white);
+    color: var(--gray-700);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: var(--font-weight-medium);
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    border-color: var(--primary-blue);
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.event-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.event-image {
+    height: 200px;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 3rem;
+}
+
+.event-content {
+    padding: 2rem;
+}
+
+.event-category {
+    background-color: var(--blue-100);
+    color: var(--primary-blue);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.event-content h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.event-content p {
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.event-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.event-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+}
+
+.event-meta-item i {
+    color: var(--primary-blue);
+    width: 1rem;
+}
+
+.event-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+/* Past Events */
+.past-events {
+    background-color: var(--white);
+}
+
+.past-events h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 3rem;
+}
+
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-blue);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+.timeline-content {
+    width: 45%;
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) .timeline-content::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 10px solid transparent;
+    border-right-color: var(--white);
+}
+
+.timeline-item:nth-child(even) .timeline-content::before {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 10px solid transparent;
+    border-left-color: var(--white);
+}
+
+.timeline-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--gradient-primary);
+    color: var(--white);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.timeline-date {
+    color: var(--primary-blue);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content h4 {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.timeline-content p {
+    color: var(--gray-600);
+    line-height: 1.6;
+}
+
+/* Newsletter Signup */
+.newsletter-signup {
+    background: var(--gradient-primary);
+    color: var(--white);
+    text-align: center;
+}
+
+.signup-content h2 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+}
+
+.signup-content p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.newsletter-form button {
+    background-color: var(--white);
+    color: var(--white);
+}
+
+.newsletter-form button:hover {
+    background-color: var(--gray-100);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--gray-900);
+    color: var(--white);
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.footer-section h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+    color: var(--primary-blue);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.footer-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+}
+
+.footer-section h4 {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 1rem;
+}
+
+.footer-section p {
+    color: var(--gray-300);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: var(--gray-300);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary-blue);
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info i {
+    color: var(--primary-blue);
+}
+
+.footer .social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.footer .social-links a {
+    background-color: var(--gray-800);
+    color: var(--white);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer .social-links a:hover {
+    background-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--gray-800);
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: var(--gray-400);
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-brand .logo {
+        height: 40px;
+    }
+    
+    .nav-brand .brand-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .nav-brand .brand-text span {
+        font-size: 0.75rem;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background-color: #fff !important;
+        width: 100%;
+        text-align: center;
+        transition: left 0.3s ease;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.15);
+        padding: 1rem 0;
+        z-index: 999;
+        height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu.active::before {
+        display: none;
+    }
+
+    .nav-menu li {
+        margin: 0;
+        border-bottom: 1px solid var(--gray-100);
+    }
+
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        color: var(--gray-700);
+        text-decoration: none;
+        transition: var(--transition);
+        border-left: 4px solid transparent;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+        background-color: var(--blue-50);
+        color: var(--primary-blue);
+        border-left-color: var(--primary-blue);
+    }
+
+    .nav-menu a.active::after {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .header.scrolled {
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+    }
+    
+    .featured-card .event-details {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline::before {
+        left: 1rem;
+    }
+    
+    .timeline-item {
+        flex-direction: row !important;
+        margin-left: 2rem;
+    }
+    
+    .timeline-content {
+        width: 100%;
+        margin-left: 2rem;
+    }
+    
+    .timeline-icon {
+        left: 1rem;
+    }
+    
+    .timeline-item .timeline-content::before {
+        left: -10px !important;
+        right: auto !important;
+        border-right-color: var(--white) !important;
+        border-left-color: transparent !important;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    .page-header {
+        padding: 6rem 0 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .featured-card {
+        padding: 2rem;
+    }
+    
+    .featured-card h2 {
+        font-size: 2rem;
+    }
+    
+    .events-filter {
+        justify-content: stretch;
+    }
+    
+    .filter-btn {
+        flex: 1;
+        text-align: center;
+    }
+}
+    
+/* Image Placeholder */
+.image-placeholder {
+    background: var(--gradient-light);
+    border-radius: var(--border-radius-large);
+    padding: 3rem;
+    text-align: center;
+    color: var(--primary-blue);
+    box-shadow: var(--shadow-md);
+    margin: 2rem 0;
+}
+
+.image-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.image-placeholder p {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-medium);
+    margin: 0;
+}</style>
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="logo"></a>
+                    <div class="brand-text">
+                        <h1>MedXMentor</h1>
+                        <span>Mentorship Program</span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li style="position:relative;list-style:none;text-align:right;">
+                        <button class="nav-close" aria-label="Close Menu" style="background:none;border:none;position:absolute;top:0.5rem;right:1.5rem;font-size:2rem;color:#374151;z-index:1001;cursor:pointer;display:none;">
+                            <i class="fas fa-xmark"></i>
+                        </button>
+                    </li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="team.html">The Team</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="events.html" class="active">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Featured Event -->
+    <section class="featured-event">
+        <div class="container">
+            <div class="featured-card">
+                <div class="event-badge">Featured Event</div>
+                <h2>Onboarding of Chapters</h2>
+                <p>Join us for our flagship event bringing together mentors, mentees, and healthcare professionals from across Africa for the onboarding of univeristy chapters for the mentorship year 2025/2026.</p>
+                <div class="event-details">
+                    <div class="event-detail">
+                        <i class="fas fa-calendar"></i>
+                        <span>Monday 1st September, 2025</span>
+                    </div>
+                    <div class="event-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Live on GoogleMeet</span>
+                    </div>
+                    <div class="event-detail">
+                        <i class="fas fa-users"></i>
+                        <span>500+ Participants</span>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-primary">Register Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Categories -->
+    <section class="events-categories">
+        <div class="container">
+            <h2>Upcoming Events</h2>
+            
+            <div class="events-filter">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="workshops">Workshops</button>
+                <button class="filter-btn" data-filter="webinars">Webinars</button>
+                <button class="filter-btn" data-filter="networking">Networking</button>
+                <button class="filter-btn" data-filter="training">Training</button>
+            </div>
+
+            <div class="events-grid">
+                <div class="event-card" data-category="workshops">
+                    <div class="event-image">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category">Workshop</span>
+                        <h3>Research Methodology Workshop</h3>
+                        <p>Learn the fundamentals of conducting healthcare research, from hypothesis formation to data analysis and publication.</p>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>September 10, 2025</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>8:00 PM - 10:00 PM</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Live on GoogleMeet</span>
+                            </div>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary btn-small">Register</a>
+                            <a href="#" class="btn btn-secondary btn-small">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="webinars">
+                    <div class="event-image">
+                        <i class="fas fa-presentation"></i>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category">Webinar</span>
+                        <h3>CV Writing for Healthcare Professionals</h3>
+                        <p>Expert tips on creating compelling CVs that stand out in the competitive healthcare job market.</p>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>September 17, 2025</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>8:00 PM - 10:00 PM</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Live on GoogleMeet</span>
+                            </div>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary btn-small">Register</a>
+                            <a href="#" class="btn btn-secondary btn-small">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="networking">
+                    <div class="event-image">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category">Networking</span>
+                        <h3>Monthly Mentor-Mentee Meetup</h3>
+                        <p>Informal networking session for mentors and mentees to connect, share experiences, and build relationships.</p>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>First Friday of Every Month</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>7:00 PM - 9:00 PM</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Rotating Locations</span>
+                            </div>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary btn-small">RSVP</a>
+                            <a href="#" class="btn btn-secondary btn-small">View Schedule</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="training">
+                    <div class="event-image">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category">Training</span>
+                        <h3>Campus Ambassador Training</h3>
+                        <p>Comprehensive training program for new campus ambassadors on leadership, event organization, and student engagement.</p>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>October 5-7, 2025</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>3-Day Program</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>On GoogleMeet</span>
+                            </div>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary btn-small">Apply</a>
+                            <a href="#" class="btn btn-secondary btn-small">Requirements</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="workshops">
+                    <div class="event-image">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category">Workshop</span>
+                        <h3>Grant Writing Masterclass</h3>
+                        <p>Intensive workshop on writing successful research grant proposals, including hands-on practice and expert feedback.</p>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>September 24, 2025</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>8:00 PM - 10:00 PM</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>On GoogleMeet</span>
+                            </div>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary btn-small">Register</a>
+                            <a href="#" class="btn btn-secondary btn-small">Moe Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="webinars">
+                    <div class="event-image">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category">Webinar</span>
+                        <h3>Public Speaking for Healthcare Professionals</h3>
+                        <p>Build confidence in presenting your research and ideas to various audiences, from academic conferences to community meetings.</p>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>October 1, 2025</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>8:00 PM - 10:00 PM</span>
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>On GoogleMeet</span>
+                            </div>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary btn-small">Register</a>
+                            <a href="#" class="btn btn-secondary btn-small">More Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Events Timeline -->
+    <section class="past-events">
+        <!-- Banner Image -->
+        <div style="width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;overflow:hidden;max-width:100vw;">
+            <img src="pictures/4F3A7018.jpg" alt="Past Events Banner" style="width:100vw;height:320px;object-fit:cover;display:block;" />
+        </div>
+        <div class="container">
+            <h2 style="margin-top:2rem;">Past Events Highlights</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 2024</div>
+                        <h4>Second Cohort Launch</h4>
+                        <p>Celebrated the launch of our second mentorship cohort with 50 new mentees joining the program. The event featured keynote speeches from industry leaders and networking opportunities.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">December 2023</div>
+                        <h4>First Cohort Graduation</h4>
+                        <p>MedXMentor celebrated the graduation of its first cohort, with mentees showcasing their projects and achievements.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">August 2023</div>
+                        <h4>Mega Workshop</h4>
+                        <p>Intensive workshop for first cohort mentees focusing on CV writing, project management, and proposal writing.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 2022</div>
+                        <h4>First Bootcamp</h4>
+                        <p>Bootcamp held at PenPal Gardens Mbarara, Uganda. Bringing medical students from all professional backgrounds together.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">February 2022</div>
+                        <h4>Program Launch & First Cohort</h4>
+                        <p>Official launch of MedXMentor with the secretariat team and mentors.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-signup">
+        <div class="container">
+            <div class="signup-content">
+                <h2>Stay Connected</h2>
+                <p>Subscribe to our newsletter for updates on the latest events, calls, and mentorship articles.</p>
+                </form>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf5QTwEH6bXFEt4easnwLuWx5_HMIu7ZrOywAGyeIZbiVcD2Q/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="footer-logo"></a>
+                        <h3>MedXMentor</h3>
+                    </div>
+                    <p>A mentorship program for young health professionals. We Journey with You.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/medxmentor/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/MedXMentor" target="_blank" style="font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
+                        <a href="https://www.youtube.com/@medxmentor" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/in/medxmentor/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacts</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +256 788 340086</p>
+                        <p><i class="fas fa-envelope"></i> info@medxmentor.org</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; MedXMentor 2025. All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+// Mobile Navigation Toggle
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+const navClose = document.querySelector('.nav-close');
+
+function openMenu() {
+    hamburger.classList.add('active');
+    navMenu.classList.add('active');
+    if (navClose) navClose.style.display = 'block';
+}
+function closeMenu() {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+    if (navClose) navClose.style.display = 'none';
+}
+
+hamburger.addEventListener('click', openMenu);
+if (navClose) navClose.addEventListener('click', closeMenu);
+
+document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', closeMenu));
+
+// Header scroll effect
+const header = document.querySelector('.header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// Set active navigation item based on current page
+document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    
+    navLinks.forEach(link => {
+        const linkPath = new URL(link.href).pathname;
+        if (linkPath === currentPath) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Events Filter Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const eventCards = document.querySelectorAll('.event-card');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
+
+            const filter = button.getAttribute('data-filter');
+
+            eventCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+
+// Newsletter form handling
+const newsletterForm = document.querySelector('.newsletter-form');
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        
+        // Basic email validation
+        if (validateEmail(email)) {
+            alert('Thank you for subscribing to our newsletter!');
+            this.querySelector('input[type="email"]').value = '';
+        } else {
+            alert('Please enter a valid email address.');
+        }
+    });
+}
+
+// Email validation function
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// Smooth scrolling for internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Intersection Observer for fade-in animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe elements for animation
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.event-card, .timeline-item, .featured-card');
+    
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+});
+    </script>
+</body>
+</html>
+
+
+
+
+

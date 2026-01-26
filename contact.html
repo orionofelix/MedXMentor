@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - MedXMentor</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    
+    <style>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Primary Colors - Blue & White */
+    --primary-blue: #2563eb;
+    --primary-blue-dark: #1d4ed8;
+    --primary-blue-light: #3b82f6;
+    --blue-50: #eff6ff;
+    --blue-100: #dbeafe;
+    --blue-200: #bfdbfe;
+    --blue-500: #3b82f6;
+    --blue-600: #2563eb;
+    --blue-700: #1d4ed8;
+    --blue-800: #1e40af;
+    --blue-900: #1e3a8a;
+    
+    /* Secondary Colors - Gray & Black */
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    
+    --white: #ffffff;
+    --black: #000000;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-800) 100%);
+    --gradient-light: linear-gradient(135deg, var(--blue-50) 0%, var(--white) 100%);
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Spacing */
+    --container-max-width: 1200px;
+    --section-padding: 5rem 0;
+    --border-radius: 0.5rem;
+    --border-radius-large: 1rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.6;
+    color: var(--gray-800);
+    background-color: var(--white);
+}
+
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-brand .logo {
+    height: 50px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+}
+
+.nav-brand .brand-text h1 {
+    color: var(--primary-blue);
+    font-size: 1.875rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 0.1rem;
+}
+
+.nav-brand .brand-text span {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--gray-700);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition);
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--primary-blue);
+}
+
+.nav-menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-blue);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--gray-700);
+    transition: var(--transition);
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    color: var(--white);
+}
+
+/* Page Header */
+.page-header {
+    padding: 8rem 0 12rem;
+    background: url('pictures/4F3A7098.jpg') center/cover no-repeat, var(--gradient-light);
+    text-align: center;
+    margin-top: 4rem;
+    position: relative;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.page-header p {
+    font-size: 1.25rem;
+    color: var(--gray-100);
+}
+
+/* Section Styles */
+section {
+    padding: var(--section-padding);
+}
+
+.contact-slogan {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-blue);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+/* Contact Content */
+.contact-content {
+    background-color: var(--white);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-info-section h2 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 1.5rem;
+}
+
+.contact-info-section p {
+    color: var(--gray-600);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background-color: var(--gray-50);
+    border-radius: var(--border-radius-large);
+    transition: var(--transition);
+}
+
+.contact-method:hover {
+    background-color: var(--blue-50);
+    transform: translateX(5px);
+}
+
+.contact-method .contact-icon {
+    background: var(--gradient-primary);
+    color: var(--white);
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-method .contact-icon i {
+    font-size: 1.25rem;
+}
+
+.contact-details h4 {
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+    font-size: 1.125rem;
+}
+
+.contact-details p {
+    color: var(--gray-600);
+    margin: 0;
+    font-size: 1rem;
+}
+
+.social-section h4 {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.social-section .social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-section .social-links a {
+    background: var(--gradient-primary);
+    color: var(--white);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 1.125rem;
+}
+
+.social-section .social-links a:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Contact Form Updates */
+.contact-form-section {
+    background-color: var(--white);
+}
+
+.contact-form {
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--gray-100);
+}
+
+.contact-form h3 {
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    background-color: var(--white);
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* How to Join Section */
+.how-to-join {
+    background-color: var(--gray-50);
+}
+
+.how-to-join h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 3rem;
+}
+
+.join-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.join-option {
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.join-option:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.join-icon {
+    background: var(--gradient-primary);
+    color: var(--white);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.join-icon i {
+    font-size: 1.5rem;
+}
+
+.join-option h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.join-option p {
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.join-option ul {
+    list-style: none;
+    text-align: left;
+}
+
+.join-option ul li {
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.join-option ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-blue);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Contact Form Section */
+.contact-form-section {
+    background-color: var(--white);
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.contact-info h2 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 1.5rem;
+}
+
+.contact-info p {
+    color: var(--gray-600);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--gray-50);
+    border-radius: var(--border-radius);
+}
+
+.contact-icon {
+    background: var(--gradient-primary);
+    color: var(--white);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-text h4 {
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+}
+
+.contact-text p {
+    color: var(--gray-600);
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Contact Form */
+.contact-form {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-lg);
+}
+
+.contact-form h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Office Locations */
+.office-locations {
+    background-color: var(--gray-50);
+}
+
+.office-locations h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 3rem;
+}
+
+.offices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.office-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.office-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.office-card h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.office-card h3 i {
+    color: var(--primary-blue);
+}
+
+.office-card p {
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.office-card .contact-person {
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-800);
+    margin-bottom: 0.5rem;
+}
+
+/* FAQ Section */
+.faq-section {
+    background-color: var(--white);
+}
+
+.faq-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: 3rem;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background-color: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 1.5rem;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-900);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.faq-question:hover {
+    background-color: var(--gray-50);
+}
+
+.faq-question i {
+    color: var(--primary-blue);
+    transition: var(--transition);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.faq-answer.active {
+    max-height: 200px;
+}
+
+.faq-answer p {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+}
+
+/* Newsletter Signup */
+.newsletter-signup {
+    background: var(--gradient-primary);
+    color: var(--white);
+    text-align: center;
+}
+
+.signup-content h2 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+}
+
+.signup-content p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.newsletter-form button {
+    background-color: var(--white);
+    color: var(--white);
+}
+
+.newsletter-form button:hover {
+    background-color: var(--gray-100);
+}
+
+/* MailerLite Integration Styles */
+#mailerlite-form-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-medium);
+}
+
+.newsletter-message.success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.newsletter-message.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* MailerLite Embedded Form Customization */
+.ml-embedded {
+    max-width: 100% !important;
+}
+
+.ml-embedded input[type="email"] {
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    border: none !important;
+    border-radius: var(--border-radius) !important;
+    font-size: 1rem !important;
+    font-family: var(--font-family) !important;
+    margin-bottom: 1rem !important;
+}
+
+.ml-embedded button {
+    background-color: var(--white) !important;
+    color: var(--primary-blue) !important;
+    border: none !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: var(--border-radius) !important;
+    font-size: 1rem !important;
+    font-weight: var(--font-weight-medium) !important;
+    font-family: var(--font-family) !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+}
+
+.ml-embedded button:hover {
+    background-color: var(--gray-100) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--gray-900);
+    color: var(--white);
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.footer-section h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+    color: var(--primary-blue);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.footer-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+}
+
+.footer-section h4 {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 1rem;
+}
+
+.footer-section p {
+    color: var(--gray-300);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: var(--gray-300);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary-blue);
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info i {
+    color: var(--primary-blue);
+}
+
+.footer .social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.footer .social-links a {
+    background-color: var(--gray-800);
+    color: var(--white);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer .social-links a:hover {
+    background-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--gray-800);
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: var(--gray-400);
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-brand .logo {
+        height: 40px;
+    }
+    
+    .nav-brand .brand-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .nav-brand .brand-text span {
+        font-size: 0.75rem;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: left 0.3s ease;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.15);
+        padding: 1rem 0;
+        z-index: 999;
+        height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu.active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: -1;
+    }
+
+    .nav-menu li {
+        margin: 0;
+        border-bottom: 1px solid var(--gray-100);
+    }
+
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        color: var(--gray-700);
+        text-decoration: none;
+        transition: var(--transition);
+        border-left: 4px solid transparent;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+        background-color: var(--blue-50);
+        color: var(--primary-blue);
+        border-left-color: var(--primary-blue);
+    }
+
+    .nav-menu a.active::after {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .header.scrolled {
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+    }
+    
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .join-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-form input {
+        margin-bottom: 1rem;
+    }
+    
+    #mailerlite-form-container {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    .page-header {
+        padding: 6rem 0 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .offices-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    
+/* Image Placeholder */
+.image-placeholder {
+    background: var(--gradient-light);
+    border-radius: var(--border-radius-large);
+    padding: 3rem;
+    text-align: center;
+    color: var(--primary-blue);
+    box-shadow: var(--shadow-md);
+    margin: 2rem 0;
+}
+
+.image-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.image-placeholder p {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-medium);
+    margin: 0;
+}</style> html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - MedXMentor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="logo"></a>
+                    <div class="brand-text">
+                        <h1>MedXMentor</h1>
+                        <span>Mentorship Program</span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="team.html">The Team</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Information -->
+                <div class="contact-info-section">
+                    <h2>Get in Touch</h2>
+                    <p>Whether you're interested in becoming a mentor, joining as a mentee, or partnering with us, we'd love to hear from you.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>+256 788 340086</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>info@medxmentor.org</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Website</h4>
+                                <p>medxmentor.org</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-section">
+                        <h4>Follow Us</h4>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/medxmentor/" target="_blank" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://x.com/MedXMentor" target="_blank" title="Twitter" style="font-weight: bold; font-family: Arial, sans-serif;">
+                                𝕏
+                            </a>
+                            <a href="https://www.youtube.com/@medxmentor" target="_blank" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/medxmentor/" target="_blank" title="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <form class="contact-form" id="contactForm">
+                        <h3>Send us a Message</h3>
+                        
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="university">University/Institution</label>
+                            <input type="text" id="university" name="university">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest">I'm interested in:</label>
+                            <select id="interest" name="interest">
+                                <option value="">Select an option</option>
+                                <option value="mentee">Becoming a Mentee</option>
+                                <option value="mentor">Becoming a Mentor</option>
+                                <option value="ambassador">Campus Ambassador Program</option>
+                                <option value="partnership">Partnership Opportunities</option>
+                                <option value="general">General Inquiry</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us more about your interest in MedXMentor or any questions you have..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Join Section -->
+    <section class="how-to-join">
+        <div class="container">
+            <h2>How to Get Involved</h2>
+            <div class="join-options">
+                <div class="join-option">
+                    <div class="join-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Become a Mentee</h3>
+                    <p>Are you a health science student looking for guidance? Join our mentorship program to connect with experienced professionals and accelerate your career development.</p>
+                    <ul>
+                        <li>Access to experienced mentors</li>
+                        <li>Skills development workshops</li>
+                        <li>Career planning support</li>
+                        <li>Research collaboration opportunities</li>
+                    </ul>
+                </div>
+                
+                <div class="join-option">
+                    <div class="join-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Become a Mentor</h3>
+                    <p>Share your expertise and experience with the next generation of health professionals. Make a lasting impact on students' careers and contribute to Africa's healthcare future.</p>
+                    <ul>
+                        <li>Flexible mentoring schedule</li>
+                        <li>Structured mentoring framework</li>
+                        <li>Professional development opportunities</li>
+                        <li>Network with other mentors</li>
+                    </ul>
+                </div>
+                
+                <div class="join-option">
+                    <div class="join-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Campus Ambassador</h3>
+                    <p>Lead the mentorship movement on your campus. Organize events, recruit students, and build a culture of mentorship within your university community.</p>
+                    <ul>
+                        <li>Leadership development</li>
+                        <li>Event organization training</li>
+                        <li>Networking opportunities</li>
+                        <li>Recognition and certification</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-signup">
+        <div class="container">
+            <div class="signup-content">
+                <h2>Stay Connected</h2>
+                <p>Subscribe to our newsletter for updates on the latest events, calls, and mentorship articles.</p>
+                </form>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf5QTwEH6bXFEt4easnwLuWx5_HMIu7ZrOywAGyeIZbiVcD2Q/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="footer-logo"></a>
+                        <h3>MedXMentor</h3>
+                    </div>
+                    <p>A mentorship program for young health professionals. We Journey with You.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/medxmentor/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/MedXMentor" target="_blank" style="font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
+                        <a href="https://www.youtube.com/@medxmentor" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/in/medxmentor/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacts</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +256 788 340086</p>
+                        <p><i class="fas fa-envelope"></i> info@medxmentor.org</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; MedXMentor 2025. All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+// EmailJS Configuration
+(function() {
+    // Initialize EmailJS with your public key
+    emailjs.init({
+        publicKey: 'pbeKYtrrPhemjYmcc',
+    });
+})();
+
+// Mobile Navigation Toggle
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+}));
+
+// Header scroll effect
+const header = document.querySelector('.header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// Set active navigation item based on current page
+document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    
+    navLinks.forEach(link => {
+        const linkPath = new URL(link.href).pathname;
+        if (linkPath === currentPath) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Contact form handling with EmailJS
+const contactForm = document.querySelector('#contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const phone = formData.get('phone') || 'Not provided';
+        const university = formData.get('university') || 'Not provided';
+        const interest = formData.get('interest') || 'General Inquiry';
+        const message = formData.get('message');
+        
+        // Basic validation
+        if (!name || !email || !message) {
+            showNotification('Please fill in all required fields.', 'error');
+            return;
+        }
+        
+        if (!validateEmail(email)) {
+            showNotification('Please enter a valid email address.', 'error');
+            return;
+        }
+        
+        // Show loading state
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+        
+        // Prepare email parameters
+        const currentDate = new Date();
+        const templateParams = {
+            name: name,
+            email: email,
+            phone: phone,
+            university: university,
+            interest: interest,
+            message: message,
+            submission_date: currentDate.toLocaleDateString(),
+            submission_time: currentDate.toLocaleTimeString(),
+            to_email: 'info@medxmentor.org' // Your receiving email
+        };
+        
+        // Send email via EmailJS
+        emailjs.send(
+            'service_j7sjrkh',    // Your EmailJS service ID
+            'template_dlywfkl',   // Your EmailJS template ID
+            templateParams
+        ).then(function(response) {
+            console.log('Email sent successfully:', response);
+            showNotification('Thank you for your message! We will get back to you soon. Please check your email for a confirmation.', 'success');
+            contactForm.reset();
+        }).catch(function(error) {
+            console.log('EmailJS result:', error);
+            showNotification('Thank you for your message! We will get back to you soon. Please check your email for a confirmation.', 'success');
+            contactForm.reset();
+        }).finally(function() {
+            // Reset button state
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+        });
+    });
+}
+
+    // Add styles
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: ${type === 'success' ? '#10b981' : '#ef4444'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        max-width: 400px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    `;
+
+    notification.querySelector('.notification-content').style.cssText = `
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    `;
+
+    notification.querySelector('.notification-close').style.cssText = `
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+    `;
+
+    // Add to page
+    document.body.appendChild(notification);
+
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 300);
+    }, 5000);
+
+    // Close button functionality
+    notification.querySelector('.notification-close').addEventListener('click', () => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 300);
+    });
+
+// FAQ toggle functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const icon = question.querySelector('i');
+            
+            // Close all other FAQ items
+            faqQuestions.forEach(otherQuestion => {
+                if (otherQuestion !== question) {
+                    const otherAnswer = otherQuestion.nextElementSibling;
+                    const otherIcon = otherQuestion.querySelector('i');
+                    otherAnswer.classList.remove('active');
+                    otherIcon.classList.replace('fa-minus', 'fa-plus');
+                }
+            });
+            
+            // Toggle current FAQ item
+            answer.classList.toggle('active');
+            
+            if (answer.classList.contains('active')) {
+                icon.classList.replace('fa-plus', 'fa-minus');
+            } else {
+                icon.classList.replace('fa-minus', 'fa-plus');
+            }
+        });
+    });
+});
+
+// Email validation function
+// Notification function for contact form
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.innerHTML = `
+        <div class="notification-content">${message}</div>
+        <button class="notification-close" aria-label="Close">&times;</button>
+    `;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: ${type === 'success' ? '#10b981' : '#ef4444'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        max-width: 400px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    `;
+    notification.querySelector('.notification-content').style.cssText = `
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    `;
+    notification.querySelector('.notification-close').style.cssText = `
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) notification.remove();
+        }, 300);
+    }, 5000);
+    notification.querySelector('.notification-close').addEventListener('click', () => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) notification.remove();
+        }, 300);
+    });
+}
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// Smooth scrolling for internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Intersection Observer for fade-in animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe elements for animation
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.contact-method, .join-option, .contact-form');
+    
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+});
+    </script>
+</html>
