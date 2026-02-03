@@ -3,1570 +3,1643 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedXMentor - Mentorship Network for Young Health Professionals</title>
+    <title>MedXMentor</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="shortcut icon" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    /* Primary Colors - Blue & White */
-    --primary-blue: #2563eb;
-    --primary-blue-dark: #1d4ed8;
-    --primary-blue-light: #3b82f6;
-    --blue-50: #eff6ff;
-    --blue-100: #dbeafe;
-    --blue-200: #bfdbfe;
-    --blue-500: #3b82f6;
-    --blue-600: #2563eb;
-    --blue-700: #1d4ed8;
-    --blue-800: #1e40af;
-    --blue-900: #1e3a8a;
-    
-    /* Secondary Colors - Gray & Black */
-    --gray-50: #f9fafb;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-400: #9ca3af;
-    --gray-500: #6b7280;
-    --gray-600: #4b5563;
-    --gray-700: #374151;
-    --gray-800: #1f2937;
-    --gray-900: #111827;
-    
-    --white: #ffffff;
-    --black: #000000;
-    
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-800) 100%);
-    --gradient-light: linear-gradient(135deg, var(--blue-50) 0%, var(--white) 100%);
-    
-    /* Typography */
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-weight-light: 300;
-    --font-weight-normal: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    
-    /* Spacing */
-    --container-max-width: 1200px;
-    --section-padding: 5rem 0;
-    --border-radius: 0.5rem;
-    --border-radius-large: 1rem;
-    
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    
-    /* Transitions */
-    --transition: all 0.3s ease;
-}
-
-body {
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-normal);
-    line-height: 1.6;
-    color: var(--gray-800);
-    background-color: var(--white);
-}
-
-.container {
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-/* Header Styles */
-.header {
-    background-color: var(--white);
-    box-shadow: var(--shadow-sm);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.navbar {
-    padding: 1rem 0;
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.nav-brand .logo {
-    height: 50px;
-    width: auto;
-    max-width: 200px;
-    object-fit: contain;
-}
-
-.nav-brand .brand-text h1 {
-    color: var(--primary-blue);
-    font-size: 1.875rem;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 0.1rem;
-}
-
-.nav-brand .brand-text span {
-    color: var(--gray-600);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-menu a {
-    text-decoration: none;
-    color: var(--gray-700);
-    font-weight: var(--font-weight-medium);
-    transition: var(--transition);
-    padding: 0.5rem 0;
-    position: relative;
-}
-
-.nav-menu a:hover,
-.nav-menu a.active {
-    color: var(--primary-blue);
-}
-
-.nav-menu a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--primary-blue);
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-    padding: 0.5rem;
-    z-index: 1001;
-    background: none;
-    border: none;
-    transition: var(--transition);
-}
-
-.hamburger:hover {
-    opacity: 0.7;
-}
-
-.hamburger:focus {
-    outline: 2px solid var(--primary-blue);
-    outline-offset: 2px;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--gray-700);
-    transition: var(--transition);
-    border-radius: 2px;
-}
-
-/* Button Styles */
-.btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius);
-    font-weight: var(--font-weight-medium);
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    transition: var(--transition);
-    font-size: 1rem;
-}
-
-.btn-primary {
-    background: var(--gradient-primary);
-    color: var(--white);
-    box-shadow: var(--shadow-md);
-    font-weight: var(--font-weight-semibold);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-    color: var(--white);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--primary-blue);
-    border: 2px solid var(--primary-blue);
-}
-
-.btn-secondary:hover {
-    background-color: var(--primary-blue);
-    color: var(--white);
-}
-
-/* Hero Section */
-.hero {
-    position: relative;
-    margin-top: 1.5rem;
-    background: var(--gradient-light);
-}
-
-.hero-banner {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    min-height: 400px;
-    overflow: hidden;
-}
-
-.hero .container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
-    padding: 0.2rem 1rem 3rem;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 2rem;
-    min-height: 100%;
-}
-
-.hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    color: var(--white);
-    z-index: 3;
-    position: relative;
-    background: rgba(0,0,0,0.6);
-    padding: 2rem;
-    border-radius: var(--border-radius-large);
-    backdrop-filter: blur(1px);
-}
-
-.hero-content h1 {
-    font-size: 3rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--white);
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-
-.hero-slogan {
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-semibold);
-    color: var(--blue-200);
-    margin-bottom: 1rem;
-    font-style: italic;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-}
-
-.hero-content p {
-    font-size: 1.25rem;
-    color: var(--gray-100);
-    margin-bottom: 2rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.hero-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    animation: fadeInImage 2s ease-out 0.5s forwards;
-}
-
-@keyframes fadeInImage {
-    from {
-        opacity: 0;
-        transform: scale(1.1);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.hero-placeholder {
-    background: var(--gradient-primary);
-    border-radius: var(--border-radius-large);
-    padding: 3rem;
-    text-align: center;
-    color: var(--white);
-    box-shadow: var(--shadow-xl);
-}
-
-.hero-placeholder i {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.hero-placeholder p {
-    font-size: 1.125rem;
-    font-weight: var(--font-weight-medium);
-}
-
-/* Section Styles */
-section {
-    padding: var(--section-padding);
-}
-
-.what-we-do {
-    background-color: var(--white);
-}
-
-.what-we-do h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--gray-900);
-    margin-bottom: 3rem;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.feature-card {
-    background-color: var(--white);
-    padding: 2rem;
-    border-radius: var(--border-radius-large);
-    box-shadow: var(--shadow-md);
-    text-align: center;
-    transition: var(--transition);
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-xl);
-}
-
-.feature-icon {
-    background: var(--gradient-primary);
-    color: var(--white);
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-}
-
-.feature-icon i {
-    font-size: 1.5rem;
-}
-
-.feature-card h3 {
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-semibold);
-    color: var(--gray-900);
-    margin-bottom: 1rem;
-}
-
-.feature-card p {
-    color: var(--gray-600);
-    line-height: 1.6;
-}
-
-/* Statistics Section */
-.stats {
-    background: var(--gradient-primary);
-    color: var(--white);
-    position: relative;
-    overflow: hidden;
-}
-
-.stats::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="30" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="30" cy="60" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-    pointer-events: none;
-}
-
-.stats-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    position: relative;
-}
-
-.stats-header h2 {
-    font-size: 2.5rem;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 1rem;
-    color: var(--white);
-}
-
-.stats-header p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    color: var(--white);
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    position: relative;
-}
-
-.stat-item {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 2rem 1.5rem;
-    border-radius: var(--border-radius-large);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-}
-
-.stat-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.6s ease;
-}
-
-.stat-item:hover::before {
-    left: 100%;
-}
-
-.stat-item:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-}
-
-.stat-item.featured {
-    background: rgba(255, 255, 255, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    transform: scale(1.02);
-}
-
-.stat-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--blue-200);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    transition: var(--transition);
-}
-
-.stat-item:hover .stat-icon {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.stat-number {
-    font-size: 3.5rem;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--white), var(--blue-200));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
-}
-
-.stat-label {
-    font-size: 1.25rem;
-    font-weight: var(--font-weight-semibold);
-    margin-bottom: 0.5rem;
-    color: var(--white);
-}
-
-.stat-description {
-    font-size: 0.95rem;
-    opacity: 0.8;
-    color: var(--blue-100);
-    font-style: italic;
-}
-
-/* Testimonial Section */
-.testimonial {
-    background-color: var(--gray-50);
-}
-
-.testimonial h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--gray-900);
-    margin-bottom: 3rem;
-}
-
-.testimonial-slider {
-    position: relative;
-    max-width: 900px;
-    margin: 0 auto;
-    overflow: hidden;
-}
-
-.testimonial-track {
-    display: flex;
-    transition: transform 1s ease;
-}
-
-.testimonial-card {
-    width: 100%;
-    min-width: 100%;
-    background-color: var(--white);
-    padding: 3rem;
-    border-radius: var(--border-radius-large);
-    box-shadow: var(--shadow-md);
-    margin: 0;
-    flex-shrink: 0;
-    box-sizing: border-box;
-}
-
-.testimonial-content p {
-    font-size: 1.125rem;
-    color: var(--gray-700);
-    font-style: italic;
-    margin-bottom: 2rem;
-    line-height: 1.8;
-    text-align: center;
-}
-
-.testimonial-author {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    text-align: center;
-}
-
-.testimonial-info strong {
-    color: var(--primary-blue);
-    font-weight: var(--font-weight-semibold);
-    display: block;
-}
-
-.testimonial-info span {
-    color: var(--gray-500);
-    font-size: 0.875rem;
-}
-
-.testimonial-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--gray-300);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.dot.active {
-    background-color: var(--primary-blue);
-}
-
-/* Video Section */
-.video-section {
-    background-color: var(--white);
-}
-
-.video-section h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--gray-900);
-    margin-bottom: 1rem;
-}
-
-.video-section p {
-    text-align: center;
-    color: var(--gray-600);
-    font-size: 1.125rem;
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.video-container {
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;
-    overflow: hidden;
-    border-radius: var(--border-radius-large);
-    box-shadow: var(--shadow-xl);
-}
-
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* News Section */
-.news {
-    background-color: var(--gray-50);
-}
-
-.news h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--gray-900);
-    margin-bottom: 3rem;
-}
-
-.news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2rem;
-}
-
-.news-card {
-    background-color: var(--white);
-    border-radius: var(--border-radius-large);
-    box-shadow: var(--shadow-md);
-    overflow: hidden;
-    transition: var(--transition);
-}
-
-.news-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-xl);
-}
-
-.news-image {
-    width: 100%;
-    height: 250px;
-    background: var(--gradient-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-blue);
-    font-size: 3rem;
-}
-
-.news-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.news-content {
-    padding: 2rem;
-}
-
-.news-date {
-    color: var(--white);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
-    margin-bottom: 0.5rem;
-}
-
-.news-title {
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--gray-900);
-    margin-bottom: 1rem;
-    line-height: 1.3;
-}
-
-.news-excerpt {
-    color: var(--gray-600);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.news-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--primary-blue);
-    font-weight: var(--font-weight-medium);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.news-link:hover {
-    color: var(--primary-blue-dark);
-}
-
-.news-link i {
-    font-size: 0.875rem;
-}
-
-.newsletter-card {
-    background: var(--gradient-primary);
-    color: var(--white);
-}
-
-.newsletter-card .news-content {
-    text-align: center;
-}
-
-.newsletter-card .news-title {
-    color: var(--white);
-}
-
-.newsletter-card .news-excerpt {
-    color: var(--white);
-}
-
-.newsletter-card .news-link {
-    background-color: var(--white);
-    color: var(--primary-blue);
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius);
-    font-weight: var(--font-weight-semibold);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: var(--transition);
-}
-
-.newsletter-card .news-link:hover {
-    background-color: var(--gray-100);
-    color: var(--primary-blue-dark);
-}
-
-/* Call to Action */
-.cta {
-    background: var(--gradient-primary);
-    color: var(--white);
-    text-align: center;
-}
-
-.cta h2 {
-    font-size: 2.5rem;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 1rem;
-}
-
-.cta p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-}
-
-.cta .btn-primary {
-    background-color: var(--white);
-    color: var(--white);
-}
-
-.cta .btn-primary:hover {
-    background-color: var(--gray-100);
-}
-
-/* Footer */
-.footer {
-    background-color: var(--gray-900);
-    color: var(--white);
-    padding: 3rem 0 1rem;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.footer-section h3 {
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 1rem;
-    color: var(--primary-blue);
-}
-
-.footer-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.footer-logo {
-    height: 40px;
-    width: auto;
-    max-width: 150px;
-    object-fit: contain;
-}
-
-.footer-section h4 {
-    font-size: 1.125rem;
-    font-weight: var(--font-weight-semibold);
-    margin-bottom: 1rem;
-}
-
-.footer-section p {
-    color: var(--gray-300);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-section ul li a {
-    color: var(--gray-300);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.footer-section ul li a:hover {
-    color: var(--primary-blue);
-}
-
-.contact-info p {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.contact-info i {
-    color: var(--primary-blue);
-}
-
-.footer .social-links {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.footer .social-links a {
-    background-color: var(--gray-800);
-    color: var(--white);
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.footer .social-links a:hover {
-    background-color: var(--primary-blue);
-    transform: translateY(-2px);
-}
-
-.footer-bottom {
-    border-top: 1px solid var(--gray-800);
-    padding-top: 1rem;
-    text-align: center;
-}
-
-.footer-bottom p {
-    color: var(--gray-400);
-    margin: 0;
-}
-
-/* Image Placeholder */
-.image-placeholder {
-    background: var(--gradient-light);
-    border-radius: var(--border-radius-large);
-    padding: 3rem;
-    text-align: center;
-    color: var(--primary-blue);
-    box-shadow: var(--shadow-md);
-    margin: 2rem 0;
-}
-
-.image-placeholder i {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.image-placeholder p {
-    font-size: 1.125rem;
-    font-weight: var(--font-weight-medium);
-    margin: 0;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-brand .logo {
-        height: 40px;
-    }
-    
-    .nav-brand .brand-text h1 {
-        font-size: 1.5rem;
-    }
-    
-    .nav-brand .brand-text span {
-        font-size: 0.75rem;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 80px;
-        flex-direction: column;
-        background-color: white;
-        width: 100%;
-        text-align: center;
-        transition: left 0.3s ease;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.15);
-        padding: 1rem 0;
-        z-index: 999;
-        height: calc(100vh - 80px);
-        overflow-y: auto;
-    }
-
-    .nav-menu.active {
-        left: 0;
-    }
-
-    .nav-menu.active::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.3);
-        z-index: -1;
-    }
-
-    .nav-menu li {
-        margin: 0;
-        border-bottom: 1px solid var(--gray-100);
-    }
-
-    .nav-menu li:last-child {
-        border-bottom: none;
-    }
-
-    .nav-menu a {
-        display: block;
-        padding: 0.75rem 2rem;
-        font-size: 1rem;
-        color: var(--gray-700);
-        text-decoration: none;
-        transition: var(--transition);
-        border-left: 4px solid transparent;
-    }
-
-    .nav-menu a:hover,
-    .nav-menu a.active {
-        background-color: var(--blue-50);
-        color: var(--primary-blue);
-        border-left-color: var(--primary-blue);
-    }
-
-    .nav-menu a.active::after {
-        display: none;
-    }
-    
-    .hamburger {
-        display: flex;
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-    }
-
-    .hamburger.active span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-    }
-
-    .header.scrolled {
-        background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-    }
-    
-    .hero {
-        margin-top: 2rem;
-    }
-    
-    .hero-banner {
-        height: 85vh;
-        min-height: 600px;
-    }
-    
-    .hero .container {
-        padding: 2rem 1rem 2rem;
-        min-height: 100%;
-        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7));
-        justify-content: center;
-    }
-    
-    .hero-content {
-        padding: 1.5rem;
-        background: rgba(0,0,0,0.7);
-    }
-    
-    .hero-content h1 {
-        font-size: 2.2rem;
-    }
-    
-    .hero-slogan {
-        font-size: 1.2rem;
-    }
-    
-    .hero-content p {
-        font-size: 1.05rem;
-    }
-    
-    .hero-buttons {
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-    
-    .hero-buttons .btn {
-        width: 100%;
-        max-width: 250px;
-    }
-    
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .stats-header h2 {
-        font-size: 2rem;
-    }
-    
-    .stat-item {
-        padding: 1.5rem 1rem;
-    }
-    
-    .stat-number {
-        font-size: 2.8rem;
-    }
-    
-    .stat-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 2rem;
-    }
-    
-    .testimonial-card {
-        padding: 1.5rem;
-    }
-    
-    .testimonial-content p {
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-    }
-    
-    .testimonial-slider {
-        max-width: 100%;
-        margin: 0 1rem;
-    }
-    
-    .video-container {
-        margin: 0 1rem;
-    }
-    
-    .news-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    .container {
-        padding: 0 1rem;
-    }
-    
-    section {
-        padding: 3rem 0;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        margin-top: 4rem;
-    }
-    
-    .hero-banner {
-        height: 80vh;
-        min-height: 550px;
-    }
-    
-    .hero .container {
-        padding: 1.5rem 0.5rem 1.5rem;
-        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8));
-        justify-content: center;
-    }
-    
-    .hero-content {
-        padding: 1rem;
-        background: rgba(0,0,0,0.8);
-    }
-    
-    .hero-content h1 {
-        font-size: 1.8rem;
-        line-height: 1.1;
-        margin-bottom: 1rem;
-    }
-    
-    .hero-slogan {
-        font-size: 1rem;
-        margin-bottom: 0.8rem;
-    }
-    
-    .hero-content p {
-        font-size: 0.95rem;
-        line-height: 1.4;
-        margin-bottom: 1.5rem;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .testimonial-card {
-        padding: 1rem;
-    }
-    
-    .testimonial-content p {
-        font-size: 0.9rem;
-        line-height: 1.5;
-        margin-bottom: 1rem;
-    }
-    
-    .testimonial-slider {
-        max-width: 100%;
-        margin: 0 0.5rem;
-    }
-    
-    .testimonial h2 {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-    }
-}
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestThin1602-hint.ttf') format('truetype');
+            font-weight: 100;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestLight1602-hint.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestRegular1602-hint.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestMedium1602-hint.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestBold1602-hint.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestExtraBold1602-hint.ttf') format('truetype');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestBlack1602-hint.ttf') format('truetype');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue-100: #e0f2fe;
+            --blue-200: #bae6fd;
+            --blue-400: #38bdf8;
+            --blue-600: #0284c7;
+            --white: #ffffff;
+            --slate-900: #0f172a;
+            --slate-600: #475569;
+            --shadow-sm: 0 6px 20px rgba(15, 23, 42, 0.08);
+        }
+
+        @property --donut-angle {
+            syntax: '<angle>';
+            inherits: false;
+            initial-value: 0deg;
+        }
+
+        body {
+            font-family: 'Onest', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--blue-100) 0%, var(--white) 60%, var(--blue-200) 100%);
+            color: var(--slate-900);
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0 1rem;
+            z-index: 1000;
+            transition: transform 0.25s ease;
+            will-change: transform;
+        }
+
+        .header.is-hidden {
+            transform: translateY(-120%);
+        }
+
+        .navbar {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0.9rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-brand img {
+            height: 34px;
+            width: auto;
+        }
+
+        .nav-brand-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+        }
+
+        .nav-brand-text strong {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .nav-brand-text span {
+            font-size: 0.72rem;
+            color: var(--slate-600);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            list-style: none;
+        }
+
+        .nav-toggle {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(56, 189, 248, 0.12);
+            border-radius: 12px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--slate-900);
+            border-radius: 999px;
+            position: relative;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 18px;
+            height: 2px;
+            background: var(--slate-900);
+            border-radius: 999px;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-toggle span::before {
+            top: -6px;
+        }
+
+        .nav-toggle span::after {
+            top: 6px;
+        }
+
+        .nav-toggle.is-open span {
+            opacity: 0;
+        }
+
+        .nav-toggle.is-open span::before {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .nav-toggle.is-open span::after {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--slate-900);
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--blue-600);
+        }
+
+        .nav-cta {
+            padding: 0.35rem 0.95rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+            color: var(--white) !important;
+            font-weight: 600;
+            font-size: 0.82rem;
+        }
+
+        .hero {
+            max-width: 980px;
+            margin: 3rem auto 0;
+            padding: 0 1.5rem 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 3vw, 3.1rem);
+            font-weight: 700;
+            color: var(--slate-900);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: var(--slate-600);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1.5rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 12px 24px rgba(2, 132, 199, 0.25);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 30px rgba(2, 132, 199, 0.3);
+        }
+
+        .hero-cta:focus-visible {
+            outline: 2px solid var(--blue-600);
+            outline-offset: 3px;
+        }
+
+        .hero-image {
+            margin-top: 2.5rem;
+            width: min(100%, 880px);
+            border-radius: 0;
+            display: block;
+        }
+
+        .ai-section {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0rem 1.5rem -8rem;
+            margin-top: -4rem;
+            margin-bottom: -4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .what-we-do {
+            background: #ffffff;
+            padding: 5rem 1.5rem 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .what-we-do .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .what-we-do h2 {
+            font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 2.5rem;
+        }
+
+        .what-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .what-card {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            text-align: left;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .what-card:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+
+        .what-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            margin: 0 auto 1.25rem;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.35), rgba(2, 132, 199, 0.15));
+            color: var(--blue-600);
+            font-weight: 700;
+            font-size: 1rem;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            box-shadow: 0 10px 20px rgba(2, 132, 199, 0.18);
+        }
+
+        .what-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.14);
+            color: var(--blue-600);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.9rem;
+        }
+
+        .what-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .what-card p {
+            color: var(--slate-600);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .what-text {
+            flex: 1;
+        }
+
+        .impact-section {
+            padding: 0.5rem 0 0;
+            background: transparent;
+            color: var(--slate-900);
+            position: relative;
+            
+        }
+
+        .impact-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-card {
+            max-width: 1180px;
+            margin: 0 auto 6rem;
+            padding: 2.5rem 2.5rem 4rem;
+            background: #ffffff;
+            border-radius: 32px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .impact-title {
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .impact-subtitle {
+            color: var(--slate-600);
+            margin-bottom: 3rem;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            justify-content: center;
+            justify-items: center;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .impact-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.18);
+            border-radius: 20px;
+            padding: 1.75rem 1.6rem;
+            text-align: center;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+            backdrop-filter: blur(4px);
+            width: 100%;
+        }
+
+        .impact-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .impact-icon svg,
+        .what-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+        }
+
+        .impact-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .impact-label {
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .impact-note {
+            font-size: 0.9rem;
+            color: var(--slate-600);
+        }
+
+        .impact-chart {
+            margin-top: 1.2rem;
+            width: 100%;
+            height: 80px;
+        }
+
+        .impact-bars {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 6px;
+            align-items: end;
+            height: 70px;
+            margin-top: 1.2rem;
+        }
+
+        .impact-bars span {
+            display: block;
+            width: 100%;
+            border-radius: 999px;
+            background: rgba(2, 132, 199, 0.35);
+            transform: scaleY(0);
+            transform-origin: bottom;
+        }
+
+        .impact-doc {
+            width: 56px;
+            height: 56px;
+            margin: 1.2rem auto 0;
+            border-radius: 16px;
+            background: rgba(56, 189, 248, 0.15);
+            display: grid;
+            place-items: center;
+            color: var(--blue-600);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        .impact-doc svg {
+            width: 26px;
+            height: 26px;
+            stroke: currentColor;
+        }
+
+        .impact-donut {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            --donut-angle: 0deg;
+            background: conic-gradient(#38bdf8 0deg var(--donut-angle), rgba(2, 132, 199, 0.15) var(--donut-angle) 360deg);
+            display: grid;
+            place-items: center;
+            margin-top: 1.2rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .impact-donut span {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: #f8fafc;
+            display: grid;
+            place-items: center;
+            font-size: 0.85rem;
+            color: var(--slate-600);
+        }
+
+        .impact-stars {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 1.2rem;
+            color: rgba(2, 132, 199, 0.6);
+        }
+
+        .impact-stars svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .impact-gauge {
+            margin-top: 1.2rem;
+            width: 100%;
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(2, 132, 199, 0.12);
+            overflow: hidden;
+        }
+
+        .impact-gauge span {
+            display: block;
+            height: 100%;
+            width: 70%;
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.7), rgba(2, 132, 199, 0.6));
+            border-radius: 999px;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        .testimonials-section {
+            padding: 0 0 6rem;
+        }
+
+        .testimonials-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 -0.8rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 24px;
+            padding: 1rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .video-frame {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            border-radius: 18px;
+            overflow: hidden;
+            background: rgba(15, 23, 42, 0.05);
+        }
+
+        .video-frame iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .quote-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 24px;
+            padding: 3rem 2.2rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .quote-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--slate-900);
+        }
+
+        .quote-slider {
+            position: relative;
+            min-height: 220px;
+        }
+
+        .quote-slide {
+            display: none;
+            font-size: 0.98rem;
+            color: var(--slate-600);
+            line-height: 1.7;
+            position: relative;
+            padding-left: 1.2rem;
+            animation: fadeQuote 0.6s ease;
+        }
+
+        .quote-slide.active {
+            display: block;
+        }
+
+        .quote-author {
+            display: block;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--slate-900);
+        }
+
+        .quote-role {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--slate-600);
+        }
+
+        .news-section {
+            padding: 0 0 0;
+            background: transparent;
+        }
+
+        .news-container {
+            max-width: 1180px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px 32px 0 0;
+            padding: 3.5rem 2.5rem 4rem;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-bottom: none;
+        }
+
+        .news-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .news-header h2 {
+            font-size: clamp(1.9rem, 2.6vw, 2.6rem);
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 0.6rem;
+        }
+
+        .news-header p {
+            color: var(--slate-600);
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .news-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .news-thumb {
+            width: 180px;
+            height: 120px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .news-meta {
+            font-size: 0.85rem;
+            color: var(--slate-600);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .news-text {
+            color: var(--slate-600);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .news-link {
+            color: var(--blue-600);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .newsletter-cta {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 1.75rem 1.5rem;
+            border-radius: 20px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .newsletter-cta h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 0.35rem;
+        }
+
+        .newsletter-cta p {
+            color: var(--slate-600);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.65rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            font-family: inherit;
+        }
+
+        .newsletter-form button {
+            padding: 0.65rem 1.4rem;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .site-footer {
+            background: #ffffff;
+            color: var(--slate-900);
+            padding: 3.5rem 0 2rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .footer-inner {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: start;
+            justify-items: start;
+            text-align: left;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-logo {
+            width: 44px;
+            height: auto;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand p {
+            color: var(--slate-600);
+            line-height: 1.6;
+        }
+
+        .footer-links h4,
+        .footer-contact h4 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--slate-900);
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: grid;
+            gap: 0.5rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links a {
+            color: var(--slate-600);
+            text-decoration: none;
+        }
+
+        .footer-contact p {
+            color: var(--slate-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: var(--slate-600);
+            font-size: 0.9rem;
+        }
+
+        .chatbot-button {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+            color: #ffffff;
+            box-shadow: 0 16px 30px rgba(2, 132, 199, 0.35);
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            z-index: 1000;
+        }
+
+        .chatbot-button svg {
+            width: 26px;
+            height: 26px;
+            stroke: #ffffff;
+        }
+
+        .chatbot-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 36px rgba(2, 132, 199, 0.35);
+        }
+
+        .chatbot-button:focus-visible {
+            outline: 2px solid var(--blue-600);
+            outline-offset: 3px;
+        }
+
+        .chatbot-panel {
+            position: fixed;
+            right: 24px;
+            bottom: 92px;
+            width: min(360px, calc(100vw - 48px));
+            max-height: 460px;
+            background: #ffffff;
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.18);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .chatbot-panel.is-open {
+            display: flex;
+        }
+
+        .chatbot-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+            color: #ffffff;
+        }
+
+        .chatbot-header h4 {
+            font-size: 1rem;
+        }
+
+        .chatbot-close {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            padding: 0.9rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            overflow-y: auto;
+        }
+
+        .chatbot-message {
+            padding: 0.65rem 0.85rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            max-width: 85%;
+        }
+
+        .chatbot-message.bot {
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--slate-900);
+            align-self: flex-start;
+        }
+
+        .chatbot-message.user {
+            background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+            color: #ffffff;
+            align-self: flex-end;
+        }
+
+        .chatbot-faqs {
+            padding: 0.5rem 1rem 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.15);
+        }
+
+        .chatbot-faqs button {
+            border: 1px solid rgba(2, 132, 199, 0.25);
+            background: rgba(2, 132, 199, 0.08);
+            color: var(--blue-600);
+            padding: 0.35rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .chatbot-form {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem 1rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.15);
+        }
+
+        .chatbot-input {
+            flex: 1;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 999px;
+            padding: 0.5rem 0.85rem;
+            font-family: inherit;
+        }
+
+        .chatbot-send {
+            border: none;
+            border-radius: 999px;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        @keyframes fadeQuote {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .impact-chart path {
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+        }
+
+        .impact-section.is-visible .impact-chart path {
+            animation: drawLine 1.4s ease forwards;
+        }
+
+        .impact-section.is-visible .impact-bars span {
+            animation: barGrow 1s ease forwards;
+        }
+
+        .impact-section.is-visible .impact-doc {
+            animation: docPop 0.6s ease forwards;
+        }
+
+        .impact-section.is-visible .impact-donut {
+            animation: donutFill 1.2s ease forwards;
+        }
+
+        .impact-section.is-visible .impact-gauge span {
+            animation: gaugeFill 1.1s ease forwards;
+        }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes barGrow {
+            to {
+                transform: scaleY(1);
+            }
+        }
+
+        @keyframes donutFill {
+            to {
+                --donut-angle: 312deg;
+            }
+        }
+
+        @keyframes docPop {
+            from {
+                transform: scale(0.9);
+                opacity: 0.6;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes gaugeFill {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .ai-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+            overflow: hidden;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        .ai-card::after {
+            content: '';
+            position: absolute;
+            inset: auto auto -45% -10%;
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, rgba(2, 132, 199, 0.25), transparent 70%);
+            filter: blur(12px);
+            opacity: 0.7;
+        }
+
+        .ai-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .ai-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--blue-600);
+            font-weight: 600;
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .ai-title {
+            margin-top: 1rem;
+            font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+            font-weight: 700;
+            color: var(--slate-900);
+        }
+
+        .ai-description {
+            margin-top: 0.75rem;
+            color: var(--slate-600);
+            line-height: 1.6;
+        }
+
+        .ai-features {
+            margin-top: 1.5rem;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .ai-feature {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            font-size: 0.95rem;
+            color: var(--slate-900);
+        }
+
+        .ai-feature span {
+            flex: 0 0 auto;
+            width: 28px;
+            height: 28px;
+            border-radius: 10px;
+            background: rgba(56, 189, 248, 0.2);
+            display: grid;
+            place-items: center;
+            color: var(--blue-600);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .ai-metrics {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .ai-metric {
+            padding: 1rem 1.2rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .ai-metric strong {
+            display: block;
+            font-size: 1.2rem;
+            color: var(--slate-900);
+        }
+
+        .ai-metric span {
+            font-size: 0.85rem;
+            color: var(--slate-600);
+        }
+
+        @media (max-width: 1024px) {
+            .navbar {
+                max-width: 92%;
+            }
+
+            .nav-menu {
+                gap: 0.85rem;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .navbar {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+                border-radius: 20px;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+            }
+
+            .nav-menu {
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                row-gap: 0.6rem;
+                display: none;
+            }
+
+            .nav-menu.is-open {
+                display: flex;
+            }
+
+            .ai-content {
+                grid-template-columns: 1fr;
+            }
+
+            .what-we-do {
+                padding: 4rem 1.25rem 5rem;
+            }
+
+            .what-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .impact-section {
+                padding: 3rem 0 0;
+            }
+
+            .impact-card {
+                text-align: center;
+            }
+
+            .impact-card-header {
+                justify-content: center;
+            }
+
+            .content-card {
+                padding: 2.5rem 1.5rem 3rem;
+                border-radius: 24px;
+                margin: 0 1.25rem 4.5rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quote-card {
+                padding: 1.8rem 1.6rem;
+            }
+
+            .testimonials-inner {
+                padding: 0 1.5rem;
+            }
+
+            .news-container {
+                padding: 2.5rem 1.5rem 3rem;
+                border-radius: 24px 24px 0 0;
+                margin: 0 1.25rem;
+            }
+
+            .news-item {
+                flex-direction: column;
+            }
+
+            .news-thumb {
+                width: 100%;
+                height: 180px;
+            }
+
+            .newsletter-cta {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .footer-inner {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .hero {
+                margin-top: 2rem;
+                padding: 0 1.25rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .hero-cta {
+                width: 100%;
+                max-width: 220px;
+            }
+
+            .hero-image {
+                margin-top: 2rem;
+            }
+
+            .content-card {
+                margin: 0 1rem 4rem;
+                padding: 2.2rem 1.25rem 2.8rem;
+                border-radius: 22px;
+            }
+
+            .what-card {
+                gap: 1rem;
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .testimonials-inner {
+                padding: 0 1.25rem;
+            }
+
+            .news-container {
+                margin: 0 1rem;
+            }
+
+            .newsletter-form input,
+            .newsletter-form button {
+                width: 100%;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <nav class="navbar">
-            <div class="container">
-                <div class="nav-brand">
-                    <img src="logo.png" alt="MedXMentor Logo" class="logo">
-                    <div class="brand-text">
-                        <h1>MedXMentor</h1>
-                        <span>Mentorship Program</span>
-                    </div>
+            <a class="nav-brand" href="index.html">
+                <img src="logo.png" alt="MedXMentor Logo">
+                <div class="nav-brand-text">
+                    <strong>MedXMentor</strong>
+                    <span>Mentorship Program</span>
                 </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="team.html">The Team</a></li>
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="donate.html">Donate</a></li>
-                    <li><a href="login.html" class="nav-link-portal"><i class="fas fa-chart-line"></i> Assessment Portal</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="team.html">The Team</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="donate.html">Donate</a></li>
+                <li><a href="login.html" class="nav-cta">Assessment Portal</a></li>
+            </ul>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+            </button>
         </nav>
     </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-banner">
-            <div class="hero-image">
-                <img src="pictures/4F3A7014.jpg" alt="MedXMentor Mentorship Program - Young Health Professionals" />
-            </div>
-            <div class="container">
-                <div class="hero-content">
-                    <h1>A Mentorship Program for Young Health Professionals</h1>
-                    <p class="hero-slogan">We Journey with You</p>
-                    <p>MedXMentor is committed to providing future health professionals with knowledge, skills, confidence, motivation, experiences, and life lessons through a mentoring program.</p>
-                    <div class="hero-buttons">
-                        <a href="about.html" class="btn btn-primary">Learn More</a>
-                        <a href="contact.html" class="btn btn-secondary">Get Started</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- What We Do Section -->
-    <section class="what-we-do">
-        <div class="container">
-            <h2>What We Do</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Mentorship Cohorts</h3>
-                    <p>Annual mentorship cohorts spanning eight months with structured virtual and in-person sessions covering grant writing, public speaking, career planning, and CV development.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3>Collaborative Projects</h3>
-                    <p>MedXMentor partners with organizations like Mejo Africa and Afrihealth allowing mentees to work on collaborative projects like research proposals with mentor guidance.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <h3>Campus Ambassadors</h3>
-                    <p>Trained campus ambassadors lead local chapters, organize events, bring students together, and promote a culture of mentorship for accessibility and sustainability.</p>
-                </div>
-            </div>
-             
-        </div>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-header">
-                <h2>Our Impact by the Numbers</h2>
-                <p>Real results from our mentorship community</p>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-item featured">
-                    <div class="stat-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="stat-number" data-target="95">95%</div>
-                    <div class="stat-label">Mentees Report Improved Confidence</div>
-                    <div class="stat-description">in pursuing medical careers</div>
-                </div>
-                <div class="stat-item featured">
-                    <div class="stat-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="stat-number" data-target="80">2</div>
-                    <div class="stat-label">Research publications</div>
-                    <div class="stat-description">highlighting actual statistics from the program</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-number" data-target="500">8000+</div>
-                    <div class="stat-label">Students Mentored</div>
-                    <div class="stat-description">across 28 universities</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="stat-number" data-target="4.8">4.8/5</div>
-                    <div class="stat-label">Average Program Rating</div>
-                    <div class="stat-description">from mentee feedback</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-globe-africa"></i>
-                    </div>
-                    <div class="stat-number" data-target="8">8+</div>
-                    <div class="stat-label">Key strategic partnerships</div>
-                    <div class="stat-description">for maximum mentee support</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <div class="stat-number" data-target="35">35+</div>
-                    <div class="stat-label">Expert Mentors</div>
-                    <div class="stat-description">from leading institutions</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonial Section -->
-    <section class="testimonial">
-        <div class="container">
-
-            <h2>Mentee Stories</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial-track">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"Choosing a mentor and ensuring that you're in constant communication with them and how far with achievement of the set goals was something I'd never heard of in mentorship, going further to organize both physical and online webinars for the mentees showed how much they were determined to make this program a success and letting them down or failing to acknowledge their effort was something one would never forgive oneself for. The activities altogether supported a holistic life of a student."</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-info">
-                                    <strong>Muhindo Juan</strong>
-                                    <span>MedXMentor Mentee</span>
-                                </div>
-                            </div>
+    <main>
+        <section class="hero">
+            <h1>A <span class="hero-gradient">Mentorship Program</span> for Young Health Professionals</h1>
+            <a class="hero-cta" href="contact.html">Join Now</a>
+            <img class="hero-image" src="pictures/people.png" alt="Mentorship community">
+        </section>
+        <section class="ai-section">
+            <div class="ai-card">
+                <div class="ai-content">
+                    <div>
+                        <span class="ai-kicker">AI-Enabled Mentorship</span>
+                        <h2 class="ai-title">Technology that personalizes every mentorship journey</h2>
+                        <p class="ai-description">We’re building AI-supported tools that match mentees with the right mentors, surface targeted learning resources, and keep progress on track through smart insights.</p>
+                        <div class="ai-features">
+                            <div class="ai-feature"><span>01</span>Intelligent mentor matching based on goals and interests</div>
+                            <div class="ai-feature"><span>02</span>Automated check-ins and milestone reminders</div>
+                            <div class="ai-feature"><span>03</span>Personalized learning paths with curated resources</div>
                         </div>
                     </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"I also like how the team managed to engage all the mentees, receive feedback, follow up, and ensured that the activities were scheduled at times convenient for us. Although I didn't fully benefit from the mentee-mentor relationship due to some challenges, I still managed to benefit and better myself through the different webinars, workshops and online resources shared alone. In conclusion, I'd recommend the program any day, anytime to all students. It's a must-do"</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-info">
-                                    <strong>Nampijja Mariam Pretty</strong>
-                                    <span>MedXMentor Mentee</span>
-                                </div>
-                            </div>
+                    <div class="ai-metrics">
+                        <div class="ai-metric">
+                            <strong>Smart Match</strong>
+                            <span>Profile-driven mentor alignment</span>
                         </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"I wouldn't have had the opportunity to share with/ meet with my mentor, sharing resources about different aspects helped me look forward to diversifying myself and building myself to be resourceful. One shouldn't miss out mentorship, as it opens one to immense opportunities, they wouldn't have been able to get alone; connections, experiences, having an accountability partner to guide and remind, to motivate and incite thought are all priceless. Having been part of the program, I'm thankful to the whole team that made it possible for us to access all these resources at no cost, and for having been with us on this journey."</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-info">
-                                    <strong>Amanda Gabwe Florence</strong>
-                                    <span>MedXMentor Mentee</span>
-                                </div>
-                            </div>
+                        <div class="ai-metric">
+                            <strong>Progress Insights</strong>
+                            <span>Track growth with AI-assisted analytics</span>
                         </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"The physical workshop sessions also deserve a mention. What a time to learn! Moments with big brains like Dr. Ngozi, Dr. Migisha cannot be taken for granted. Writing and winning grants and the soft skills workshop sessions particularly stood out. Perhaps we learnt that there is a lot more beyond grades and CGPA for one to compete and succeed in life. We needed to think like researchers, to be innovators, to be creative, to take risks, to be flexible, to seek mentorship from 'those who know'. Moments with Dr. Kasaire, my mentor, stood out. To him, one needs to have a clear life future model with a vision and mission along with SMART objectives to attain the heights."</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-info">
-                                    <strong>Imongit Emmanuel</strong>
-                                    <span>MedXMentor Mentee</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"I encourage all those who have not been part of this first cohort to join in on the next because this is an opportunity for them to interact and learn from the personal experiences of ladies and gentlemen who have accomplished a lot in their various fields. In conclusion, I'm grateful to the pioneers of the MedXMentor program for this amazing initiative and I believe everyone in this first cohort has picked up a thing or two that will positively impact their lives."</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-info">
-                                    <strong>Katuutu Eugenia</strong>
-                                    <span>MedXMentor Mentee</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"Though personal branding is a lifelong process, my team and I have been able to set the ball rolling for most of the mentees who were able to attend our webinars and physical sessions and participate in our activities. The attitude I have towards mentorship has changed throughout the mentorship program because I have been able to enjoy some of the benefits of mentorship. Above all, the mentorship program delivered to us more than mentorship; we had different webinars and different workshops that helped us build different skills, such as soft skills in the medical field."</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-info">
-                                    <strong>Oriono Felix</strong>
-                                    <span>MedXMentor Mentee</span>
-                                </div>
-                            </div>
+                        <div class="ai-metric">
+                            <strong>Always-On Support</strong>
+                            <span>Guided prompts between sessions</span>
                         </div>
                     </div>
                 </div>
-                
-                <div class="testimonial-dots">
-                    <span class="dot active" data-slide="0"></span>
-                    <span class="dot" data-slide="1"></span>
-                    <span class="dot" data-slide="2"></span>
-                    <span class="dot" data-slide="3"></span>
-                    <span class="dot" data-slide="4"></span>
-                    <span class="dot" data-slide="5"></span>
-                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Video Section -->
-    <section class="video-section">
-        <div class="container">
-            <h2>Hear From Our Community</h2>
-            <p>Watch our mentees share their experiences and the transformative impact of the MedXMentor program.</p>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/JboxaS-0j90" 
-                        title="MedXMentor Program Overview" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                </iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- News Section -->
-    <section class="news">
-        <div class="container">
-            <h2>News from MedXMentor</h2>
-            <div class="news-grid">
-                <div class="news-card">
-                    <div class="news-image">
-                        <img src="pictures/MEDXMENTOR CAMPUS AMBASSADORS 2025.jpg" alt="MedXMentor Campus Ambassadors 2025">
-                    </div>
-                    <div class="news-content">
-                        <div class="news-date">January 2025</div>
-                        <h3 class="news-title">Meet the 2025 MedXMentor Campus Ambassadors!</h3>
-                        <p class="news-excerpt">We are excited to unveil our newly chosen Campus Ambassadors for 2025 — a diverse and vibrant team of student leaders from universities across Uganda, Ethiopia, Rwanda, Kenya, and Burundi. These ambassadors embody the core of the MedXMentor mission: to provide future health professionals with knowledge, skills, confidence, motivation, experiences, and life lessons through a mentoring program.</p>
-                        <a href="team.html#campus-ambassadors" class="news-link">
-                            Read More <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="news-card newsletter-card">
-                    <div class="news-image">
-                        <img src="pictures/MEDXMENTOR NEWSLETTER HEADER.jpg" alt="MedXMentor Newsletter July 2025">
-                    </div>
-                    <div class="news-content">
-                        <div class="news-date">July 2025</div>
-                        <h3 class="news-title">MedXMentor Newsletter - July 2025 Edition</h3>
-                        <p class="news-excerpt">Stay updated with our latest news, mentorship program highlights, success stories, and upcoming events. This edition features updates from our campus ambassadors, mentee achievements, and exciting developments in our mentorship program.</p>
-                        <a href="newsletters/MedXmentor-Newsletter-July-2025.pdf" class="news-link" target="_blank">
-                            <i class="fas fa-download"></i> Download Newsletter
-                        </a>
+        </section>
+        <div class="hero-close" aria-hidden="true"></div>
+        <div class="content-card">
+            <section class="what-we-do">
+                <div class="section-inner">
+                    <h2>What We Do</h2>
+                    <div class="what-list">
+                        <article class="what-card">
+                            <div class="what-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 4.5 3.5 8.2 12 11.9 20.5 8.2 12 4.5z" />
+                                    <path d="M6.5 10.4v4.4c0 2 2.5 3.7 5.5 3.7s5.5-1.7 5.5-3.7v-4.4" />
+                                </svg>
+                            </div>
+                            <div class="what-text">
+                                <h3>Mentorship Cohorts</h3>
+                                <p>Annual mentorship cohorts spanning eight months with structured virtual and in-person sessions covering grant writing, public speaking, career planning, and CV development.</p>
+                            </div>
+                        </article>
+                        <article class="what-card">
+                            <div class="what-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 8a3 3 0 1 0-2.8-4" />
+                                    <path d="M17 8a3 3 0 1 0 2.8-4" />
+                                    <path d="M8 12h8" />
+                                    <path d="M6 16h12" />
+                                    <path d="M12 12v4" />
+                                </svg>
+                            </div>
+                            <div class="what-text">
+                                <h3>Collaborative Projects</h3>
+                                <p>MedXMentor partners with organizations like Mejo Africa and Afrihealth allowing mentees to work on collaborative projects like research proposals with mentor guidance.</p>
+                            </div>
+                        </article>
+                        <article class="what-card">
+                            <div class="what-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4.5 10.5 12 6l7.5 4.5" />
+                                    <path d="M6 10.5V18h12v-7.5" />
+                                    <path d="M10 18v-4h4v4" />
+                                </svg>
+                            </div>
+                            <div class="what-text">
+                                <h3>Campus Ambassadors</h3>
+                                <p>Trained campus ambassadors lead local chapters, organize events, bring students together, and promote a culture of mentorship for accessibility and sustainability.</p>
+                            </div>
+                        </article>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Signup -->
-    <section class="newsletter-signup" style="background: #f9fafb; padding: 4rem 0;">
-        <div class="container" style="max-width: 800px; margin: 0 auto;">
-            <h2 style="text-align:center; font-size:2.2rem; color:#2563eb; margin-bottom:1.5rem;">Subscribe to our Newsletter</h2>
-            <p style="text-align:center; color:#374151; margin-bottom:2rem;">Stay updated with the latest news, mentorship program highlights, and upcoming events. Enter your email below to subscribe.</p>
-            <div style="display:flex; justify-content:center;">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf5QTwEH6bXFEt4easnwLuWx5_HMIu7ZrOywAGyeIZbiVcD2Q/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0" style="background:#fff; border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,0.07); width:100%; max-width:700px;">Loading…</iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Start Your Mentorship Journey?</h2>
-                <p>Join our community of future health professionals and experienced mentors. Together, we journey with you.</p>
-                <a href="contact.html" class="btn btn-primary">Join MedXMentor</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-brand">
-                        <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="footer-logo"></a>
-                        <h3>MedXMentor</h3>
-                    </div>
-                    <p>A mentorship program for young health professionals. We Journey with You.</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/medxmentor/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://x.com/MedXMentor" target="_blank" style="font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
-                        <a href="https://www.youtube.com/@medxmentor" target="_blank"><i class="fab fa-youtube"></i></a>
-                        <a href="https://www.linkedin.com/in/medxmentor/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </section>
+            <section class="impact-section">
+                <div class="impact-inner">
+                    <h2 class="impact-title">Our Impact by the Numbers</h2>
+                    <p class="impact-subtitle">Real results from our mentorship community</p>
+                    <div class="impact-grid">
+                        <article class="impact-card">
+                            <div class="impact-card-header">
+                                <div class="impact-value"><span class="impact-count" data-count="95" data-suffix="%">0</span></div>
+                            </div>
+                            <div class="impact-label">Improved Confidence</div>
+                            <div class="impact-note">in pursuing medical careers</div>
+                            <div class="impact-donut"><span>95%</span></div>
+                        </article>
+                        <article class="impact-card">
+                            <div class="impact-card-header">
+                                <div class="impact-value"><span class="impact-count" data-count="2">0</span></div>
+                            </div>
+                            <div class="impact-label">Research Publications</div>
+                            <div class="impact-note">highlighting program outcomes</div>
+                            <div class="impact-doc" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 4h7l4 4v12H7z" />
+                                    <path d="M14 4v4h4" />
+                                    <path d="M9 13h6" />
+                                    <path d="M9 16h4" />
+                                </svg>
+                            </div>
+                        </article>
+                        <article class="impact-card">
+                            <div class="impact-card-header">
+                                <div class="impact-value"><span class="impact-count" data-count="8000" data-suffix="+">0</span></div>
+                            </div>
+                            <div class="impact-label">Students Mentored</div>
+                            <div class="impact-note">across 28 universities</div>
+                            <svg class="impact-chart" viewBox="0 0 200 80" fill="none" stroke="rgba(2,132,199,0.55)" stroke-width="3" stroke-linecap="round">
+                                <path d="M5 55 L 35 40 L 65 50 L 95 30 L 125 42 L 155 20 L 195 28" />
+                            </svg>
+                        </article>
+                        <article class="impact-card">
+                            <div class="impact-card-header">
+                                <div class="impact-value"><span class="impact-count" data-count="4.8" data-decimals="1" data-suffix="/5">0</span></div>
+                            </div>
+                            <div class="impact-label">Program Rating</div>
+                            <div class="impact-note">from mentee feedback</div>
+                            <div class="impact-stars" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 3.5 14.5 9l5.5.7-4 3.9 1 5.4-5-2.7-5 2.7 1-5.4-4-3.9 5.5-.7L12 3.5z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 3.5 14.5 9l5.5.7-4 3.9 1 5.4-5-2.7-5 2.7 1-5.4-4-3.9 5.5-.7L12 3.5z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 3.5 14.5 9l5.5.7-4 3.9 1 5.4-5-2.7-5 2.7 1-5.4-4-3.9 5.5-.7L12 3.5z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 3.5 14.5 9l5.5.7-4 3.9 1 5.4-5-2.7-5 2.7 1-5.4-4-3.9 5.5-.7L12 3.5z"/></svg>
+                                <svg viewBox="0 0 24 24" style="opacity:0.55"><path d="M12 3.5 14.5 9l5.5.7-4 3.9 1 5.4-5-2.7-5 2.7 1-5.4-4-3.9 5.5-.7L12 3.5z"/></svg>
+                            </div>
+                        </article>
+                        <article class="impact-card">
+                            <div class="impact-card-header">
+                                <div class="impact-value"><span class="impact-count" data-count="8" data-suffix="+">0</span></div>
+                            </div>
+                            <div class="impact-label">Strategic Partnerships</div>
+                            <div class="impact-note">supporting mentee growth</div>
+                            <div class="impact-bars">
+                                <span style="height: 48%;"></span>
+                                <span style="height: 60%;"></span>
+                                <span style="height: 40%;"></span>
+                                <span style="height: 70%;"></span>
+                                <span style="height: 62%;"></span>
+                                <span style="height: 78%;"></span>
+                                <span style="height: 55%;"></span>
+                                <span style="height: 88%;"></span>
+                            </div>
+                        </article>
+                        <article class="impact-card">
+                            <div class="impact-card-header">
+                                <div class="impact-value"><span class="impact-count" data-count="35" data-suffix="+">0</span></div>
+                            </div>
+                            <div class="impact-label">Expert Mentors</div>
+                            <div class="impact-note">from leading institutions</div>
+                            <div class="impact-gauge"><span></span></div>
+                        </article>
                     </div>
                 </div>
-                <div class="footer-section">
+            </section>
+        </div>
+        <section class="testimonials-section">
+            <div class="testimonials-inner">
+                <div class="testimonials-grid">
+                    <div class="video-card">
+                        <div class="video-frame">
+                            <iframe src="https://www.youtube.com/embed/JboxaS-0j90?rel=0&modestbranding=1&playsinline=1" title="MedXMentor testimonies" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="quote-card">
+                        <h3>Testimonies</h3>
+                        <div class="quote-slider" data-interval="9000">
+                            <div class="quote-slide active">
+                                Choosing a mentor and ensuring constant communication on goals was something I'd never heard of in mentorship. The activities supported a holistic life of a student.
+                                <span class="quote-author">Muhindo Juan</span>
+                                <span class="quote-role">MedXMentor Mentee</span>
+                            </div>
+                            <div class="quote-slide">
+                                The team engaged all mentees, received feedback, and scheduled activities at convenient times. I'd recommend the program any day—it’s a must-do.
+                                <span class="quote-author">Nampijja Mariam Pretty</span>
+                                <span class="quote-role">MedXMentor Mentee</span>
+                            </div>
+                            <div class="quote-slide">
+                                Mentorship opened immense opportunities—connections, experiences, and an accountability partner. I'm thankful for access to these resources at no cost.
+                                <span class="quote-author">Amanda Gabwe Florence</span>
+                                <span class="quote-role">MedXMentor Mentee</span>
+                            </div>
+                            <div class="quote-slide">
+                                The physical workshops stood out. We learned to think like researchers, be innovative, and seek mentorship from those who know.
+                                <span class="quote-author">Imongit Emmanuel</span>
+                                <span class="quote-role">MedXMentor Mentee</span>
+                            </div>
+                            <div class="quote-slide">
+                                The program delivered more than mentorship—webinars and workshops helped build soft skills in the medical field.
+                                <span class="quote-author">Oriono Felix</span>
+                                <span class="quote-role">MedXMentor Mentee</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="news-section">
+            <div class="news-container">
+                <div class="news-header">
+                    <h2>News from MedXMentor</h2>
+                    <p>Updates, highlights, and community milestones.</p>
+                </div>
+                <div class="news-list">
+                    <article class="news-item">
+                        <img class="news-thumb" src="pictures/MEDXMENTOR%20CAMPUS%20AMBASSADORS%202025.jpg" alt="MedXMentor Campus Ambassadors 2025">
+                        <div>
+                            <div class="news-meta">January 2025</div>
+                            <div class="news-title">Meet the 2025 MedXMentor Campus Ambassadors!</div>
+                            <p class="news-text">We are excited to unveil our newly chosen Campus Ambassadors for 2025 — a diverse and vibrant team of student leaders from universities across the region.</p>
+                            <a class="news-link" href="team.html#campus-ambassadors">Read more</a>
+                        </div>
+                    </article>
+                    <article class="news-item">
+                        <img class="news-thumb" src="pictures/MEDXMENTOR%20NEWSLETTER%20HEADER.jpg" alt="MedXMentor Newsletter July 2025">
+                        <div>
+                            <div class="news-meta">July 2025</div>
+                            <div class="news-title">MedXMentor Newsletter — July 2025 Edition</div>
+                            <p class="news-text">Stay updated with mentorship highlights, success stories, and upcoming events from across the community.</p>
+                            <a class="news-link" href="newsletters/MedXmentor-Newsletter-July-2025.pdf" target="_blank" rel="noopener">Download newsletter</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="newsletter-cta">
+                    <div>
+                        <h3>Subscribe to our Newsletter</h3>
+                        <p>Get the latest updates, mentorship resources, and event announcements.</p>
+                    </div>
+                    <form class="newsletter-form" action="#">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="logo.png" alt="MedXMentor Logo" class="footer-logo">
+                    <h3>MedXMentor</h3>
+                    <p>A mentorship program for young health professionals. We journey with you.</p>
+                </div>
+                <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="index.html">Home</a></li>
@@ -1574,380 +1647,232 @@ section {
                         <li><a href="team.html">Our Team</a></li>
                         <li><a href="resources.html">Resources</a></li>
                         <li><a href="events.html">Events</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Contacts</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-phone"></i> +256 788 340086</p>
-                        <p><i class="fas fa-envelope"></i> info@medxmentor.org</p>
-                    </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>+256 788 340086</p>
+                    <p>info@medxmentor.org</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; MedXMentor 2025. All rights reserved</p>
-            </div>
+            <div class="footer-bottom">© MedXMentor 2026. All rights reserved.</div>
         </div>
     </footer>
+    <button class="chatbot-button" type="button" aria-label="Open chatbot">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 4.5c-4.42 0-8 2.9-8 6.48 0 2.09 1.26 3.92 3.22 5.08v3.44l3.27-1.86c.49.07 1 .11 1.51.11 4.42 0 8-2.9 8-6.48S16.42 4.5 12 4.5z" />
+            <path d="M8.7 10.7h6.6" />
+            <path d="M8.7 13.1h4.1" />
+        </svg>
+    </button>
+    <div class="chatbot-panel" role="dialog" aria-label="MedXMentor chatbot">
+        <div class="chatbot-header">
+            <h4>MedXMentor FAQs</h4>
+            <button class="chatbot-close" type="button" aria-label="Close chatbot">×</button>
+        </div>
+        <div class="chatbot-messages">
+            <div class="chatbot-message bot">Hi! I can help with mentorship program questions. Ask me anything.</div>
+        </div>
+        <div class="chatbot-faqs">
+            <button type="button" data-faq="How do I join?">How do I join?</button>
+            <button type="button" data-faq="Who can apply?">Who can apply?</button>
+            <button type="button" data-faq="Is there a fee?">Is there a fee?</button>
+            <button type="button" data-faq="How long is the program?">Program length</button>
+        </div>
+        <form class="chatbot-form">
+            <input class="chatbot-input" type="text" placeholder="Type your question..." aria-label="Chat message" />
+            <button class="chatbot-send" type="submit">Send</button>
+        </form>
+    </div>
     <script>
-// MedXMentor Website JavaScript
+        (function () {
+            const header = document.querySelector('.header');
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+            let impactAnimated = false;
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Navigation Toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
 
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav-menu a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
-
-        // Close mobile menu on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
-    }
-
-    // Smooth scrolling for anchor links
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    const isOpen = navMenu.classList.toggle('is-open');
+                    navToggle.classList.toggle('is-open', isOpen);
+                    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
                 });
             }
-        });
-    });
 
-    // Add scroll effect to header
-    const header = document.querySelector('.header');
-    if (header) {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    }
+            function animateCount(el) {
+                const target = parseFloat(el.dataset.count);
+                const decimals = parseInt(el.dataset.decimals || '0', 10);
+                const suffix = el.dataset.suffix || '';
+                const duration = 1200;
+                const startTime = performance.now();
 
-    // Newsletter form submission
-    const newsletterForms = document.querySelectorAll('.newsletter-form');
-    newsletterForms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            
-            if (validateEmail(email)) {
-                // Show success message (you can integrate with actual newsletter service)
-                showNotification('Thank you for subscribing to our newsletter!', 'success');
-                this.reset();
-            } else {
-                showNotification('Please enter a valid email address.', 'error');
-            }
-        });
-    });
-
-    // Contact form submission
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-            
-            // Validate required fields
-            if (validateContactForm(data)) {
-                // Show success message (you can integrate with actual form service)
-                showNotification('Thank you for your message! We will get back to you soon.', 'success');
-                this.reset();
-            } else {
-                showNotification('Please fill in all required fields.', 'error');
-            }
-        });
-    }
-
-    // Testimonial Slider
-    const testimonialSlider = document.querySelector('.testimonial-slider');
-    if (testimonialSlider) {
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.testimonial-card');
-        const dots = document.querySelectorAll('.dot');
-        const totalSlides = slides.length;
-
-        function showSlide(slideIndex) {
-            const track = document.querySelector('.testimonial-track');
-            const slideWidth = slides[0].offsetWidth || testimonialSlider.offsetWidth;
-            track.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
-            
-            // Update dots
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === slideIndex);
-            });
-            
-            currentSlide = slideIndex;
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
-        }
-
-        // Auto-advance slides every 5 seconds
-        const slideInterval = setInterval(nextSlide, 5000);
-
-        // Dot navigation
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                showSlide(index);
-                // Reset auto-advance timer
-                clearInterval(slideInterval);
-                setTimeout(() => {
-                    setInterval(nextSlide, 5000);
-                }, 1000);
-            });
-        });
-
-        // Touch/swipe support for mobile
-        let startX = 0;
-        let endX = 0;
-        
-        testimonialSlider.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
-        
-        testimonialSlider.addEventListener('touchmove', (e) => {
-            endX = e.touches[0].clientX;
-        });
-        
-        testimonialSlider.addEventListener('touchend', () => {
-            const threshold = 50;
-            const diff = startX - endX;
-            
-            if (Math.abs(diff) > threshold) {
-                if (diff > 0) {
-                    // Swiped left - next slide
-                    nextSlide();
-                } else {
-                    // Swiped right - previous slide
-                    currentSlide = currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
-                    showSlide(currentSlide);
-                }
-            }
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            showSlide(currentSlide);
-        });
-
-        // Initialize slider with a small delay to ensure proper measurement
-        setTimeout(() => {
-            showSlide(0);
-        }, 100);
-    }
-
-    // Animate statistics on scroll
-    const statsSection = document.querySelector('.stats');
-    if (statsSection) {
-        const statNumbers = statsSection.querySelectorAll('.stat-number');
-        let hasAnimated = false;
-
-        const animateStats = () => {
-            if (hasAnimated) return;
-            
-            statNumbers.forEach(stat => {
-                const finalValue = parseInt(stat.textContent);
-                let currentValue = 0;
-                const increment = finalValue / 50;
-                const timer = setInterval(() => {
-                    currentValue += increment;
-                    if (currentValue >= finalValue) {
-                        stat.textContent = finalValue;
-                        clearInterval(timer);
-                    } else {
-                        stat.textContent = Math.floor(currentValue);
+                function updateCount(now) {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    const value = target * progress;
+                    el.textContent = value.toFixed(decimals) + suffix;
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
                     }
-                }, 30);
-            });
-            hasAnimated = true;
-        };
-
-        // Check if stats section is in viewport
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
                 }
-            });
-        }, { threshold: 0.5 });
 
-        observer.observe(statsSection);
-    }
+                requestAnimationFrame(updateCount);
+            }
 
-    // Add fade-in animation to cards on scroll
-    const animatedElements = document.querySelectorAll('.feature-card, .achievement-card, .team-member, .ambassador-card, .resource-item, .benefit-item, .join-option');
-    
-    if (animatedElements.length > 0) {
-        const cardObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+            function onScroll() {
+                const currentY = window.scrollY;
+                const isScrollingDown = currentY > lastScrollY;
+
+                if (currentY > 80 && isScrollingDown) {
+                    header.classList.add('is-hidden');
+                } else {
+                    header.classList.remove('is-hidden');
                 }
+
+                lastScrollY = currentY;
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    window.requestAnimationFrame(onScroll);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            const impactSection = document.querySelector('.impact-section');
+            if (impactSection) {
+                const runImpactAnimations = () => {
+                    if (impactAnimated) return;
+                    impactAnimated = true;
+                    impactSection.classList.add('is-visible');
+                    const counters = impactSection.querySelectorAll('.impact-count');
+                    counters.forEach(animateCount);
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            runImpactAnimations();
+                            observer.disconnect();
+                        }
+                    });
+                }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+                observer.observe(impactSection);
+
+                if (impactSection.getBoundingClientRect().top < window.innerHeight * 0.85) {
+                    runImpactAnimations();
+                }
+            }
+
+            const sliders = document.querySelectorAll('.quote-slider');
+            sliders.forEach((slider) => {
+                const slides = Array.from(slider.querySelectorAll('.quote-slide'));
+                if (slides.length <= 1) {
+                    return;
+                }
+
+                const interval = parseInt(slider.dataset.interval || '9000', 10);
+                let current = 0;
+
+                setInterval(() => {
+                    slides[current].classList.remove('active');
+                    current = (current + 1) % slides.length;
+                    slides[current].classList.add('active');
+                }, interval);
             });
-        }, { 
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
 
-        animatedElements.forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            cardObserver.observe(element);
-        });
-    }
+            const chatbotButton = document.querySelector('.chatbot-button');
+            const chatbotPanel = document.querySelector('.chatbot-panel');
 
-    // Resource links click tracking (for analytics)
-    const resourceLinks = document.querySelectorAll('.resource-link');
-    resourceLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // You can add analytics tracking here
-            console.log('Resource clicked:', this.textContent.trim());
-        });
-    });
+            if (chatbotButton && chatbotPanel) {
+                const chatbotClose = chatbotPanel.querySelector('.chatbot-close');
+                const chatbotForm = chatbotPanel.querySelector('.chatbot-form');
+                const chatbotInput = chatbotPanel.querySelector('.chatbot-input');
+                const chatbotMessages = chatbotPanel.querySelector('.chatbot-messages');
+                const faqButtons = chatbotPanel.querySelectorAll('[data-faq]');
 
-    // Social media links click tracking
-    const socialLinks = document.querySelectorAll('.social-links a');
-    socialLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // You can add analytics tracking here
-            const platform = this.getAttribute('href');
-            console.log('Social media clicked:', platform);
-        });
-    });
-});
+                const responses = [
+                    {
+                        keywords: ['join', 'apply', 'signup', 'sign up'],
+                        text: 'You can join by contacting us via the Contact page or clicking “Join the program.” We’ll guide you through the next steps.'
+                    },
+                    {
+                        keywords: ['who can', 'eligible', 'eligibility', 'requirements'],
+                        text: 'We welcome health science students and early-career health professionals across Africa who want mentorship and growth.'
+                    },
+                    {
+                        keywords: ['fee', 'cost', 'price', 'pay'],
+                        text: 'MedXMentor is community-focused. Most cohorts are fully sponsored—reach out for the latest cohort details.'
+                    },
+                    {
+                        keywords: ['how long', 'duration', 'length'],
+                        text: 'Cohorts typically run for several months with structured check-ins and activities throughout.'
+                    },
+                    {
+                        keywords: ['mentor', 'matching', 'match'],
+                        text: 'Mentor matching is based on your goals, interests, and growth areas to ensure a supportive fit.'
+                    },
+                    {
+                        keywords: ['contact', 'email', 'phone'],
+                        text: 'You can reach us at info@medxmentor.org or +256 788 340086.'
+                    }
+                ];
 
-// Utility Functions
+                const addMessage = (text, type) => {
+                    if (!chatbotMessages) return;
+                    const message = document.createElement('div');
+                    message.className = `chatbot-message ${type}`;
+                    message.textContent = text;
+                    chatbotMessages.appendChild(message);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                };
 
-function validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
+                const getResponse = (input) => {
+                    const normalized = input.toLowerCase();
+                    const match = responses.find(rule =>
+                        rule.keywords.some(keyword => normalized.includes(keyword))
+                    );
+                    return match ? match.text : 'Thanks for your question! Please share a bit more detail, or contact us directly for a precise answer.';
+                };
 
-function validateContactForm(data) {
-    const requiredFields = ['name', 'email', 'message'];
-    return requiredFields.every(field => data[field] && data[field].trim() !== '');
-}
+                const handleQuestion = (question) => {
+                    addMessage(question, 'user');
+                    const reply = getResponse(question);
+                    setTimeout(() => addMessage(reply, 'bot'), 150);
+                };
 
-function showNotification(message, type) {
-    // Remove existing notifications
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
+                chatbotButton.addEventListener('click', () => {
+                    chatbotPanel.classList.add('is-open');
+                    chatbotInput?.focus();
+                });
 
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">
-            <span class="notification-message">${message}</span>
-            <button class="notification-close">&times;</button>
-        </div>
-    `;
+                chatbotClose?.addEventListener('click', () => {
+                    chatbotPanel.classList.remove('is-open');
+                });
 
-    // Add styles
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: ${type === 'success' ? '#10b981' : '#ef4444'};
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        z-index: 9999;
-        max-width: 400px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-    `;
+                chatbotForm?.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const value = chatbotInput?.value.trim();
+                    if (!value) return;
+                    handleQuestion(value);
+                    chatbotInput.value = '';
+                });
 
-    notification.querySelector('.notification-content').style.cssText = `
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-    `;
-    notification.querySelector('.notification-close').style.cssText = `
-        background: none;
-        border: none;
-        color: white;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 0;
-        line-height: 1;
-    `;
-    document.body.appendChild(notification);
-    setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 100);
-    setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.remove();
+                faqButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const question = button.getAttribute('data-faq');
+                        if (question) {
+                            handleQuestion(question);
+                        }
+                    });
+                });
             }
-        }, 300);
-    }, 5000);
-    notification.querySelector('.notification-close').addEventListener('click', () => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.remove();
-            }
-        }, 300);
-    });
-}
+        })();
     </script>
 </body>
 </html>

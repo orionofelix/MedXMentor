@@ -32,15 +32,17 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: var(--gray-800);
-            background: var(--gradient-primary);
             min-height: 100vh;
+        }
+
+        .auth-main {
+            min-height: calc(100vh - 240px);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem 1rem;
+            padding: 4rem 1rem 5rem;
         }
 
         .container {
@@ -92,7 +94,7 @@
             padding: 0.75rem;
             border: 1px solid var(--gray-200);
             border-radius: 0.5rem;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 1rem;
             transition: all 0.3s ease;
         }
@@ -108,7 +110,7 @@
             padding: 0.75rem;
             border: none;
             border-radius: 0.5rem;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -191,15 +193,17 @@
             }
         }
     </style>
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="login-card">
-            <div class="login-header">
-                <img src="logo.png" alt="MedXMentor" class="logo">
-                <h1>Login</h1>
-                <p>Assessment Portal</p>
-            </div>
+    <main class="auth-main">
+        <div class="container">
+            <div class="login-card">
+                <div class="login-header">
+                    <img src="logo.png" alt="MedXMentor" class="logo">
+                    <h1>Login</h1>
+                    <p>Assessment Portal</p>
+                </div>
 
             <div id="alertMessage" class="alert"></div>
 
@@ -225,8 +229,9 @@
             <p class="signup-link">
                 Don't have an account? <a href="signup.html">Sign up here</a>
             </p>
+            </div>
         </div>
-    </div>
+    </main>
 
     <script>
         const apiUrl = 'https://medxmentor.onrender.com/api';

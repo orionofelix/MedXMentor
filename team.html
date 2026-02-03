@@ -89,96 +89,6 @@ body {
     padding: 0 1rem;
 }
 
-/* Header Styles */
-.header {
-    background-color: var(--white);
-    box-shadow: var(--shadow-sm);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.navbar {
-    padding: 1rem 0;
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.nav-brand .logo {
-    height: 50px;
-    width: auto;
-    max-width: 200px;
-    object-fit: contain;
-}
-
-.nav-brand .brand-text h1 {
-    color: var(--primary-blue);
-    font-size: 1.875rem;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 0.1rem;
-}
-
-.nav-brand .brand-text span {
-    color: var(--gray-600);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-menu a {
-    text-decoration: none;
-    color: var(--gray-700);
-    font-weight: var(--font-weight-medium);
-    transition: var(--transition);
-    padding: 0.5rem 0;
-    position: relative;
-}
-
-.nav-menu a:hover,
-.nav-menu a.active {
-    color: var(--primary-blue);
-}
-
-.nav-menu a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--primary-blue);
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--gray-700);
-    transition: var(--transition);
-}
-
 /* Button Styles */
 .btn {
     display: inline-block;
@@ -546,100 +456,6 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .nav-brand .logo {
-        height: 40px;
-    }
-    
-    .nav-brand .brand-text h1 {
-        font-size: 1.5rem;
-    }
-    
-    .nav-brand .brand-text span {
-        font-size: 0.75rem;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 80px;
-        flex-direction: column;
-        background-color: white;
-        width: 100%;
-        text-align: center;
-        transition: left 0.3s ease;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.15);
-        padding: 1rem 0;
-        z-index: 999;
-        height: calc(100vh - 80px);
-        overflow-y: auto;
-    }
-
-    .nav-menu.active {
-        left: 0;
-    }
-
-    .nav-menu.active::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.3);
-        z-index: -1;
-    }
-
-    .nav-menu li {
-        margin: 0;
-        border-bottom: 1px solid var(--gray-100);
-    }
-
-    .nav-menu li:last-child {
-        border-bottom: none;
-    }
-
-    .nav-menu a {
-        display: block;
-        padding: 0.75rem 2rem;
-        font-size: 1rem;
-        color: var(--gray-700);
-        text-decoration: none;
-        transition: var(--transition);
-        border-left: 4px solid transparent;
-    }
-
-    .nav-menu a:hover,
-    .nav-menu a.active {
-        background-color: var(--blue-50);
-        color: var(--primary-blue);
-        border-left-color: var(--primary-blue);
-    }
-
-    .nav-menu a.active::after {
-        display: none;
-    }
-    
-    .hamburger {
-        display: flex;
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-    }
-
-    .hamburger.active span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-    }
-
-    .header.scrolled {
-        background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-    }
-    
     .team-grid {
         grid-template-columns: 1fr;
     }
@@ -696,38 +512,11 @@ section {
     font-size: 1.125rem;
     font-weight: var(--font-weight-medium);
     margin: 0;
-}</style>
+}
+    </style>
 
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="container">
-                <div class="nav-brand">
-                    <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="logo"></a>
-                    <div class="brand-text">
-                        <h1>MedXMentor</h1>
-                        <span>Mentorship Program</span>
-                    </div>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="team.html" class="active">The Team</a></li>
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="donate.html">Donate</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-    </header>
 
     <!-- Page Header -->
     <section class="page-header">
@@ -1012,85 +801,10 @@ section {
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-brand">
-                        <a href="index.html"><img src="logo.png" alt="MedXMentor Logo" class="footer-logo"></a>
-                        <h3>MedXMentor</h3>
-                    </div>
-                    <p>A mentorship program for young health professionals. We Journey with You.</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/medxmentor/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://x.com/MedXMentor" target="_blank" style="font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
-                        <a href="https://www.youtube.com/@medxmentor" target="_blank"><i class="fab fa-youtube"></i></a>
-                        <a href="https://www.linkedin.com/in/medxmentor/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="team.html">Our Team</a></li>
-                        <li><a href="resources.html">Resources</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="donate.html">Donate</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contacts</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-phone"></i> +256 788 340086</p>
-                        <p><i class="fas fa-envelope"></i> info@medxmentor.org</p>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; MedXMentor 2025. All rights reserved</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
 // MedXMentor Website JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Navigation Toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav-menu a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-    }
-
-    // Add scroll effect to header
-    const header = document.querySelector('.header');
-    if (header) {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    }
-
     // Add fade-in animation to cards on scroll
     const animatedElements = document.querySelectorAll('.team-member, .ambassador-card');
     
