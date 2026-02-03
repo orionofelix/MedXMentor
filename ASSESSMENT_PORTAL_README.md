@@ -1,4 +1,4 @@
-# MedXMentor Assessment Portal - Complete Implementation
+# MedXMentor PORTAL - Complete Implementation
 
 ## 🎯 Overview
 
@@ -102,7 +102,7 @@ backend/
    - Navigation to create new assessment
    - Responsive grid layouts
 
-#### Features in Assessment Portal
+#### Features in PORTAL
 
 **Tab 1: Competencies**
 - Clinical Knowledge
@@ -327,7 +327,7 @@ Ready to deploy to:
 ```
 1. User visits website
    ↓
-2. Click "Assessment Portal" link
+2. Click "PORTAL" link
    ↓
 3. Redirected to login.html
    ↓
@@ -445,6 +445,6 @@ Same as MedXMentor main project
 
 ---
 
-**🎉 Assessment Portal is ready to use!**
+**🎉 PORTAL is ready to use!**
 
 Start at: http://localhost:8000/login.html

@@ -40,6 +40,14 @@ const userSchema = new mongoose.Schema(
         },
         university: String,
         program: String,
+        yearOfStudy: String,
+        cohort: String,
+        theme: {
+            type: String,
+            enum: ['Research', 'Leadership', 'Career', 'Innovation', ''],
+            default: '',
+        },
+        profileImage: String,
         role: {
             type: String,
             enum: ['mentee', 'mentor', 'admin'],

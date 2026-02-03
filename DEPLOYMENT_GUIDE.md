@@ -1,6 +1,6 @@
 # MedXMentor Deployment Guide
 
-Deploy your MedXMentor Assessment Portal to the cloud for 24/7 access.
+Deploy your MedXMentor PORTAL to the cloud for 24/7 access.
 
 ## 🎯 Deployment Strategy
 
@@ -110,7 +110,7 @@ git init
 git add .
 
 # Commit
-git commit -m "Initial commit - MedXMentor Assessment Portal"
+git commit -m "Initial commit - MedXMentor PORTAL"
 
 # Create repo on GitHub (https://github.com/new)
 # Then push:

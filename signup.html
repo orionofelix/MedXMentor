@@ -3,11 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - MedXMentor Assessment Portal</title>
+    <title>Sign Up - MedXMentor PORTAL</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="Fonts/OnestRegular1602-hint.ttf" as="font" type="font/ttf" crossorigin>
     <style>
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestThin1602-hint.ttf') format('truetype');
+            font-weight: 100;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestLight1602-hint.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestRegular1602-hint.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestMedium1602-hint.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestBold1602-hint.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestExtraBold1602-hint.ttf') format('truetype');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,6 +66,8 @@
             --primary-blue: #2563eb;
             --primary-blue-dark: #1d4ed8;
             --primary-blue-light: #3b82f6;
+            --sky-100: #e0f2fe;
+            --sky-200: #bae6fd;
             --gray-50: #f9fafb;
             --gray-100: #f3f4f6;
             --gray-200: #e5e7eb;
@@ -27,50 +77,54 @@
             --gray-800: #1f2937;
             --gray-900: #111827;
             --white: #ffffff;
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
         }
 
         body {
+            font-family: 'Onest', sans-serif;
             line-height: 1.6;
             color: var(--gray-800);
             min-height: 100vh;
+            background: linear-gradient(135deg, var(--sky-100) 0%, var(--white) 55%, var(--sky-200) 100%);
         }
 
         .auth-main {
-            min-height: calc(100vh - 240px);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4rem 1rem 5rem;
+            padding: 3rem 1.5rem 3.5rem;
         }
 
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 960px;
         }
 
         .signup-card {
-            background: var(--white);
-            border-radius: 1rem;
-            padding: 2.5rem;
-            box-shadow: var(--shadow-lg);
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            max-width: 960px;
+            width: 100%;
+            margin: 0 auto;
         }
 
         .signup-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.75rem;
         }
 
         .logo {
-            height: 60px;
-            margin-bottom: 1rem;
+            height: 54px;
+            margin-bottom: 0.4rem;
         }
 
         .signup-header h1 {
             color: var(--primary-blue);
             font-size: 2rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.35rem;
         }
 
         .signup-header p {
@@ -78,23 +132,28 @@
             font-size: 1rem;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        #signupForm {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem 1.5rem;
         }
 
         .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            display: contents;
         }
 
-        .form-row .form-group {
-            margin-bottom: 0;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
         }
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.45rem;
             color: var(--gray-700);
             font-weight: 500;
             font-size: 0.95rem;
@@ -107,57 +166,20 @@
             border-radius: 0.5rem;
             font-family: inherit;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.2s ease;
         }
 
         input:focus, select:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .btn {
-            width: 100%;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 0.5rem;
-            font-family: inherit;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: var(--white);
-            margin-bottom: 1rem;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-        }
-
-        .login-link {
-            text-align: center;
-            color: var(--gray-600);
-        }
-
-        .login-link a {
-            color: var(--primary-blue);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .login-link a:hover {
-            text-decoration: underline;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
         }
 
         .alert {
-            padding: 1rem;
+            grid-column: 1 / -1;
+            padding: 0.9rem 1rem;
             border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
             display: none;
         }
 
@@ -175,6 +197,28 @@
             display: block;
         }
 
+        .btn {
+            grid-column: 1 / -1;
+            width: 100%;
+            padding: 0.85rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
         .loading {
             display: none;
         }
@@ -190,24 +234,36 @@
             margin-right: 0.5rem;
         }
 
+        .login-link {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: var(--gray-600);
+            margin-top: 0.5rem;
+        }
+
+        .login-link a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        @media (max-width: 768px) {
-            .signup-card {
-                padding: 2rem;
-            }
-
-            .signup-header h1 {
-                font-size: 1.5rem;
-            }
-
-            .form-row {
+        @media (max-width: 900px) {
+            #signupForm {
                 grid-template-columns: 1fr;
             }
+
+            .signup-header {
+                margin-bottom: 1.25rem;
+            }
         }
-    </style>
     </style>
 </head>
 <body>
@@ -220,9 +276,8 @@
                     <p>Create Your Assessment Account</p>
                 </div>
 
-            <div id="alertMessage" class="alert"></div>
-
             <form id="signupForm">
+                <div id="alertMessage" class="alert"></div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
@@ -234,12 +289,12 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group full">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" required placeholder="your@email.com">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group full">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required placeholder="At least 6 characters">
                 </div>
@@ -262,7 +317,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group full">
                     <label for="program">Program of Study</label>
                     <input type="text" id="program" name="program" placeholder="e.g., Medical School">
                 </div>
@@ -341,7 +396,7 @@
                     alertMessage.className = 'alert alert-success';
                     alertMessage.textContent = 'Account created successfully! Redirecting...';
 
-                    // Redirect to assessment portal after 1.5 seconds
+                    // Redirect to PORTAL after 1.5 seconds
                     setTimeout(() => {
                         window.location.href = 'assessment-portal.html';
                     }, 1500);

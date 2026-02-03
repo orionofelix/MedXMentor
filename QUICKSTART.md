@@ -1,6 +1,6 @@
-# MedXMentor Assessment Portal - Quick Start
+# MedXMentor PORTAL - Quick Start
 
-Get the assessment portal up and running in 5 minutes!
+Get the PORTAL up and running in 5 minutes!
 
 ## What You'll Get
 
@@ -74,7 +74,7 @@ npx serve .
 Open your browser:
 
 1. **Homepage**: http://localhost:8000
-2. **Login/Sign Up**: Click "Assessment Portal" link or go to http://localhost:8000/login.html
+2. **Login/Sign Up**: Click "PORTAL" link or go to http://localhost:8000/login.html
 3. **Create Account**: Fill in signup form
 4. **Fill Assessment**: Rate your competencies and track milestones
 5. **View History**: See all past assessments and progress charts

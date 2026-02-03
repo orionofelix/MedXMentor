@@ -1,4 +1,4 @@
-# Assessment Portal - Testing Guide
+# PORTAL - Testing Guide
 
 Complete testing checklist to verify all features work correctly.
 
@@ -94,7 +94,7 @@ localStorage.getItem('user')
 
 ---
 
-## Assessment Portal Testing
+## PORTAL Testing
 
 ### Test 6: Load Assessment Form
 **Steps:**
@@ -314,7 +314,7 @@ db.assessments.findOne({})
 **Steps:**
 1. From assessment pages, test all nav links
 2. Go to different pages (about, resources, etc.)
-3. Return to assessment portal
+3. Return to PORTAL
 
 **Expected Result:**
 - ✅ Links work correctly
@@ -323,7 +323,7 @@ db.assessments.findOne({})
 ### Test 24: Portal Link on Home
 **Steps:**
 1. On index.html
-2. Look for Assessment Portal link
+2. Look for PORTAL link
 3. Click it
 
 **Expected Result:**

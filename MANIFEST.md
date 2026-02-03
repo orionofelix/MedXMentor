@@ -1,4 +1,4 @@
-# Complete File Manifest - Assessment Portal
+# Complete File Manifest - PORTAL
 
 ## 📋 New Files Created
 
@@ -130,7 +130,7 @@
 ### Updated Files (1 file)
 
 17. **index.html** (1 line added)
-    - Added "Assessment Portal" link to navigation
+    - Added "PORTAL" link to navigation
     - Styled to match existing design
 
 ### Documentation (4 files)

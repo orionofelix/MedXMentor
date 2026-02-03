@@ -3,12 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assessment Portal - MedXMentor</title>
+    <title>Mentee Portal - MedXMentor</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preload" href="Fonts/OnestRegular1602-hint.ttf" as="font" type="font/ttf" crossorigin>
     <style>
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestThin1602-hint.ttf') format('truetype');
+            font-weight: 100;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestLight1602-hint.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestRegular1602-hint.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestMedium1602-hint.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestBold1602-hint.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestExtraBold1602-hint.ttf') format('truetype');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,86 +63,531 @@
         }
 
         :root {
-            --primary-blue: #2563eb;
-            --primary-blue-dark: #1d4ed8;
-            --primary-blue-light: #3b82f6;
-            --blue-50: #eff6ff;
-            --blue-100: #dbeafe;
-            --blue-200: #bfdbfe;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-300: #d1d5db;
-            --gray-400: #9ca3af;
-            --gray-500: #6b7280;
-            --gray-600: #4b5563;
-            --gray-700: #374151;
-            --gray-800: #1f2937;
-            --gray-900: #111827;
+            --blue-50: #f0f9ff;
+            --blue-100: #e0f2fe;
+            --blue-200: #bae6fd;
+            --blue-400: #38bdf8;
+            --blue-600: #0284c7;
+            --primary-blue: var(--blue-600);
+            --primary-blue-dark: #0369a1;
+            --primary-blue-light: var(--blue-400);
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
             --white: #ffffff;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
-            --gradient-light: linear-gradient(135deg, var(--blue-50) 0%, var(--white) 100%);
+            --shadow-sm: 0 6px 20px rgba(15, 23, 42, 0.08);
+            --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.12);
+            --gradient-primary: linear-gradient(135deg, var(--blue-400) 0%, var(--blue-600) 100%);
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Onest', sans-serif;
             line-height: 1.6;
+            color: var(--gray-900);
+            background: linear-gradient(135deg, var(--blue-100) 0%, var(--white) 60%, var(--blue-200) 100%);
+            min-height: 100vh;
+        }
+
+        .layout {
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--white);
+            border-right: 1px solid var(--gray-200);
+            padding: 1.75rem 1.25rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition: width 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .sidebar.collapsed {
+            width: 80px;
+        }
+
+        .sidebar.collapsed .profile-name,
+        .sidebar.collapsed .sidebar-menu span,
+        .sidebar.collapsed .logout-text {
+            display: none;
+        }
+
+        .sidebar.collapsed .profile-link,
+        .sidebar.collapsed .sidebar-menu a,
+        .sidebar.collapsed .logout-btn {
+            justify-content: center;
+        }
+
+        .sidebar.collapsed .profile-link {
+            padding: 0.6rem;
+        }
+
+        .sidebar.collapsed .sidebar-brand span {
+            display: none;
+        }
+
+        .sidebar-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .sidebar-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
             color: var(--gray-800);
-            background-color: var(--gray-50);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.78rem;
+        }
+
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+        }
+
+        .sidebar-toggle {
+            border: none;
+            background: var(--gray-100);
+            border-radius: 0.75rem;
+            padding: 0.5rem 0.6rem;
+            cursor: pointer;
+            color: var(--gray-600);
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar.collapsed .sidebar-header {
+            align-items: center;
+        }
+
+        .sidebar.collapsed .sidebar-toggle {
+            width: 44px;
+        }
+
+        .mobile-header {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.85rem 1rem;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu-btn {
+            border: none;
+            background: var(--gray-100);
+            border-radius: 0.75rem;
+            padding: 0.55rem 0.7rem;
+            cursor: pointer;
+            color: var(--gray-700);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-header-title {
+            font-weight: 600;
+            color: var(--gray-800);
+            letter-spacing: 0.02em;
+        }
+
+        .mobile-header-logo {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .virtual-mentor-btn {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            background: var(--gradient-primary);
+            color: var(--white);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 12;
+        }
+
+        .virtual-mentor-btn i {
+            font-size: 1.25rem;
+        }
+
+        .mentor-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.4);
+            display: none;
+            align-items: flex-end;
+            justify-content: flex-end;
+            z-index: 20;
+        }
+
+        .mentor-modal.active {
+            display: flex;
+        }
+
+        .mentor-panel {
+            width: min(420px, 100%);
+            height: min(640px, 90vh);
+            background: var(--white);
+            border-radius: 1.25rem;
+            border: 1px solid var(--gray-200);
+            margin: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .terms-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.4);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 22;
+        }
+
+        .terms-modal.active {
+            display: flex;
+        }
+
+        .terms-card {
+            width: min(520px, 92vw);
+            background: var(--white);
+            border-radius: 1.25rem;
+            border: 1px solid var(--gray-200);
+            padding: 1.5rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .terms-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+
+        .terms-decline {
+            border: none;
+            padding: 0.7rem 1.1rem;
+            border-radius: 0.75rem;
+            background: var(--gray-100);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .terms-accept {
+            border: none;
+            padding: 0.7rem 1.1rem;
+            border-radius: 0.75rem;
+            background: var(--gradient-primary);
+            color: var(--white);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .mentor-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-50);
+        }
+
+        .mentor-title {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .mentor-title i {
+            color: var(--primary-blue);
+        }
+
+        .mentor-close {
+            border: none;
+            background: var(--gray-100);
+            border-radius: 0.65rem;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--gray-600);
+        }
+
+        .mentor-body {
+            flex: 1;
+            padding: 1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: auto;
+        }
+
+        .mentor-bubble {
+            padding: 0.85rem 1rem;
+            border-radius: 1rem;
+            border: 1px solid var(--gray-200);
+            background: var(--gray-50);
+            color: var(--gray-800);
+            max-width: 90%;
+        }
+
+        .mentor-bubble.user {
+            margin-left: auto;
+            background: var(--blue-100);
+            border-color: var(--blue-200);
+        }
+
+        .mentor-footer {
+            padding: 0.9rem 1.2rem 1.2rem;
+            border-top: 1px solid var(--gray-200);
+            display: grid;
+            gap: 0.75rem;
+            background: var(--white);
+        }
+
+        .mentor-input-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .mentor-send-btn {
+            border: none;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--gradient-primary);
+            color: var(--white);
+            cursor: pointer;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .mentor-hint {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.35);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 9;
+        }
+
+        .sidebar-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .profile-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            background: transparent;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .profile-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0.9rem;
+            border-radius: 0.75rem;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: var(--blue-50);
+            color: var(--primary-blue);
+        }
+
+        .sidebar-actions {
+            margin-top: auto;
+        }
+
+        .logout-btn {
+            width: 100%;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            background: #ef4444;
+            color: var(--white);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            padding: 2.5rem 2.5rem 3rem;
+            margin-left: 260px;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+        .sidebar.collapsed ~ .content-wrapper {
+            margin-left: 80px;
+        }
+
+        .layout.sidebar-collapsed .content-wrapper {
+            margin-left: 80px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 3rem 0;
         }
 
         .page-header {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .page-header h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
+            margin-bottom: 0.35rem;
             color: var(--gray-900);
-            margin-bottom: 0.5rem;
         }
 
         .page-header p {
             color: var(--gray-600);
-            font-size: 1.1rem;
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             gap: 1rem;
-            margin-bottom: 2rem;
             border-bottom: 2px solid var(--gray-200);
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-list {
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-list.hidden {
+            display: none;
+        }
+
+        .assessment-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.9rem;
+            background: var(--white);
+            cursor: pointer;
+            transition: border 0.2s ease, background 0.2s ease;
+        }
+
+        .assessment-item:hover {
+            border-color: var(--primary-blue);
+            background: var(--blue-50);
+        }
+
+        .assessment-item.disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+            background: var(--gray-50);
+        }
+
+        .assessment-item.disabled:hover {
+            border-color: var(--gray-200);
+            background: var(--gray-50);
+        }
+
+        .assessment-item span {
+            font-weight: 600;
+            color: var(--gray-800);
         }
 
         .tab-btn {
-            padding: 1rem;
-            background: none;
             border: none;
-            border-bottom: 3px solid transparent;
+            background: transparent;
+            padding: 0.75rem 0.5rem;
+            font-weight: 600;
             color: var(--gray-600);
             cursor: pointer;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            bottom: -2px;
+            border-bottom: 3px solid transparent;
         }
 
         .tab-btn.active {
@@ -109,275 +601,162 @@
 
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .assessment-form {
+            display: none;
+        }
+
+        .assessment-form.active {
+            display: block;
+            animation: fadeIn 0.2s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Cards */
         .card {
             background: var(--white);
             border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 2rem;
-        }
-
-        .card-header {
+            padding: 1.75rem;
+            border: 1px solid var(--gray-100);
             margin-bottom: 1.5rem;
         }
 
+        .card-header {
+            margin-bottom: 1.25rem;
+        }
+
         .card-header h2 {
+            font-size: 1.25rem;
             color: var(--gray-900);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .card-header p {
             color: var(--gray-600);
         }
 
-        /* Form Groups */
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-top: 1rem;
+        }
+
+        .form-grid .form-group {
+            margin-top: 0;
         }
 
         label {
-            display: block;
-            margin-bottom: 0.5rem;
+            font-weight: 500;
             color: var(--gray-700);
-            font-weight: 600;
-            font-size: 0.95rem;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.75rem 0.85rem;
+            border-radius: 0.65rem;
             border: 1px solid var(--gray-200);
-            border-radius: 0.5rem;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: border 0.2s ease, box-shadow 0.2s ease;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
         }
 
         textarea {
+            min-height: 110px;
             resize: vertical;
-            min-height: 100px;
         }
 
-        /* Rating Scales */
-        .competency-section {
-            margin-bottom: 2.5rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .competency-section:last-child {
-            border-bottom: none;
-        }
-
-        .competency-header {
+        .pill-group {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .pill {
+            border: 1px solid var(--gray-200);
+            border-radius: 999px;
+            padding: 0.45rem 0.9rem;
+            display: inline-flex;
             align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .competency-header h3 {
-            color: var(--gray-900);
-            font-size: 1.1rem;
-        }
-
-        .rating-group {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .rating-btn {
-            width: 3rem;
-            height: 3rem;
-            border: 2px solid var(--gray-200);
+            gap: 0.4rem;
+            cursor: pointer;
             background: var(--white);
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--gray-600);
-            transition: all 0.3s ease;
-            font-size: 1rem;
+            transition: all 0.2s ease;
+            font-weight: 500;
         }
 
-        .rating-btn:hover {
-            border-color: var(--primary-blue);
-            background: var(--blue-50);
+        .pill input {
+            display: none;
         }
 
-        .rating-btn.selected {
-            background: var(--gradient-primary);
+        .pill.selected {
+            background: var(--primary-blue);
             color: var(--white);
             border-color: var(--primary-blue);
         }
 
-        .competency-comment {
-            margin-top: 1rem;
-        }
-
-        /* Milestones */
-        .milestone-grid {
+        .checkbox-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.6rem;
         }
 
-        .milestone-item {
-            background: var(--blue-50);
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            text-align: center;
-            border: 2px solid var(--gray-200);
-            transition: all 0.3s ease;
-        }
-
-        .milestone-item:hover {
-            border-color: var(--primary-blue);
-            box-shadow: var(--shadow-md);
-        }
-
-        .milestone-item label {
-            margin-bottom: 1rem;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .milestone-item input {
-            width: auto;
-            margin-right: 0.5rem;
-            cursor: pointer;
-        }
-
-        .milestone-input {
-            width: 100%;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            border: none;
-            background: transparent;
-            padding: 0;
-            margin: 0;
-        }
-
-        .milestone-input:focus {
-            box-shadow: none;
-            border: none;
-        }
-
-        /* Progress Bars */
-        .progress-section {
-            background: var(--gradient-light);
-            padding: 2rem;
-            border-radius: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .progress-item {
-            margin-bottom: 2rem;
-        }
-
-        .progress-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .progress-label span:first-child {
-            font-weight: 600;
-            color: var(--gray-900);
-        }
-
-        .progress-label span:last-child {
-            color: var(--primary-blue);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .progress-bar {
-            background: var(--gray-200);
-            height: 1rem;
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: var(--gradient-primary);
-            height: 100%;
-            border-radius: 0.5rem;
-            transition: width 0.3s ease;
-            display: flex;
+        .checkbox-grid label {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 0.75rem;
-            font-weight: 600;
+            gap: 0.5rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.65rem;
+            padding: 0.45rem 0.6rem;
+            background: var(--white);
+            cursor: pointer;
         }
 
-        /* Overall Score */
-        .overall-score {
-            background: var(--gradient-primary);
-            color: var(--white);
-            padding: 2rem;
-            border-radius: 1rem;
-            text-align: center;
-            margin-bottom: 2rem;
+        .checkbox-grid input {
+            width: 1rem;
+            height: 1rem;
+            margin: 0;
+            accent-color: var(--primary-blue);
+            flex-shrink: 0;
         }
 
-        .overall-score h3 {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
+        .field-error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
         }
 
-        .overall-score .score {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        .pill-group.field-error,
+        .checkbox-grid.field-error {
+            border: 1px solid #ef4444;
+            border-radius: 0.75rem;
+            padding: 0.4rem;
         }
 
-        .overall-score p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Buttons */
         .btn {
-            padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 0.5rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1.4rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
+            font-size: 1rem;
         }
 
         .btn-primary {
@@ -385,626 +764,1313 @@
             color: var(--white);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        .form-submit {
+            margin-top: 1rem;
         }
 
         .btn-secondary {
             background: var(--gray-200);
-            color: var(--gray-900);
+            color: var(--gray-800);
         }
 
-        .btn-secondary:hover {
-            background: var(--gray-300);
-        }
-
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        /* Alert */
         .alert {
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
             display: none;
-        }
-
-        .alert-success {
-            background: #efe;
-            color: #060;
-            border: 1px solid #cfc;
-        }
-
-        .alert-error {
-            background: #fee;
-            color: #c00;
-            border: 1px solid #fcc;
-        }
-
-        .alert-info {
-            background: #eef;
-            color: #006;
-            border: 1px solid #ccf;
+            padding: 0.85rem 1rem;
+            border-radius: 0.65rem;
+            margin-bottom: 1.25rem;
         }
 
         .alert.show {
             display: block;
-            animation: slideIn 0.3s ease;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .alert-success {
+            background: #ecfdf3;
+            border: 1px solid #86efac;
+            color: #166534;
         }
 
-        /* Loading */
-        .loading-spinner {
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top-color: var(--white);
+        .alert-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .summary-detail {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .summary-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .summary-list li {
+            background: var(--gray-50);
+            border-radius: 0.75rem;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .summary-card {
+            display: grid;
+            gap: 0.4rem;
+        }
+
+        .summary-card-title {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .summary-card-value {
+            color: var(--gray-600);
+            font-weight: 600;
+        }
+
+        .summary-pie {
+            width: 84px;
+            height: 84px;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-right: 0.5rem;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Chart Container */
-        .chart-container {
+            display: grid;
+            place-items: center;
+            background: conic-gradient(var(--primary-blue) var(--percent), var(--gray-200) 0);
             position: relative;
-            height: 400px;
-            margin-bottom: 2rem;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .page-header h1 {
-                font-size: 1.5rem;
+        .summary-pie::before {
+            content: '';
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--white);
+            position: absolute;
+        }
+
+        .summary-pie span {
+            position: relative;
+            font-weight: 700;
+            color: var(--gray-900);
+            font-size: 0.9rem;
+        }
+
+        .summary-panel {
+            display: none;
+        }
+
+        .summary-panel.active {
+            display: block;
+        }
+
+        .profile-panel {
+            display: none;
+        }
+
+        .profile-panel.active {
+            display: block;
+        }
+
+        .profile-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .profile-back-btn {
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 0.7rem;
+            background: var(--gray-100);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .profile-save-btn {
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 0.7rem;
+            background: var(--gradient-primary);
+            color: var(--white);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .profile-details {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .profile-photo {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .profile-photo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-upload-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: 0.7rem;
+            border: 1px dashed var(--gray-300);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .profile-upload-label.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        #profileImageInput {
+            display: none;
+        }
+
+        .profile-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .content-wrapper {
+                padding: 2rem 1.5rem;
+                margin-left: 0;
             }
 
-            .form-grid {
-                grid-template-columns: 1fr;
+            .sidebar {
+                width: 78vw;
+                max-width: 300px;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
             }
 
-            .milestone-grid {
-                grid-template-columns: 1fr;
+            .sidebar.open {
+                transform: translateX(0);
             }
 
-            .rating-btn {
-                width: 2.5rem;
-                height: 2.5rem;
-                font-size: 0.9rem;
+            .sidebar-header {
+                align-items: stretch;
             }
 
-            .button-group {
-                flex-direction: column;
-            }
-
-            .btn {
+            .sidebar-brand {
                 width: 100%;
-                text-align: center;
+                justify-content: center;
+            }
+
+            .sidebar-toggle {
+                width: 100%;
+            }
+
+            .mobile-header {
+                display: flex;
+            }
+
+            .profile-panel-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .mentor-panel {
+                width: 100%;
+                height: 92vh;
+                margin: 0.9rem;
+                border-radius: 1rem;
+            }
+
+            .terms-card {
+                width: 92vw;
+                border-radius: 1rem;
+            }
+
+            .virtual-mentor-btn {
+                right: 18px;
+                bottom: 18px;
+                width: 52px;
+                height: 52px;
+            }
+
+            .form-grid,
+            .profile-row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <div class="page-header">
-                <h1>Your Assessment</h1>
-                <p>Track your progress as a mentee across key competencies</p>
-            </div>
-
-            <div id="alertMessage" class="alert"></div>
-
-            <!-- Tabs -->
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="competencies">
-                    <i class="fas fa-star"></i> Competencies
-                </button>
-                <button class="tab-btn" data-tab="milestones">
-                    <i class="fas fa-flag"></i> Milestones
-                </button>
-                <button class="tab-btn" data-tab="summary">
-                    <i class="fas fa-chart-pie"></i> Summary
+    <div class="layout" id="layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <img src="logo.png" alt="MedXMentor" class="brand-logo">
+                    <span>MedXMentor</span>
+                </div>
+                <button id="sidebarToggle" class="sidebar-toggle" type="button" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
+            <button class="profile-link" id="profileShortcut" type="button" aria-label="Open profile">
+                <img src="Pictures/people.png" alt="Profile" class="profile-avatar" id="sidebarAvatar">
+                <span id="userName" class="profile-name">Mentee Name</span>
+            </button>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#" id="menuSummary" class="active">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Summary</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="menuNewAssessment">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>New Assessment</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="menuResources">
+                        <i class="fas fa-book"></i>
+                        <span>Course Resources</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-actions">
+                <button id="logoutBtn" class="logout-btn" type="button">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="logout-text">Logout</span>
+                </button>
+            </div>
+        </aside>
 
-            <!-- TAB 1: Competencies -->
-            <div id="competencies" class="tab-content active">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Rate Your Competencies</h2>
-                        <p>Assess yourself on a scale of 1 (Beginning) to 5 (Mastery)</p>
+        <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+        <div class="content-wrapper">
+            <main class="main-content">
+                <div class="container">
+                    <div class="mobile-header">
+                        <button id="mobileSidebarToggle" class="mobile-menu-btn" type="button" aria-label="Open menu">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <span class="mobile-header-title">PORTAL</span>
+                        <img src="logo.png" alt="MedXMentor" class="mobile-header-logo">
                     </div>
+                    <div id="alertMessage" class="alert"></div>
+                    <section id="assessmentContent">
+                        <div class="page-header">
+                            <h1>Your Assessments</h1>
+                            <p>Complete your assessments here</p>
+                        </div>
 
-                    <form id="competenciesForm">
-                        <!-- Clinical Knowledge -->
-                        <div class="competency-section">
-                            <div class="competency-header">
-                                <h3>Clinical Knowledge</h3>
-                                <span id="clinicalRating">-</span>
+                        <div class="assessment-list" id="assessmentList">
+                            <div class="assessment-item" data-target="sessionForm">
+                                <span>Post-Session Assessment</span>
+                                <i class="fas fa-chevron-right"></i>
                             </div>
-                            <div class="rating-group">
-                                <button type="button" class="rating-btn" data-competency="clinicalKnowledge" data-rating="1">1</button>
-                                <button type="button" class="rating-btn" data-competency="clinicalKnowledge" data-rating="2">2</button>
-                                <button type="button" class="rating-btn" data-competency="clinicalKnowledge" data-rating="3">3</button>
-                                <button type="button" class="rating-btn" data-competency="clinicalKnowledge" data-rating="4">4</button>
-                                <button type="button" class="rating-btn" data-competency="clinicalKnowledge" data-rating="5">5</button>
+                            <div class="assessment-item" data-target="outputProgressForm">
+                                <span>Output and Progress</span>
+                                <i class="fas fa-chevron-right"></i>
                             </div>
-                            <div class="competency-comment">
-                                <label for="clinicalComment">Comments (Optional)</label>
-                                <textarea id="clinicalComment" name="clinicalComment" placeholder="Share your thoughts on your clinical knowledge..."></textarea>
+                            <div class="assessment-item disabled">
+                                <span>Mentor Meeting Check-In</span>
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="assessment-item disabled">
+                                <span>Monthly Module Check-In</span>
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="assessment-item disabled">
+                                <span>Endline reflection</span>
+                                <i class="fas fa-lock"></i>
                             </div>
                         </div>
 
-                        <!-- Communication -->
-                        <div class="competency-section">
-                            <div class="competency-header">
-                                <h3>Communication</h3>
-                                <span id="communicationRating">-</span>
-                            </div>
-                            <div class="rating-group">
-                                <button type="button" class="rating-btn" data-competency="communication" data-rating="1">1</button>
-                                <button type="button" class="rating-btn" data-competency="communication" data-rating="2">2</button>
-                                <button type="button" class="rating-btn" data-competency="communication" data-rating="3">3</button>
-                                <button type="button" class="rating-btn" data-competency="communication" data-rating="4">4</button>
-                                <button type="button" class="rating-btn" data-competency="communication" data-rating="5">5</button>
-                            </div>
-                            <div class="competency-comment">
-                                <label for="communicationComment">Comments (Optional)</label>
-                                <textarea id="communicationComment" name="communicationComment" placeholder="How is your communication with mentors and colleagues?"></textarea>
+                        <div id="sessionForm" class="assessment-form">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="profile-panel-header" style="margin-bottom: 0.75rem;">
+                                        <button class="profile-back-btn" id="backToAssessmentList" type="button">
+                                            <i class="fas fa-arrow-left"></i> Back to assessments
+                                        </button>
+                                    </div>
+                                    <h2>Post-Session Assessment</h2>
+                                    <p>Capture your reflections immediately after a mentorship session.</p>
+                                </div>
+                                <form id="sessionAssessmentForm">
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="sessionAttended">Session attended</label>
+                                            <input id="sessionAttended" type="text" placeholder="Session title" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sessionDate">Date</label>
+                                            <input id="sessionDate" type="date" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="keyInsight">Key insight</label>
+                                        <textarea id="keyInsight" placeholder="What stood out the most?" required></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Relevance to your goals</label>
+                                        <div class="pill-group" data-group="relevance">
+                                            <label class="pill"><input type="radio" name="relevance" value="1" required>1</label>
+                                            <label class="pill"><input type="radio" name="relevance" value="2">2</label>
+                                            <label class="pill"><input type="radio" name="relevance" value="3">3</label>
+                                            <label class="pill"><input type="radio" name="relevance" value="4">4</label>
+                                            <label class="pill"><input type="radio" name="relevance" value="5">5</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="valuablePart">Most valuable part</label>
+                                        <textarea id="valuablePart" placeholder="Describe what helped you the most" required></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Overall session rating</label>
+                                        <div class="pill-group" data-group="overallRating">
+                                            <label class="pill"><input type="radio" name="overallRating" value="1" required>1</label>
+                                            <label class="pill"><input type="radio" name="overallRating" value="2">2</label>
+                                            <label class="pill"><input type="radio" name="overallRating" value="3">3</label>
+                                            <label class="pill"><input type="radio" name="overallRating" value="4">4</label>
+                                            <label class="pill"><input type="radio" name="overallRating" value="5">5</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="actionStep">Action step to take</label>
+                                        <textarea id="actionStep" placeholder="What will you do next?" required></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Support needed</label>
+                                        <div class="checkbox-grid">
+                                            <label><input class="support-needed" type="checkbox" value="Mentor feedback"> Mentor feedback</label>
+                                            <label><input class="support-needed" type="checkbox" value="Resources"> Resources</label>
+                                            <label><input class="support-needed" type="checkbox" value="Peer support"> Peer support</label>
+                                            <label><input class="support-needed" type="checkbox" value="Follow-up call"> Follow-up call</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="questions">Questions to address</label>
+                                        <textarea id="questions" placeholder="Any questions for your mentor?"></textarea>
+                                    </div>
+
+                                    <button class="btn btn-primary form-submit" type="submit">Submit Session Assessment</button>
+                                </form>
                             </div>
                         </div>
 
-                        <!-- Research Skills -->
-                        <div class="competency-section">
-                            <div class="competency-header">
-                                <h3>Research Skills</h3>
-                                <span id="researchRating">-</span>
-                            </div>
-                            <div class="rating-group">
-                                <button type="button" class="rating-btn" data-competency="researchSkills" data-rating="1">1</button>
-                                <button type="button" class="rating-btn" data-competency="researchSkills" data-rating="2">2</button>
-                                <button type="button" class="rating-btn" data-competency="researchSkills" data-rating="3">3</button>
-                                <button type="button" class="rating-btn" data-competency="researchSkills" data-rating="4">4</button>
-                                <button type="button" class="rating-btn" data-competency="researchSkills" data-rating="5">5</button>
-                            </div>
-                            <div class="competency-comment">
-                                <label for="researchComment">Comments (Optional)</label>
-                                <textarea id="researchComment" name="researchComment" placeholder="Discuss your research experience..."></textarea>
+                        <div id="outputProgressForm" class="assessment-form">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="profile-panel-header" style="margin-bottom: 0.75rem;">
+                                        <button class="profile-back-btn" type="button" data-back="assessmentList">
+                                            <i class="fas fa-arrow-left"></i> Back to assessments
+                                        </button>
+                                    </div>
+                                    <h2>Output &amp; Progress</h2>
+                                    <p>Track deliverables and progress updates (2–4 minutes).</p>
+                                </div>
+                                <form id="outputProgressAssessmentForm">
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="outputType">Output type</label>
+                                            <select id="outputType" required>
+                                                <option value="">Select output type</option>
+                                                <option>Commitment form</option>
+                                                <option>Mentorship plan</option>
+                                                <option>Proposal</option>
+                                                <option>Protocol</option>
+                                                <option>Literature summary</option>
+                                                <option>Data extraction sheet</option>
+                                                <option>Manuscript draft</option>
+                                                <option>Policy brief</option>
+                                                <option>Advocacy pitch</option>
+                                                <option>Portfolio</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="outputStage">Output stage</label>
+                                            <select id="outputStage" required>
+                                                <option value="">Select stage</option>
+                                                <option>Not started</option>
+                                                <option>In progress</option>
+                                                <option>First draft</option>
+                                                <option>Revised draft</option>
+                                                <option>Final</option>
+                                                <option>Submitted</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="outputDueDate">Due date</label>
+                                            <input id="outputDueDate" type="date">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Evidence (choose one)</label>
+                                        <div class="pill-group" data-group="evidenceType">
+                                            <label class="pill"><input type="radio" name="evidenceType" value="upload">Upload file</label>
+                                            <label class="pill"><input type="radio" name="evidenceType" value="link">Paste link</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" id="evidenceUploadGroup" style="display:none;">
+                                        <label for="outputEvidenceFile">Upload file</label>
+                                        <input id="outputEvidenceFile" type="file">
+                                    </div>
+
+                                    <div class="form-group" id="evidenceLinkGroup" style="display:none;">
+                                        <label for="outputEvidenceLink">Paste link</label>
+                                        <input id="outputEvidenceLink" type="url" placeholder="Google Doc/Drive link">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="outputReflection">Short reflection</label>
+                                        <textarea id="outputReflection" placeholder="What changed after producing this output?"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Challenges encountered</label>
+                                        <div class="checkbox-grid">
+                                            <label><input class="output-challenge" type="checkbox" value="Methods"> Methods</label>
+                                            <label><input class="output-challenge" type="checkbox" value="Writing"> Writing</label>
+                                            <label><input class="output-challenge" type="checkbox" value="Team roles"> Team roles</label>
+                                            <label><input class="output-challenge" type="checkbox" value="Mentor feedback"> Mentor feedback</label>
+                                            <label><input class="output-challenge" type="checkbox" value="Access to literature"> Access to literature</label>
+                                            <label><input class="output-challenge" type="checkbox" value="Time"> Time</label>
+                                            <label><input class="output-challenge" type="checkbox" value="Other" id="outputChallengeOther"> Other</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" id="outputOtherChallengeGroup" style="display:none;">
+                                        <label for="outputOtherChallenge">Describe other challenges</label>
+                                        <textarea id="outputOtherChallenge" placeholder="Share the challenges you faced"></textarea>
+                                    </div>
+
+                                    <div class="form-group" id="submissionGroup" style="display:none;">
+                                        <label for="submissionVenue">Where submitted?</label>
+                                        <input id="submissionVenue" type="text" placeholder="Journal or platform">
+                                        <label for="submissionDate" style="margin-top: 0.75rem;">Submission date</label>
+                                        <input id="submissionDate" type="date">
+                                    </div>
+
+                                    <button class="btn btn-primary form-submit" type="submit">Submit Output &amp; Progress</button>
+                                </form>
                             </div>
                         </div>
 
-                        <!-- Leadership -->
-                        <div class="competency-section">
-                            <div class="competency-header">
-                                <h3>Leadership</h3>
-                                <span id="leadershipRating">-</span>
+                    </section>
+
+                    <section id="summaryPanel" class="summary-panel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Snapshot</h2>
+                                <p>Key totals from your recent assessments.</p>
                             </div>
-                            <div class="rating-group">
-                                <button type="button" class="rating-btn" data-competency="leadership" data-rating="1">1</button>
-                                <button type="button" class="rating-btn" data-competency="leadership" data-rating="2">2</button>
-                                <button type="button" class="rating-btn" data-competency="leadership" data-rating="3">3</button>
-                                <button type="button" class="rating-btn" data-competency="leadership" data-rating="4">4</button>
-                                <button type="button" class="rating-btn" data-competency="leadership" data-rating="5">5</button>
-                            </div>
-                            <div class="competency-comment">
-                                <label for="leadershipComment">Comments (Optional)</label>
-                                <textarea id="leadershipComment" name="leadershipComment" placeholder="Share your leadership experiences..."></textarea>
-                            </div>
+                            <div class="summary-grid" id="summaryList"></div>
                         </div>
 
-                        <!-- Professionalism -->
-                        <div class="competency-section">
-                            <div class="competency-header">
-                                <h3>Professionalism</h3>
-                                <span id="professionalismRating">-</span>
-                            </div>
-                            <div class="rating-group">
-                                <button type="button" class="rating-btn" data-competency="professionalism" data-rating="1">1</button>
-                                <button type="button" class="rating-btn" data-competency="professionalism" data-rating="2">2</button>
-                                <button type="button" class="rating-btn" data-competency="professionalism" data-rating="3">3</button>
-                                <button type="button" class="rating-btn" data-competency="professionalism" data-rating="4">4</button>
-                                <button type="button" class="rating-btn" data-competency="professionalism" data-rating="5">5</button>
-                            </div>
-                            <div class="competency-comment">
-                                <label for="professionalismComment">Comments (Optional)</label>
-                                <textarea id="professionalismComment" name="professionalismComment" placeholder="Reflect on your professionalism..."></textarea>
+                        <div class="summary-detail">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Recent Sessions</h2>
+                                </div>
+                                <ul id="recentSessions" class="summary-list"></ul>
                             </div>
                         </div>
+                    </section>
 
-                        <!-- Time Management -->
-                        <div class="competency-section">
-                            <div class="competency-header">
-                                <h3>Time Management</h3>
-                                <span id="timeRating">-</span>
+                    <section id="profilePanel" class="profile-panel">
+                        <div class="card">
+                            <div class="profile-panel-header">
+                                <span class="profile-panel-title">User Profile</span>
+                                <div>
+                                    <button class="profile-back-btn" id="profileEditBtn" type="button">Edit Profile</button>
+                                    <button class="profile-save-btn" id="profileSaveBtn" type="button" style="display: none;">Save Changes</button>
+                                </div>
                             </div>
-                            <div class="rating-group">
-                                <button type="button" class="rating-btn" data-competency="timeManagement" data-rating="1">1</button>
-                                <button type="button" class="rating-btn" data-competency="timeManagement" data-rating="2">2</button>
-                                <button type="button" class="rating-btn" data-competency="timeManagement" data-rating="3">3</button>
-                                <button type="button" class="rating-btn" data-competency="timeManagement" data-rating="4">4</button>
-                                <button type="button" class="rating-btn" data-competency="timeManagement" data-rating="5">5</button>
-                            </div>
-                            <div class="competency-comment">
-                                <label for="timeComment">Comments (Optional)</label>
-                                <textarea id="timeComment" name="timeComment" placeholder="How do you manage your time?"></textarea>
+                            <div class="profile-details">
+                                <div class="profile-photo">
+                                    <img id="profileImagePreview" src="Pictures/people.png" alt="Profile" class="profile-photo-img">
+                                    <div>
+                                        <label class="profile-upload-label disabled" for="profileImageInput">Upload photo</label>
+                                        <input id="profileImageInput" type="file" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="profile-row">
+                                    <div class="form-group">
+                                        <label for="profileFirstName">First name</label>
+                                        <input id="profileFirstName" type="text" placeholder="First name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profileLastName">Last name</label>
+                                        <input id="profileLastName" type="text" placeholder="Last name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileEmail">Email address</label>
+                                    <input id="profileEmail" type="email" placeholder="Email address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileUniversity">University</label>
+                                    <input id="profileUniversity" type="text" placeholder="University">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileCountry">Country</label>
+                                    <input id="profileCountry" type="text" placeholder="Country">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileProgram">Program</label>
+                                    <input id="profileProgram" type="text" placeholder="Program">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileYear">Year of study</label>
+                                    <input id="profileYear" type="text" placeholder="Year of study">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileCohort">Cohort</label>
+                                    <input id="profileCohort" type="text" placeholder="Cohort">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileTheme">Theme/Track</label>
+                                    <select id="profileTheme">
+                                        <option value="">Select theme</option>
+                                        <option value="Research">Research</option>
+                                        <option value="Leadership">Leadership</option>
+                                        <option value="Career">Career</option>
+                                        <option value="Innovation">Innovation</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </form>
+                    </section>
+
+                    <section id="resourcesPanel" class="profile-panel">
+                        <div class="page-header">
+                            <h1>Course Resources</h1>
+                            <p>Quick links and materials to support your learning</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Resources</h2>
+                                <p>Curated learning materials will appear here.</p>
+                            </div>
+                            <ul class="summary-list">
+                                <li>
+                                    <strong>Orientation Guide</strong>
+                                    <p style="color: var(--gray-600);">Overview of the PORTAL and expectations.</p>
+                                </li>
+                                <li>
+                                    <strong>Clinical Skills Toolkit</strong>
+                                    <p style="color: var(--gray-600);">Core checklists and practice resources.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <button class="virtual-mentor-btn" id="virtualMentorBtn" type="button" aria-label="Open virtual mentor">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <div class="mentor-modal" id="mentorModal" aria-hidden="true">
+        <div class="mentor-panel" role="dialog" aria-modal="true" aria-labelledby="mentorTitle">
+            <div class="mentor-header">
+                <div class="mentor-title" id="mentorTitle">
+                    <i class="fas fa-robot"></i>
+                    Virtual Mentor
+                </div>
+                <button class="mentor-close" id="mentorClose" type="button" aria-label="Close virtual mentor">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mentor-body" id="mentorBody">
+                <div class="mentor-bubble">
+                    Hi! I’m your virtual mentor. Introduce yourself, and share your hobbies, interests, and goals.
                 </div>
             </div>
-
-            <!-- TAB 2: Milestones -->
-            <div id="milestones" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Track Your Milestones</h2>
-                        <p>Record significant achievements in your mentorship journey</p>
-                    </div>
-
-                    <form id="milestonesForm">
-                        <div class="milestone-grid">
-                            <div class="milestone-item">
-                                <label for="rotations">Completed Rotations</label>
-                                <input type="number" id="rotations" name="rotations" class="milestone-input" min="0" placeholder="0">
-                            </div>
-                            <div class="milestone-item">
-                                <label for="certifications">Certifications Earned</label>
-                                <input type="number" id="certifications" name="certifications" class="milestone-input" min="0" placeholder="0">
-                            </div>
-                            <div class="milestone-item">
-                                <label for="papers">Papers Published</label>
-                                <input type="number" id="papers" name="papers" class="milestone-input" min="0" placeholder="0">
-                            </div>
-                            <div class="milestone-item">
-                                <label for="presentations">Presentations Given</label>
-                                <input type="number" id="presentations" name="presentations" class="milestone-input" min="0" placeholder="0">
-                            </div>
-                            <div class="milestone-item">
-                                <label for="projects">Projects Completed</label>
-                                <input type="number" id="projects" name="projects" class="milestone-input" min="0" placeholder="0">
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin-top: 2rem;">
-                            <label for="strengths">What are your key strengths?</label>
-                            <textarea id="strengths" name="strengths" placeholder="Describe your strengths as a mentee..."></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="improvements">Areas for improvement</label>
-                            <textarea id="improvements" name="improvements" placeholder="What areas would you like to improve?"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nextSteps">Next steps and goals</label>
-                            <textarea id="nextSteps" name="nextSteps" placeholder="What are your goals for the next period?"></textarea>
-                        </div>
-                    </form>
+            <div class="mentor-footer">
+                <div class="mentor-input-row">
+                    <input id="mentorInput" type="text" placeholder="Type your message...">
+                    <button class="mentor-send-btn" id="mentorSendBtn" type="button">Send</button>
                 </div>
-            </div>
-
-            <!-- TAB 3: Summary -->
-            <div id="summary" class="tab-content">
-                <div class="overall-score">
-                    <h3>Overall Progress Score</h3>
-                    <div class="score" id="overallScore">0%</div>
-                    <p>Based on your competencies and milestones</p>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Competency Progress</h2>
-                        <p>Visual summary of your development</p>
-                    </div>
-
-                    <div class="progress-section">
-                        <div class="progress-item">
-                            <div class="progress-label">
-                                <span>Clinical Knowledge</span>
-                                <span id="clinicalProgress">0%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="clinicalBar" style="width: 0%"></div>
-                            </div>
-                        </div>
-
-                        <div class="progress-item">
-                            <div class="progress-label">
-                                <span>Communication</span>
-                                <span id="communicationProgress">0%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="communicationBar" style="width: 0%"></div>
-                            </div>
-                        </div>
-
-                        <div class="progress-item">
-                            <div class="progress-label">
-                                <span>Research Skills</span>
-                                <span id="researchProgress">0%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="researchBar" style="width: 0%"></div>
-                            </div>
-                        </div>
-
-                        <div class="progress-item">
-                            <div class="progress-label">
-                                <span>Leadership</span>
-                                <span id="leadershipProgress">0%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="leadershipBar" style="width: 0%"></div>
-                            </div>
-                        </div>
-
-                        <div class="progress-item">
-                            <div class="progress-label">
-                                <span>Professionalism</span>
-                                <span id="professionalismProgress">0%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="professionalismBar" style="width: 0%"></div>
-                            </div>
-                        </div>
-
-                        <div class="progress-item">
-                            <div class="progress-label">
-                                <span>Time Management</span>
-                                <span id="timeProgress">0%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="timeBar" style="width: 0%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Submit Button -->
-            <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                <button id="submitBtn" class="btn btn-primary">
-                    <i class="fas fa-check"></i> Submit Assessment
-                </button>
-                <button id="resetBtn" class="btn btn-secondary">
-                    <i class="fas fa-redo"></i> Reset Form
-                </button>
+                <div class="mentor-hint">Your messages will be saved to continue next time you log in.</div>
             </div>
         </div>
-    </main>
+    </div>
+
+    <div class="terms-modal" id="termsModal" aria-hidden="true">
+        <div class="terms-card" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+            <div>
+                <strong id="termsTitle">Virtual Mentor Terms</strong>
+                <p style="color: var(--gray-600); margin-top: 0.35rem;">
+                    By continuing, you agree that your chats and profile details may be saved to personalize your mentoring experience.
+                    <a href="terms.html" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); font-weight: 600;">Read the terms</a>.
+                </p>
+            </div>
+            <div class="terms-actions">
+                <button class="terms-decline" id="termsDecline" type="button">Not now</button>
+                <button class="terms-accept" id="termsAccept" type="button">I Agree</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         const apiUrl = 'https://medxmentor.onrender.com/api';
-        let competencies = {
-            clinicalKnowledge: { rating: 0, comment: '' },
-            communication: { rating: 0, comment: '' },
-            researchSkills: { rating: 0, comment: '' },
-            leadership: { rating: 0, comment: '' },
-            professionalism: { rating: 0, comment: '' },
-            timeManagement: { rating: 0, comment: '' }
+        let isProfileEditing = false;
+        let pendingProfileImage = '';
+        const INACTIVITY_TIMEOUT_MS = 60 * 60 * 1000;
+        let inactivityTimer;
+
+        const resetInactivityTimer = () => {
+            if (inactivityTimer) {
+                clearTimeout(inactivityTimer);
+            }
+            inactivityTimer = setTimeout(() => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = 'login.html';
+            }, INACTIVITY_TIMEOUT_MS);
         };
 
-        let milestones = {
-            completedRotations: 0,
-            certificationsEarned: 0,
-            papersPublished: 0,
-            presentationsGiven: 0,
-            projectsCompleted: 0
+        const profileFields = [
+            'profileFirstName',
+            'profileLastName',
+            'profileEmail',
+            'profileUniversity',
+            'profileCountry',
+            'profileProgram',
+            'profileYear',
+            'profileCohort'
+        ];
+
+        const profileSelects = ['profileTheme'];
+
+        const setProfileEditing = (isEditing) => {
+            isProfileEditing = isEditing;
+            profileFields.forEach((id) => {
+                const field = document.getElementById(id);
+                field.readOnly = !isEditing;
+            });
+            profileSelects.forEach((id) => {
+                const field = document.getElementById(id);
+                field.disabled = !isEditing;
+            });
+
+            const uploadLabel = document.querySelector('.profile-upload-label');
+            const uploadInput = document.getElementById('profileImageInput');
+            if (isEditing) {
+                uploadLabel.classList.remove('disabled');
+                uploadInput.disabled = false;
+            } else {
+                uploadLabel.classList.add('disabled');
+                uploadInput.disabled = true;
+            }
+
+            const editBtn = document.getElementById('profileEditBtn');
+            const saveBtn = document.getElementById('profileSaveBtn');
+            if (editBtn && saveBtn) {
+                editBtn.style.display = isEditing ? 'none' : 'inline-flex';
+                saveBtn.style.display = isEditing ? 'inline-flex' : 'none';
+            }
         };
 
-        // Initialize on load
-        window.addEventListener('load', async () => {
+        const getStoredList = (key) => JSON.parse(localStorage.getItem(key) || '[]');
+        const setStoredList = (key, list) => localStorage.setItem(key, JSON.stringify(list));
+
+        const renderSummary = () => {
+            const sessions = getStoredList('sessionAssessments');
+            const outputProgress = getStoredList('outputProgressRecords');
+            const mentorMeetings = getStoredList('mentorMeetingCheckins');
+            const monthlyModules = getStoredList('monthlyModuleCheckins');
+            const endlineReflections = getStoredList('endlineReflections');
+            const summaryList = document.getElementById('summaryList');
+            const recentSessions = document.getElementById('recentSessions');
+            const sessionTarget = 10;
+            const sessionPercent = Math.min(100, Math.round((sessions.length / sessionTarget) * 100));
+
+            summaryList.innerHTML = '';
+            const cards = [
+                {
+                    title: 'Post-Session Assessments',
+                    content: `
+                        <div class="summary-pie" style="--percent: ${sessionPercent}%;">
+                            <span>${sessions.length}/${sessionTarget}</span>
+                        </div>
+                        <div class="summary-card-value">${sessionPercent}% submitted</div>
+                    `
+                },
+                { title: 'Output & Progress', value: outputProgress.length },
+                { title: 'Mentor Meeting Check-In', value: mentorMeetings.length },
+                { title: 'Monthly Module Check-In', value: monthlyModules.length },
+                { title: 'Endline Reflection', value: endlineReflections.length }
+            ];
+
+            cards.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'card summary-card';
+                card.style.margin = '0';
+                card.style.padding = '1.25rem';
+                if (item.content) {
+                    card.innerHTML = `<div class="summary-card-title">${item.title}</div>${item.content}`;
+                } else {
+                    card.innerHTML = `<div class="summary-card-title">${item.title}</div><div class="summary-card-value">${item.value}</div>`;
+                }
+                summaryList.appendChild(card);
+            });
+
+            recentSessions.innerHTML = sessions.slice(0, 3).map((session) => (
+                `<li><strong>${session.sessionAttended}</strong><br><span style="color: var(--gray-600);">${session.date}</span></li>`
+            )).join('') || '<li>No session assessments yet.</li>';
+        };
+
+        const resetPills = (form) => {
+            form.querySelectorAll('.pill.selected').forEach((pill) => pill.classList.remove('selected'));
+        };
+
+        window.addEventListener('load', () => {
             const token = localStorage.getItem('token');
             if (!token) {
                 window.location.href = 'login.html';
                 return;
             }
+
+            resetInactivityTimer();
+            ['click', 'keydown', 'mousemove', 'scroll', 'touchstart'].forEach((eventName) => {
+                window.addEventListener(eventName, resetInactivityTimer, { passive: true });
+            });
 
             const user = JSON.parse(localStorage.getItem('user'));
             document.getElementById('userName').textContent = `${user.firstName} ${user.lastName}`;
+            const avatarSrc = user.profileImage || 'Pictures/people.png';
+            document.getElementById('sidebarAvatar').src = avatarSrc;
+            document.getElementById('profileImagePreview').src = avatarSrc;
+            document.getElementById('profileFirstName').value = user.firstName || '';
+            document.getElementById('profileLastName').value = user.lastName || '';
+            document.getElementById('profileEmail').value = user.email || '';
+            document.getElementById('profileUniversity').value = user.university || '';
+            document.getElementById('profileCountry').value = user.country || '';
+            document.getElementById('profileProgram').value = user.program || '';
+            document.getElementById('profileYear').value = user.yearOfStudy || '';
+            document.getElementById('profileCohort').value = user.cohort || '';
+            document.getElementById('profileTheme').value = user.theme || '';
 
-            // Load existing assessment if available
-            await loadLatestAssessment();
+            document.getElementById('sessionDate').valueAsDate = new Date();
+            renderSummary();
+            setProfileEditing(false);
+            setActivePanel('summary');
+            setActiveMenu('menuSummary');
         });
 
-        // Tab switching
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        const sidebar = document.getElementById('sidebar');
+        const layout = document.getElementById('layout');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
 
-                e.target.classList.add('active');
-                const tabId = e.target.dataset.tab;
-                document.getElementById(tabId).classList.add('active');
+        const toggleMobileSidebar = () => {
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('visible', sidebar.classList.contains('open'));
+        };
+
+        document.getElementById('sidebarToggle').addEventListener('click', () => {
+            if (window.innerWidth <= 900) {
+                toggleMobileSidebar();
+            } else {
+                sidebar.classList.toggle('collapsed');
+                layout.classList.toggle('sidebar-collapsed', sidebar.classList.contains('collapsed'));
+            }
+        });
+
+        if (mobileSidebarToggle) {
+            mobileSidebarToggle.addEventListener('click', () => {
+                if (window.innerWidth <= 900) {
+                    toggleMobileSidebar();
+                }
             });
-        });
-
-        // Rating buttons
-        document.querySelectorAll('.rating-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const competency = btn.dataset.competency;
-                const rating = parseInt(btn.dataset.rating);
-
-                // Remove selected from siblings
-                btn.parentElement.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
-                // Add selected to clicked
-                btn.classList.add('selected');
-
-                // Update competencies object
-                competencies[competency].rating = rating;
-
-                // Update rating display
-                const ratingDisplay = {
-                    'clinicalKnowledge': 'clinicalRating',
-                    'communication': 'communicationRating',
-                    'researchSkills': 'researchRating',
-                    'leadership': 'leadershipRating',
-                    'professionalism': 'professionalismRating',
-                    'timeManagement': 'timeRating'
-                };
-
-                document.getElementById(ratingDisplay[competency]).textContent = rating;
-                updateProgressBars();
-            });
-        });
-
-        // Competency comments
-        document.getElementById('clinicalComment').addEventListener('change', (e) => {
-            competencies.clinicalKnowledge.comment = e.target.value;
-        });
-        document.getElementById('communicationComment').addEventListener('change', (e) => {
-            competencies.communication.comment = e.target.value;
-        });
-        document.getElementById('researchComment').addEventListener('change', (e) => {
-            competencies.researchSkills.comment = e.target.value;
-        });
-        document.getElementById('leadershipComment').addEventListener('change', (e) => {
-            competencies.leadership.comment = e.target.value;
-        });
-        document.getElementById('professionalismComment').addEventListener('change', (e) => {
-            competencies.professionalism.comment = e.target.value;
-        });
-        document.getElementById('timeComment').addEventListener('change', (e) => {
-            competencies.timeManagement.comment = e.target.value;
-        });
-
-        // Milestone inputs
-        document.getElementById('rotations').addEventListener('input', (e) => {
-            milestones.completedRotations = parseInt(e.target.value) || 0;
-            updateProgressBars();
-        });
-        document.getElementById('certifications').addEventListener('input', (e) => {
-            milestones.certificationsEarned = parseInt(e.target.value) || 0;
-            updateProgressBars();
-        });
-        document.getElementById('papers').addEventListener('input', (e) => {
-            milestones.papersPublished = parseInt(e.target.value) || 0;
-            updateProgressBars();
-        });
-        document.getElementById('presentations').addEventListener('input', (e) => {
-            milestones.presentationsGiven = parseInt(e.target.value) || 0;
-            updateProgressBars();
-        });
-        document.getElementById('projects').addEventListener('input', (e) => {
-            milestones.projectsCompleted = parseInt(e.target.value) || 0;
-            updateProgressBars();
-        });
-
-        function updateProgressBars() {
-            // Calculate competency percentages
-            const ratings = {
-                'clinical': (competencies.clinicalKnowledge.rating / 5) * 100,
-                'communication': (competencies.communication.rating / 5) * 100,
-                'research': (competencies.researchSkills.rating / 5) * 100,
-                'leadership': (competencies.leadership.rating / 5) * 100,
-                'professionalism': (competencies.professionalism.rating / 5) * 100,
-                'time': (competencies.timeManagement.rating / 5) * 100
-            };
-
-            document.getElementById('clinicalProgress').textContent = Math.round(ratings.clinical) + '%';
-            document.getElementById('clinicalBar').style.width = ratings.clinical + '%';
-
-            document.getElementById('communicationProgress').textContent = Math.round(ratings.communication) + '%';
-            document.getElementById('communicationBar').style.width = ratings.communication + '%';
-
-            document.getElementById('researchProgress').textContent = Math.round(ratings.research) + '%';
-            document.getElementById('researchBar').style.width = ratings.research + '%';
-
-            document.getElementById('leadershipProgress').textContent = Math.round(ratings.leadership) + '%';
-            document.getElementById('leadershipBar').style.width = ratings.leadership + '%';
-
-            document.getElementById('professionalismProgress').textContent = Math.round(ratings.professionalism) + '%';
-            document.getElementById('professionalismBar').style.width = ratings.professionalism + '%';
-
-            document.getElementById('timeProgress').textContent = Math.round(ratings.time) + '%';
-            document.getElementById('timeBar').style.width = ratings.time + '%';
-
-            // Calculate overall score (this will be recalculated on the backend after milestones are included)
-            const avgRating = (competencies.clinicalKnowledge.rating + competencies.communication.rating + 
-                              competencies.researchSkills.rating + competencies.leadership.rating + 
-                              competencies.professionalism.rating + competencies.timeManagement.rating) / 6;
-            const competencyScore = (avgRating / 5) * 50;
-
-            const totalMilestones = milestones.completedRotations + milestones.certificationsEarned + 
-                                   milestones.papersPublished + milestones.presentationsGiven + 
-                                   milestones.projectsCompleted;
-            const milestoneScore = Math.min((totalMilestones / 10) * 50, 50);
-
-            const overall = Math.round(competencyScore + milestoneScore);
-            document.getElementById('overallScore').textContent = overall + '%';
         }
 
-        // Submit assessment
-        document.getElementById('submitBtn').addEventListener('click', async () => {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                window.location.href = 'login.html';
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('visible');
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('visible');
+                layout.classList.toggle('sidebar-collapsed', sidebar.classList.contains('collapsed'));
+            }
+        });
+
+        const menuNewAssessment = document.getElementById('menuNewAssessment');
+        const menuSummary = document.getElementById('menuSummary');
+        const menuResources = document.getElementById('menuResources');
+        const menuProfile = document.getElementById('menuProfile');
+        const profileShortcut = document.getElementById('profileShortcut');
+        const profilePanel = document.getElementById('profilePanel');
+        const resourcesPanel = document.getElementById('resourcesPanel');
+        const summaryPanel = document.getElementById('summaryPanel');
+        const assessmentContent = document.getElementById('assessmentContent');
+        const assessmentList = document.getElementById('assessmentList');
+        const profileEditBtn = document.getElementById('profileEditBtn');
+        const profileSaveBtn = document.getElementById('profileSaveBtn');
+        const profileImageInput = document.getElementById('profileImageInput');
+        const backToAssessmentList = document.getElementById('backToAssessmentList');
+        const outputProgressForm = document.getElementById('outputProgressForm');
+
+        const setActiveMenu = (activeId) => {
+            [menuNewAssessment, menuSummary, menuResources, menuProfile].forEach((link) => {
+                if (!link) return;
+                link.classList.toggle('active', link.id === activeId);
+            });
+        };
+
+        const setActivePanel = (panel) => {
+            assessmentContent.style.display = panel === 'assessment' ? '' : 'none';
+            profilePanel.classList.toggle('active', panel === 'profile');
+            resourcesPanel.classList.toggle('active', panel === 'resources');
+            summaryPanel.classList.toggle('active', panel === 'summary');
+            if (window.innerWidth <= 900) {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('visible');
+            }
+        };
+
+        const showAssessmentList = () => {
+            assessmentList.classList.remove('hidden');
+            document.querySelectorAll('.assessment-form').forEach((form) => form.classList.remove('active'));
+        };
+
+        menuNewAssessment.addEventListener('click', (event) => {
+            event.preventDefault();
+            setActivePanel('assessment');
+            setActiveMenu('menuNewAssessment');
+            showAssessmentList();
+            document.getElementById('assessmentList').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        menuSummary.addEventListener('click', (event) => {
+            event.preventDefault();
+            setActivePanel('summary');
+            setActiveMenu('menuSummary');
+        });
+
+        menuResources.addEventListener('click', (event) => {
+            event.preventDefault();
+            setActivePanel('resources');
+            setActiveMenu('menuResources');
+        });
+
+        if (menuProfile) {
+            menuProfile.addEventListener('click', (event) => {
+                event.preventDefault();
+                setActivePanel('profile');
+                setActiveMenu('menuProfile');
+            });
+        }
+
+        if (profileShortcut) {
+            profileShortcut.addEventListener('click', () => {
+                setActivePanel('profile');
+                setActiveMenu('menuProfile');
+            });
+        }
+
+        if (profileEditBtn) {
+            profileEditBtn.addEventListener('click', () => {
+                setProfileEditing(true);
+                profileEditBtn.style.display = 'none';
+                if (profileSaveBtn) {
+                    profileSaveBtn.style.display = 'inline-flex';
+                }
+            });
+        }
+
+        if (profileSaveBtn) {
+            profileSaveBtn.addEventListener('click', async () => {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const payload = {
+                    firstName: document.getElementById('profileFirstName').value.trim(),
+                    lastName: document.getElementById('profileLastName').value.trim(),
+                    email: document.getElementById('profileEmail').value.trim(),
+                    university: document.getElementById('profileUniversity').value.trim(),
+                    country: document.getElementById('profileCountry').value.trim(),
+                    program: document.getElementById('profileProgram').value.trim(),
+                    yearOfStudy: document.getElementById('profileYear').value.trim(),
+                    cohort: document.getElementById('profileCohort').value.trim(),
+                    theme: document.getElementById('profileTheme').value
+                };
+
+                if (pendingProfileImage) {
+                    payload.profileImage = pendingProfileImage;
+                }
+
+                try {
+                    const response = await fetch(`${apiUrl}/auth/profile`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${token}`
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Profile update failed');
+                    }
+
+                    const data = await response.json();
+                    if (data && data.user) {
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        const avatarSrc = data.user.profileImage || 'Pictures/people.png';
+                        document.getElementById('sidebarAvatar').src = avatarSrc;
+                        document.getElementById('profileImagePreview').src = avatarSrc;
+                        document.getElementById('userName').textContent = `${data.user.firstName} ${data.user.lastName}`;
+                    }
+
+                    pendingProfileImage = '';
+                    setProfileEditing(false);
+                    profileSaveBtn.style.display = 'none';
+                    if (profileEditBtn) {
+                        profileEditBtn.style.display = 'inline-flex';
+                    }
+                    showAlert('Profile updated successfully.', 'success');
+                    setActivePanel('summary');
+                    setActiveMenu('menuSummary');
+                } catch (error) {
+                    showAlert('Unable to save profile changes. Please try again.', 'error');
+                }
+            });
+        }
+
+        if (profileImageInput) {
+            profileImageInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => {
+                    pendingProfileImage = reader.result;
+                    document.getElementById('profileImagePreview').src = pendingProfileImage;
+                    document.getElementById('sidebarAvatar').src = pendingProfileImage;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        document.querySelectorAll('.assessment-item').forEach((item) => {
+            if (item.classList.contains('disabled')) return;
+            item.addEventListener('click', () => {
+                const targetId = item.dataset.target;
+                if (!targetId) return;
+                document.querySelectorAll('.assessment-form').forEach((form) => form.classList.remove('active'));
+                const targetForm = document.getElementById(targetId);
+                if (targetForm) {
+                    assessmentList.classList.add('hidden');
+                    targetForm.classList.add('active');
+                    targetForm.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        backToAssessmentList.addEventListener('click', () => {
+            showAssessmentList();
+            assessmentList.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.querySelectorAll('[data-back="assessmentList"]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                showAssessmentList();
+                assessmentList.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        document.querySelectorAll('.pill-group').forEach((group) => {
+            group.querySelectorAll('input[type="radio"]').forEach((input) => {
+                input.addEventListener('change', () => {
+                    group.querySelectorAll('.pill').forEach((pill) => pill.classList.remove('selected'));
+                    input.closest('.pill').classList.add('selected');
+                });
+            });
+        });
+
+        document.getElementById('sessionAssessmentForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const sessionForm = event.target;
+            const sessionValidation = validateSessionForm(sessionForm);
+            if (!sessionValidation.isValid) {
+                showAlert('Please complete all required fields.', 'error');
+                sessionValidation.firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                sessionValidation.firstInvalid.focus?.();
                 return;
             }
+            const supportNeeded = Array.from(document.querySelectorAll('.support-needed:checked')).map(item => item.value);
+            const relevance = document.querySelector('input[name="relevance"]:checked')?.value;
+            const overallRating = document.querySelector('input[name="overallRating"]:checked')?.value || '';
 
-            const btn = document.getElementById('submitBtn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<span class="loading-spinner"></span>Submitting...';
-            btn.disabled = true;
+            const record = {
+                id: `session-${Date.now()}`,
+                sessionAttended: document.getElementById('sessionAttended').value,
+                date: document.getElementById('sessionDate').value,
+                insight: document.getElementById('keyInsight').value,
+                relevance,
+                valuablePart: document.getElementById('valuablePart').value,
+                overallRating,
+                actionStep: document.getElementById('actionStep').value,
+                supportNeeded,
+                questions: document.getElementById('questions').value,
+            };
 
-            try {
-                const response = await fetch(`${apiUrl}/assessments`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        competencies,
-                        milestones,
-                        strengths: document.getElementById('strengths').value,
-                        areasForImprovement: document.getElementById('improvements').value,
-                        nextSteps: document.getElementById('nextSteps').value
-                    })
-                });
+            const sessions = getStoredList('sessionAssessments');
+            sessions.unshift(record);
+            setStoredList('sessionAssessments', sessions);
 
-                const data = await response.json();
+            renderSummary();
+            event.target.reset();
+            resetPills(event.target);
+            document.getElementById('sessionDate').valueAsDate = new Date();
+            showAlert('Session assessment submitted.', 'success');
+        });
 
-                if (data.success) {
-                    showAlert('Assessment submitted successfully!', 'success');
-                    setTimeout(() => {
-                        window.location.href = 'assessment-history.html';
-                    }, 2000);
-                } else {
-                    showAlert(data.message || 'Failed to submit assessment', 'error');
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
+        const outputStage = document.getElementById('outputStage');
+        const submissionGroup = document.getElementById('submissionGroup');
+        const evidenceRadios = document.querySelectorAll('input[name="evidenceType"]');
+        const evidenceUploadGroup = document.getElementById('evidenceUploadGroup');
+        const evidenceLinkGroup = document.getElementById('evidenceLinkGroup');
+        const outputChallengeOther = document.getElementById('outputChallengeOther');
+        const outputOtherChallengeGroup = document.getElementById('outputOtherChallengeGroup');
+
+        outputStage.addEventListener('change', () => {
+            submissionGroup.style.display = outputStage.value === 'Submitted' ? 'block' : 'none';
+        });
+
+        evidenceRadios.forEach((radio) => {
+            radio.addEventListener('change', () => {
+                evidenceUploadGroup.style.display = radio.value === 'upload' ? 'block' : 'none';
+                evidenceLinkGroup.style.display = radio.value === 'link' ? 'block' : 'none';
+            });
+        });
+
+        outputChallengeOther.addEventListener('change', () => {
+            if (outputChallengeOther.checked) {
+                outputOtherChallengeGroup.style.display = 'block';
+            } else {
+                outputOtherChallengeGroup.style.display = 'none';
+                document.getElementById('outputOtherChallenge').value = '';
+            }
+        });
+
+        document.getElementById('outputProgressAssessmentForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const outputForm = event.target;
+            const outputValidation = validateOutputForm(outputForm);
+            if (!outputValidation.isValid) {
+                showAlert('Please complete all required fields.', 'error');
+                outputValidation.firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                outputValidation.firstInvalid.focus?.();
+                return;
+            }
+            const outputType = document.getElementById('outputType').value;
+            const stage = outputStage.value;
+            const dueDate = document.getElementById('outputDueDate').value;
+            const evidenceType = document.querySelector('input[name="evidenceType"]:checked')?.value || '';
+            const evidenceLink = document.getElementById('outputEvidenceLink').value;
+            const evidenceFileName = document.getElementById('outputEvidenceFile').files[0]?.name || '';
+            const reflection = document.getElementById('outputReflection').value;
+            const challenges = Array.from(document.querySelectorAll('.output-challenge:checked')).map((item) => item.value);
+            const otherChallenge = document.getElementById('outputOtherChallenge').value;
+            const submissionVenue = document.getElementById('submissionVenue').value;
+            const submissionDate = document.getElementById('submissionDate').value;
+
+            const record = {
+                id: `output-${Date.now()}`,
+                outputType,
+                stage,
+                dueDate,
+                evidenceType,
+                evidenceLink,
+                evidenceFileName,
+                reflection,
+                challenges,
+                otherChallenge,
+                submissionVenue,
+                submissionDate,
+                createdAt: new Date().toISOString()
+            };
+
+            const outputs = getStoredList('outputProgressRecords');
+            outputs.unshift(record);
+            setStoredList('outputProgressRecords', outputs);
+
+            if (dueDate) {
+                const due = new Date(dueDate);
+                const today = new Date();
+                const diffDays = Math.floor((today - due) / (1000 * 60 * 60 * 24));
+                if (diffDays > 14 && stage !== 'Submitted') {
+                    const flags = getStoredList('outputFlags');
+                    flags.unshift({ outputId: record.id, dueDate, daysLate: diffDays, createdAt: record.createdAt });
+                    setStoredList('outputFlags', flags);
                 }
-            } catch (error) {
-                showAlert('Network error. Please try again.', 'error');
-                btn.innerHTML = originalText;
-                btn.disabled = false;
             }
+
+            renderSummary();
+            event.target.reset();
+            resetPills(event.target);
+            evidenceUploadGroup.style.display = 'none';
+            evidenceLinkGroup.style.display = 'none';
+            submissionGroup.style.display = 'none';
+            outputOtherChallengeGroup.style.display = 'none';
+            showAlert('Output & Progress submitted.', 'success');
         });
 
-        // Reset form
-        document.getElementById('resetBtn').addEventListener('click', () => {
-            if (confirm('Are you sure you want to reset the form?')) {
-                location.reload();
-            }
-        });
+        const clearFormErrors = (form) => {
+            form.querySelectorAll('.field-error').forEach((el) => el.classList.remove('field-error'));
+        };
 
-        // Logout
+        const markInvalid = (element) => {
+            if (!element) return;
+            element.classList.add('field-error');
+        };
+
+        const validateSessionForm = (form) => {
+            clearFormErrors(form);
+            const requiredFields = [
+                document.getElementById('sessionAttended'),
+                document.getElementById('sessionDate'),
+                document.getElementById('keyInsight'),
+                document.getElementById('valuablePart'),
+                document.getElementById('actionStep'),
+                document.getElementById('questions')
+            ];
+
+            for (const field of requiredFields) {
+                if (!field.value.trim()) {
+                    markInvalid(field);
+                    return { isValid: false, firstInvalid: field };
+                }
+            }
+
+            const relevanceGroup = document.querySelector('.pill-group[data-group="relevance"]');
+            if (!document.querySelector('input[name="relevance"]:checked')) {
+                markInvalid(relevanceGroup);
+                return { isValid: false, firstInvalid: relevanceGroup };
+            }
+
+            const overallGroup = document.querySelector('.pill-group[data-group="overallRating"]');
+            if (!document.querySelector('input[name="overallRating"]:checked')) {
+                markInvalid(overallGroup);
+                return { isValid: false, firstInvalid: overallGroup };
+            }
+
+            const supportGroup = form.querySelector('.checkbox-grid');
+            if (!form.querySelector('.support-needed:checked')) {
+                markInvalid(supportGroup);
+                return { isValid: false, firstInvalid: supportGroup };
+            }
+
+            return { isValid: true, firstInvalid: null };
+        };
+
+        const validateOutputForm = (form) => {
+            clearFormErrors(form);
+            const outputType = document.getElementById('outputType');
+            const outputStageField = document.getElementById('outputStage');
+            const outputDueDate = document.getElementById('outputDueDate');
+            const outputReflection = document.getElementById('outputReflection');
+
+            const requiredFields = [outputType, outputStageField, outputDueDate, outputReflection];
+            for (const field of requiredFields) {
+                if (!field.value.trim()) {
+                    markInvalid(field);
+                    return { isValid: false, firstInvalid: field };
+                }
+            }
+
+            const evidenceGroup = document.querySelector('.pill-group[data-group="evidenceType"]');
+            const evidenceChoice = document.querySelector('input[name="evidenceType"]:checked');
+            if (!evidenceChoice) {
+                markInvalid(evidenceGroup);
+                return { isValid: false, firstInvalid: evidenceGroup };
+            }
+
+            if (evidenceChoice.value === 'upload') {
+                const fileInput = document.getElementById('outputEvidenceFile');
+                if (!fileInput.files.length) {
+                    markInvalid(fileInput);
+                    return { isValid: false, firstInvalid: fileInput };
+                }
+            }
+
+            if (evidenceChoice.value === 'link') {
+                const linkInput = document.getElementById('outputEvidenceLink');
+                if (!linkInput.value.trim()) {
+                    markInvalid(linkInput);
+                    return { isValid: false, firstInvalid: linkInput };
+                }
+            }
+
+            const challengesGroup = form.querySelector('.checkbox-grid');
+            if (!form.querySelector('.output-challenge:checked')) {
+                markInvalid(challengesGroup);
+                return { isValid: false, firstInvalid: challengesGroup };
+            }
+
+            if (outputChallengeOther.checked) {
+                const otherField = document.getElementById('outputOtherChallenge');
+                if (!otherField.value.trim()) {
+                    markInvalid(otherField);
+                    return { isValid: false, firstInvalid: otherField };
+                }
+            }
+
+            if (outputStageField.value === 'Submitted') {
+                const venue = document.getElementById('submissionVenue');
+                const date = document.getElementById('submissionDate');
+                if (!venue.value.trim()) {
+                    markInvalid(venue);
+                    return { isValid: false, firstInvalid: venue };
+                }
+                if (!date.value.trim()) {
+                    markInvalid(date);
+                    return { isValid: false, firstInvalid: date };
+                }
+            }
+
+            return { isValid: true, firstInvalid: null };
+        };
+
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('token');
             localStorage.removeItem('user');
@@ -1020,47 +2086,164 @@
             }, 5000);
         }
 
-        async function loadLatestAssessment() {
+        const mentorModal = document.getElementById('mentorModal');
+        const mentorBody = document.getElementById('mentorBody');
+        const mentorInput = document.getElementById('mentorInput');
+        const mentorSendBtn = document.getElementById('mentorSendBtn');
+        const termsModal = document.getElementById('termsModal');
+        const termsAccept = document.getElementById('termsAccept');
+        const termsDecline = document.getElementById('termsDecline');
+        let mentorLoading = false;
+
+        const openMentorModal = async () => {
+            mentorModal.classList.add('active');
+            mentorModal.setAttribute('aria-hidden', 'false');
+            await loadMentorHistory();
+            mentorInput.focus();
+        };
+
+        const openTermsModal = () => {
+            termsModal.classList.add('active');
+            termsModal.setAttribute('aria-hidden', 'false');
+        };
+
+        const closeTermsModal = () => {
+            termsModal.classList.remove('active');
+            termsModal.setAttribute('aria-hidden', 'true');
+        };
+
+        const showMentorWithTerms = () => {
+            const accepted = localStorage.getItem('mentorTermsAccepted') === 'true';
+            if (accepted) {
+                openMentorModal();
+            } else {
+                openTermsModal();
+            }
+        };
+
+        const closeMentorModal = () => {
+            mentorModal.classList.remove('active');
+            mentorModal.setAttribute('aria-hidden', 'true');
+        };
+
+        document.getElementById('virtualMentorBtn').addEventListener('click', showMentorWithTerms);
+        document.getElementById('mentorClose').addEventListener('click', closeMentorModal);
+
+        mentorModal.addEventListener('click', (event) => {
+            if (event.target === mentorModal) {
+                closeMentorModal();
+            }
+        });
+
+        termsModal.addEventListener('click', (event) => {
+            if (event.target === termsModal) {
+                closeTermsModal();
+            }
+        });
+
+        termsAccept.addEventListener('click', () => {
+            localStorage.setItem('mentorTermsAccepted', 'true');
+            closeTermsModal();
+            openMentorModal();
+        });
+
+        termsDecline.addEventListener('click', () => {
+            closeTermsModal();
+        });
+
+        const appendMentorMessage = (text, isUser = false) => {
+            const bubble = document.createElement('div');
+            bubble.className = `mentor-bubble${isUser ? ' user' : ''}`;
+            bubble.textContent = text;
+            mentorBody.appendChild(bubble);
+            mentorBody.scrollTop = mentorBody.scrollHeight;
+        };
+
+        const setMentorLoading = (isLoading) => {
+            mentorLoading = isLoading;
+            mentorSendBtn.disabled = isLoading;
+            mentorInput.disabled = isLoading;
+        };
+
+        const loadMentorHistory = async () => {
             const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            mentorBody.innerHTML = '';
+            setMentorLoading(true);
             try {
-                const response = await fetch(`${apiUrl}/assessments/dashboard/summary`, {
+                const response = await fetch(`${apiUrl}/mentor/history`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
 
+                if (!response.ok) {
+                    throw new Error('Unable to load mentor history');
+                }
+
                 const data = await response.json();
-                if (data.success && data.data.latestAssessment) {
-                    const assessment = data.data.latestAssessment;
-                    // Load competency ratings
-                    Object.keys(assessment.competencies).forEach(key => {
-                        if (assessment.competencies[key].rating) {
-                            competencies[key] = assessment.competencies[key];
-                            // Update rating buttons
-                            const btn = document.querySelector(`[data-competency="${key}"][data-rating="${assessment.competencies[key].rating}"]`);
-                            if (btn) btn.classList.add('selected');
-                        }
+                const messages = data.messages || [];
+
+                if (!messages.length) {
+                    appendMentorMessage('Hi! I’m your virtual mentor. Introduce yourself, and share your hobbies, interests, and goals.');
+                } else {
+                    messages.forEach((msg) => {
+                        appendMentorMessage(msg.content, msg.role === 'user');
                     });
-
-                    // Load milestones
-                    milestones = assessment.milestones;
-                    document.getElementById('rotations').value = assessment.milestones.completedRotations;
-                    document.getElementById('certifications').value = assessment.milestones.certificationsEarned;
-                    document.getElementById('papers').value = assessment.milestones.papersPublished;
-                    document.getElementById('presentations').value = assessment.milestones.presentationsGiven;
-                    document.getElementById('projects').value = assessment.milestones.projectsCompleted;
-
-                    // Load text fields
-                    document.getElementById('strengths').value = assessment.strengths || '';
-                    document.getElementById('improvements').value = assessment.areasForImprovement || '';
-                    document.getElementById('nextSteps').value = assessment.nextSteps || '';
-
-                    updateProgressBars();
                 }
             } catch (error) {
-                console.error('Error loading assessment:', error);
+                appendMentorMessage('I couldn’t load your chat history. Please try again.');
+            } finally {
+                setMentorLoading(false);
             }
-        }
+        };
+
+        const handleMentorSend = async () => {
+            const message = mentorInput.value.trim();
+            if (!message || mentorLoading) return;
+            appendMentorMessage(message, true);
+            mentorInput.value = '';
+            setMentorLoading(true);
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${apiUrl}/mentor/message`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({ message }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Mentor response failed');
+                }
+
+                const data = await response.json();
+                appendMentorMessage(data.reply || 'Thanks for sharing. How can I help next?');
+            } catch (error) {
+                appendMentorMessage('Sorry, I couldn’t respond right now. Please try again.');
+            } finally {
+                setMentorLoading(false);
+            }
+        };
+
+        mentorSendBtn.addEventListener('click', handleMentorSend);
+        mentorInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                handleMentorSend();
+            }
+        });
     </script>
 </body>
 </html>

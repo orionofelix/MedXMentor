@@ -865,9 +865,18 @@
         .footer-bottom {
             border-top: 1px solid rgba(148, 163, 184, 0.2);
             padding-top: 1.5rem;
-            text-align: center;
             color: var(--slate-600);
             font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .footer-bottom a {
+            color: var(--slate-600);
+            text-decoration: none;
+            font-weight: 600;
         }
 
         .chatbot-button {
@@ -1357,6 +1366,11 @@
                 text-align: center;
                 justify-items: center;
             }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -1378,7 +1392,7 @@
                 <li><a href="events.html">Events</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="donate.html">Donate</a></li>
-                <li><a href="login.html" class="nav-cta">Assessment Portal</a></li>
+                <li><a href="login.html" class="nav-cta">Portal</a></li>
             </ul>
             <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
                 <span></span>
@@ -1656,7 +1670,10 @@
                     <p>info@medxmentor.org</p>
                 </div>
             </div>
-            <div class="footer-bottom">© MedXMentor 2026. All rights reserved.</div>
+            <div class="footer-bottom">
+                <span>© MedXMentor 2026. All rights reserved.</span>
+                <a href="terms.html">Terms &amp; Conditions</a>
+            </div>
         </div>
     </footer>
     <button class="chatbot-button" type="button" aria-label="Open chatbot">

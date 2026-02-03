@@ -3,11 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - MedXMentor Assessment Portal</title>
+    <title>Login - MedXMentor PORTAL</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="Fonts/OnestRegular1602-hint.ttf" as="font" type="font/ttf" crossorigin>
     <style>
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestThin1602-hint.ttf') format('truetype');
+            font-weight: 100;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestLight1602-hint.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestRegular1602-hint.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestMedium1602-hint.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestBold1602-hint.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Onest';
+            src: url('Fonts/OnestExtraBold1602-hint.ttf') format('truetype');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -18,6 +65,8 @@
             --primary-blue: #2563eb;
             --primary-blue-dark: #1d4ed8;
             --primary-blue-light: #3b82f6;
+            --sky-100: #e0f2fe;
+            --sky-200: #bae6fd;
             --gray-50: #f9fafb;
             --gray-100: #f3f4f6;
             --gray-200: #e5e7eb;
@@ -32,45 +81,112 @@
         }
 
         body {
+            font-family: 'Onest', sans-serif;
             line-height: 1.6;
             color: var(--gray-800);
             min-height: 100vh;
+            background: linear-gradient(135deg, var(--sky-100) 0%, var(--white) 55%, var(--sky-200) 100%);
         }
 
         .auth-main {
-            min-height: calc(100vh - 240px);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4rem 1rem 5rem;
+            padding: 2.5rem 1.5rem 3rem;
         }
 
         .container {
             width: 100%;
-            max-width: 450px;
+            max-width: 1100px;
         }
+
+        .auth-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2.25rem;
+            align-items: center;
+        }
+
+        .auth-illustration {
+            position: relative;
+        }
+
+        .illustration-card {
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            border: none;
+            overflow: visible;
+        }
+
+        .illustration-text h2 {
+            font-size: 2rem;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .illustration-text p {
+            color: var(--gray-600);
+            font-size: 1rem;
+        }
+
+        .illustration-figures {
+            position: relative;
+            width: 360px;
+            height: 400px;
+            margin: 0 auto 4rem;
+        }
+
+        .figure-img {
+            position: absolute;
+            bottom: 28px;
+            width: 170px;
+            height: auto;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .figure-img.one {
+            left: 0;
+            transform: translateY(8px) scale(0.98);
+        }
+
+        .figure-img.two {
+            right: 0;
+            animation-delay: 0.8s;
+            transform: translateY(6px) scale(0.98);
+        }
+
+
 
         .login-card {
             background: var(--white);
             border-radius: 1rem;
-            padding: 2.5rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
             box-shadow: var(--shadow-lg);
+            justify-self: end;
+            max-width: 600px;
+            width: 100%;
         }
 
         .login-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .logo {
             height: 60px;
-            margin-bottom: 1rem;
+            margin-bottom: 0.2rem;
         }
 
         .login-header h1 {
             color: var(--primary-blue);
             font-size: 2rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
         }
 
         .login-header p {
@@ -79,7 +195,7 @@
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         label {
@@ -183,52 +299,131 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(6deg); }
+        }
+
+
         @media (max-width: 768px) {
+            .auth-main {
+                padding: 1.75rem 1rem 2.5rem;
+            }
+
+            .auth-layout {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                align-items: start;
+            }
+
             .login-card {
-                padding: 2rem;
+                justify-self: stretch;
+            }
+
+            .login-card {
+                padding: 1.75rem;
             }
 
             .login-header h1 {
                 font-size: 1.5rem;
             }
+
+            .illustration-card {
+                padding: 0;
+            }
+
+            .illustration-figures {
+                height: auto;
+                margin: 0 auto 0.75rem;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .figure-img {
+                position: static;
+                height: auto;
+                width: 45vw;
+                max-width: 180px;
+            }
+
+            .figure-img.one,
+            .figure-img.two {
+                transform: none;
+            }
         }
-    </style>
+
+        @media (max-width: 480px) {
+            .auth-main {
+                padding: 1.5rem 0.75rem 2rem;
+            }
+
+            .illustration-figures {
+                gap: 0.75rem;
+            }
+
+            .figure-img {
+                position: static;
+                width: 46vw;
+                max-width: 150px;
+            }
+
+            .login-card {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
     <main class="auth-main">
         <div class="container">
-            <div class="login-card">
-                <div class="login-header">
-                    <img src="logo.png" alt="MedXMentor" class="logo">
-                    <h1>Login</h1>
-                    <p>Assessment Portal</p>
+            <div class="auth-layout">
+                <div class="auth-illustration">
+                    <div class="illustration-card">
+                        <div class="illustration-figures" aria-hidden="true">
+                            <img src="Pictures/SVG image 1.svg" alt="" class="figure-img one">
+                            <img src="Pictures/SVG image 2.svg" alt="" class="figure-img two">
+                        </div>
+                    </div>
                 </div>
+                <div class="login-card">
+                    <div class="login-header">
+                        <img src="logo.png" alt="MedXMentor" class="logo">
+                        <h1>Login</h1>
+                        <p>Portal</p>
+                    </div>
 
-            <div id="alertMessage" class="alert"></div>
+                    <div id="alertMessage" class="alert"></div>
 
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="your@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required placeholder="Enter your password">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <span class="loading">
+                                <span class="spinner"></span>Logging in...
+                            </span>
+                            <span class="normal">Login</span>
+                        </button>
+                    </form>
+
+                    <p class="signup-link">
+                        Don't have an account? <a href="signup.html">Sign up here</a>
+                    </p>
                 </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="Enter your password">
-                </div>
-
-                <button type="submit" class="btn btn-primary">
-                    <span class="loading">
-                        <span class="spinner"></span>Logging in...
-                    </span>
-                    <span class="normal">Login</span>
-                </button>
-            </form>
-
-            <p class="signup-link">
-                Don't have an account? <a href="signup.html">Sign up here</a>
-            </p>
             </div>
         </div>
     </main>
@@ -272,7 +467,7 @@
                     alertMessage.className = 'alert alert-success';
                     alertMessage.textContent = 'Login successful! Redirecting...';
 
-                    // Redirect to assessment portal after 1.5 seconds
+                    // Redirect to PORTAL after 1.5 seconds
                     setTimeout(() => {
                         window.location.href = 'assessment-portal.html';
                     }, 1500);

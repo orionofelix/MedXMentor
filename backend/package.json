@@ -18,7 +18,8 @@
     "dotenv": "^16.3.1",
     "cors": "^2.8.5",
     "express-validator": "^7.0.0",
-    "multer": "^2.0.0"
+    "multer": "^2.0.0",
+    "openai": "^4.79.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

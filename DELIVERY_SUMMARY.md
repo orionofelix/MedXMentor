@@ -1,4 +1,4 @@
-# 🎉 MedXMentor Assessment Portal - Delivery Summary
+# 🎉 MedXMentor PORTAL - Delivery Summary
 
 ## Project Completion Overview
 
@@ -131,7 +131,7 @@ backend/
 ### 3. Updated Existing Pages
 
 **index.html** - Home Page
-- Added "Assessment Portal" link in navigation
+- Added "PORTAL" link in navigation
 - Icon and styling match existing design
 - Links to login page when not authenticated
 
@@ -454,10 +454,10 @@ http://localhost:8000/login.html → Sign up
 ## 🎯 User Flow
 
 ```
-Visit Website → Click "Assessment Portal" 
+Visit Website → Click "PORTAL" 
   → Redirected to Login/Signup
     → Create Account (or Login)
-      → Taken to Assessment Portal
+      → Taken to PORTAL
         → Fill Competencies (Tab 1)
         → Track Milestones (Tab 2)
         → View Progress (Tab 3)
@@ -564,7 +564,7 @@ Included in repository:
 
 ## 💬 Summary
 
-The MedXMentor Assessment Portal is a **complete, production-ready system** that enables mentees to:
+The MedXMentor PORTAL is a **complete, production-ready system** that enables mentees to:
 
 1. **Create accounts** securely
 2. **Complete assessments** with 6 competency areas
@@ -600,6 +600,6 @@ The system is built on modern technologies, includes comprehensive documentation
 
 ---
 
-**🎉 Assessment Portal is complete and ready to use!**
+**🎉 PORTAL is complete and ready to use!**
 
 Start your journey at: http://localhost:8000/login.html

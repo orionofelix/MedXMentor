@@ -1,4 +1,4 @@
-# MedXMentor Assessment Portal - Complete Setup Guide
+# MedXMentor PORTAL - Complete Setup Guide
 
 ## Project Structure
 
@@ -349,7 +349,7 @@ Then open your browser and navigate to:
 
 - **Login**: http://localhost:8000/login.html
 - **Sign Up**: http://localhost:8000/signup.html
-- **Assessment Portal**: http://localhost:8000/assessment-portal.html (after login)
+- **PORTAL**: http://localhost:8000/assessment-portal.html (after login)
 - **Assessment History**: http://localhost:8000/assessment-history.html (after login)
 
 ## Database Schema
